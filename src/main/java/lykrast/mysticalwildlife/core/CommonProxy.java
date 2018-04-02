@@ -2,6 +2,7 @@ package lykrast.mysticalwildlife.core;
 
 import java.io.File;
 
+import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.util.Config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -17,6 +18,8 @@ public class CommonProxy {
 		File directory = e.getModConfigurationDirectory();
         config = new Configuration(new File(directory.getPath(), "mystical_wildlife.cfg"));
         Config.readConfig();
+        
+		ModEntities.init();
 	}
 
 	@EventHandler

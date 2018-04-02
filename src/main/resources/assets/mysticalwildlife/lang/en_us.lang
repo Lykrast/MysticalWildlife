@@ -6,11 +6,11 @@ itemGroup.mysticalwildlife=Mystical Wildlife
 #----------------------------
 #Items
 #----------------------------
-item.mysticalwildlife.vrontausurus_fur.name=Vrontausurus Fur
-item.mysticalwildlife.vrontausurus_meat_raw.name=Raw Vrontausurus
-item.mysticalwildlife.vrontausurus_meat_cooked.name=Cooked Vrontausurus
+item.mysticalwildlife.vrontausaurus_fur.name=Vrontausaurus Fur
+item.mysticalwildlife.vrontausaurus_meat_raw.name=Raw Vrontausaurus
+item.mysticalwildlife.vrontausaurus_meat_cooked.name=Cooked Vrontausaurus
 
 #----------------------------
 #Mobs
 #----------------------------
-entity.mysticalwildlife.vrontausurus.name=Vrontausurus
+entity.mysticalwildlife.vrontausaurus.name=Vrontausaurus

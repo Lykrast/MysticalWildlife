@@ -20,12 +20,12 @@ public class ModRecipes {
 	public static void initOreDict()
 	{
 		//Meat
-		OreDictionary.registerOre("listAllmeatraw", ModItems.vrontausurusRaw);
-		OreDictionary.registerOre("listAllmeatcooked", ModItems.vrontausurusCooked);
+		OreDictionary.registerOre("listAllmeatraw", ModItems.vrontausaurusRaw);
+		OreDictionary.registerOre("listAllmeatcooked", ModItems.vrontausaurusCooked);
 	}
 	
 	public static void initSmelting()
 	{
-		GameRegistry.addSmelting(ModItems.vrontausurusRaw, new ItemStack(ModItems.vrontausurusCooked), 0.35F);
+		GameRegistry.addSmelting(ModItems.vrontausaurusRaw, new ItemStack(ModItems.vrontausaurusCooked), 0.35F);
 	}
 }
