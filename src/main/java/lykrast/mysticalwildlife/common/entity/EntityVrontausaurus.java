@@ -44,7 +44,7 @@ public class EntityVrontausaurus extends EntityAnimal {
 	public EntityVrontausaurus(World worldIn)
 	{
 		super(worldIn);
-        this.setSize(2.4F, 1.4F);
+        this.setSize(2.2F, 1.4F);
 	}
 
     protected void entityInit()
@@ -74,6 +74,7 @@ public class EntityVrontausaurus extends EntityAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
     }
     
+    @Override
     public boolean attackEntityAsMob(Entity entityIn)
     {
     	return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
@@ -155,6 +156,7 @@ public class EntityVrontausaurus extends EntityAnimal {
      */
     public boolean isBreedingItem(ItemStack stack)
     {
+    	if (!world.isRaining()) return false;
         return TEMPTATION_ITEMS.contains(stack.getItem());
     }
     
