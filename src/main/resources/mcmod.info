@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mysticalwildlife",
+  "name": "Mystical Wildlife",
+  "description": "Adds various imaginary animals to the world.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Lykrast"],
+  "credits": "The Minecraft Mod Development Discord.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
