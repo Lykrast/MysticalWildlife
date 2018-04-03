@@ -10,12 +10,13 @@ import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -56,14 +57,13 @@ public class EntityVrontausaurus extends EntityAnimal {
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new AIPanic(1.2D));
-        this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.2D, false));
-        this.tasks.addTask(4, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(5, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(6, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(9, new EntityAILookIdle(this));
+        this.tasks.addTask(2, new AIAttackMeleeShortrange(this, 1.2D, false));
+        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
     }
     
@@ -71,7 +71,7 @@ public class EntityVrontausaurus extends EntityAnimal {
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
     }
     
     @Override
@@ -174,6 +174,20 @@ public class EntityVrontausaurus extends EntityAnimal {
         {
             return !EntityVrontausaurus.this.isChild() && !EntityVrontausaurus.this.isBurning() ? false : super.shouldExecute();
         }
+    }
+    
+    private static class AIAttackMeleeShortrange extends EntityAIAttackMelee {
+
+		public AIAttackMeleeShortrange(EntityCreature creature, double speedIn, boolean useLongMemory) {
+			super(creature, speedIn, useLongMemory);
+		}
+
+		@Override
+        protected double getAttackReachSqr(EntityLivingBase attackTarget)
+        {
+            return (double)(9.0F + attackTarget.width);
+        }
+    	
     }
 
 }
