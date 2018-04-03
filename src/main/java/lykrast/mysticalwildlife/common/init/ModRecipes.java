@@ -22,10 +22,13 @@ public class ModRecipes {
 		//Meat
 		OreDictionary.registerOre("listAllmeatraw", ModItems.vrontausaurusRaw);
 		OreDictionary.registerOre("listAllmeatcooked", ModItems.vrontausaurusCooked);
+		OreDictionary.registerOre("listAllmeatraw", ModItems.yagaHogRaw);
+		OreDictionary.registerOre("listAllmeatcooked", ModItems.yagaHogCooked);
 	}
 	
 	public static void initSmelting()
 	{
 		GameRegistry.addSmelting(ModItems.vrontausaurusRaw, new ItemStack(ModItems.vrontausaurusCooked), 0.35F);
+		GameRegistry.addSmelting(ModItems.yagaHogRaw, new ItemStack(ModItems.yagaHogCooked), 0.35F);
 	}
 }

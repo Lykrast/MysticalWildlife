@@ -6,7 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.Level;
 
 import lykrast.mysticalwildlife.client.render.RenderVrontausaurus;
+import lykrast.mysticalwildlife.client.render.RenderYagaHog;
 import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
+import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -30,10 +32,13 @@ public class ModEntities {
 	
 	public static void init()
 	{
-		//Monsters
 		register(create(EntityVrontausaurus.class, "vrontausaurus", 0x515151, 0xd3d3d3)
 				.spawn(EnumCreatureType.CREATURE, 6, 3, 4, BiomeDictionary.getBiomes(BiomeDictionary.Type.MOUNTAIN)));
         LootTableList.register(EntityVrontausaurus.LOOT);
+        
+		register(create(EntityYagaHog.class, "yaga_hog", 0x9c7f5f, 0x443225)
+				.spawn(EnumCreatureType.CREATURE, 8, 4, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP)));
+        LootTableList.register(EntityYagaHog.LOOT);
 	}
 
 	@SubscribeEvent
@@ -61,6 +66,7 @@ public class ModEntities {
 	@SideOnly(Side.CLIENT)
     public static void initModels() {
         RenderingRegistry.registerEntityRenderingHandler(EntityVrontausaurus.class, RenderVrontausaurus.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityYagaHog.class, RenderYagaHog.FACTORY);
     }
 
 }

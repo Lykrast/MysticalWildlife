@@ -10,7 +10,11 @@ item.mysticalwildlife.vrontausaurus_fur.name=Vrontausaurus Fur
 item.mysticalwildlife.vrontausaurus_meat_raw.name=Raw Vrontausaurus
 item.mysticalwildlife.vrontausaurus_meat_cooked.name=Cooked Vrontausaurus
 
+item.mysticalwildlife.yaga_hog_meat_raw.name=Raw Yaga Hog
+item.mysticalwildlife.yaga_hog_meat_cooked.name=Cooked Yaga Hog
+
 #----------------------------
 #Mobs
 #----------------------------
 entity.mysticalwildlife.vrontausaurus.name=Vrontausaurus
+entity.mysticalwildlife.yaga_hog.name=Yaga Hog

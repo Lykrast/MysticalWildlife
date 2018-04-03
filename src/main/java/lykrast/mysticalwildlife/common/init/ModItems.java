@@ -7,8 +7,10 @@ import lykrast.mysticalwildlife.common.util.CreativeTabsMysticalWildlife;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,15 +21,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber
 public class ModItems {
-	public static Item vrontausaurusFur, vrontausaurusRaw, vrontausaurusCooked;
+	public static Item vrontausaurusFur, vrontausaurusRaw, vrontausaurusCooked,
+		yagaHogRaw, yagaHogCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
 	static
 	{
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
-		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
+		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "vrontausaurus_meat_raw");
 		vrontausaurusCooked = initItem(new ItemFood(9, 0.9F, true), "vrontausaurus_meat_cooked");
+		
+		yagaHogRaw = initItem(new ItemFood(2, 0.3F, true), "yaga_hog_meat_raw");
+		yagaHogCooked = initItem(new ItemFood(6, 0.7F, true), "yaga_hog_meat_cooked");
 	}
 	
 	@SubscribeEvent

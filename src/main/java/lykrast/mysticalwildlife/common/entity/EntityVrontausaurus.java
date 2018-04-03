@@ -95,8 +95,11 @@ public class EntityVrontausaurus extends EntityAnimal {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate()
     {
+    	//TODO: lightning attack
+    	
         super.onLivingUpdate();
     }
 
@@ -119,9 +122,7 @@ public class EntityVrontausaurus extends EntityAnimal {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		EntityVrontausaurus child = new EntityVrontausaurus(world);
-		
-		return child;
+		return new EntityVrontausaurus(world);
 	}
     
     protected SoundEvent getAmbientSound()
@@ -141,7 +142,7 @@ public class EntityVrontausaurus extends EntityAnimal {
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 1.0F);
     }
 
 	@Override

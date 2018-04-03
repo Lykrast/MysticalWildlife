@@ -2,7 +2,7 @@ package lykrast.mysticalwildlife.client.render;
 
 import lykrast.mysticalwildlife.client.model.ModelVrontausaurus;
 import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
-import lykrast.mysticalwildlife.core.MysticalWildlife;
+import lykrast.mysticalwildlife.common.util.TextureUtil;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderVrontausaurus extends RenderLiving<EntityVrontausaurus> {
-	private static final ResourceLocation TEXTURES = new ResourceLocation(MysticalWildlife.MODID, "textures/entity/vrontausaurus.png");
+	private static final ResourceLocation TEXTURES = TextureUtil.getEntityTexture("vrontausaurus");
     public static final Factory FACTORY = new Factory();
 	
 	public RenderVrontausaurus(RenderManager renderManagerIn)
