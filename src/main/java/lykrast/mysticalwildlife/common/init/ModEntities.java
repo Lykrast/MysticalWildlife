@@ -37,7 +37,7 @@ public class ModEntities {
         LootTableList.register(EntityVrontausaurus.LOOT);
         
 		register(create(EntityYagaHog.class, "yaga_hog", 0x9c7f5f, 0x443225)
-				.spawn(EnumCreatureType.CREATURE, 8, 4, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP)));
+				.spawn(EnumCreatureType.CREATURE, 12, 4, 5, BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP)));
         LootTableList.register(EntityYagaHog.LOOT);
 	}
 

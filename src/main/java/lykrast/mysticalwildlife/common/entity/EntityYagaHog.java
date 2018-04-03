@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -21,13 +22,17 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityYagaHog extends EntityAnimal {
@@ -63,6 +68,42 @@ public class EntityYagaHog extends EntityAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    }
+
+    @Override
+    public boolean isPotionApplicable(PotionEffect potioneffectIn)
+    {
+    	Potion potion = potioneffectIn.getPotion();
+    	if (potion == MobEffects.POISON) return false;
+
+    	return super.isPotionApplicable(potioneffectIn);
+    }
+    
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+    	if (!world.isRemote && amount > 0)
+    	{
+    		int amplifier = (int)Math.floor(((amount / 10.0F) * 3.0F));
+    		amplifier = MathHelper.clamp(amplifier, 0, 3);
+    		
+    		spawnLingeringCloud(amplifier);
+    	}
+    	
+    	return super.attackEntityFrom(source, amount);
+    }
+
+    private void spawnLingeringCloud(int amplifier)
+    {
+    	EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
+    	entityareaeffectcloud.setRadius(2.5F);
+    	entityareaeffectcloud.setRadiusOnUse(-0.5F);
+    	entityareaeffectcloud.setWaitTime(10);
+    	entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration() / 2);
+    	entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float)entityareaeffectcloud.getDuration());
+    	
+    	entityareaeffectcloud.addEffect(new PotionEffect(MobEffects.POISON, 200, amplifier));
+
+    	this.world.spawnEntity(entityareaeffectcloud);
     }
 
 	@Override
