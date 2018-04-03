@@ -29,10 +29,10 @@ public class ModItems {
 	static
 	{
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
-		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "vrontausaurus_meat_raw");
+		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
 		vrontausaurusCooked = initItem(new ItemFood(9, 0.9F, true), "vrontausaurus_meat_cooked");
 		
-		yagaHogRaw = initItem(new ItemFood(2, 0.3F, true), "yaga_hog_meat_raw");
+		yagaHogRaw = initItem(new ItemFood(2, 0.3F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "yaga_hog_meat_raw");
 		yagaHogCooked = initItem(new ItemFood(6, 0.7F, true), "yaga_hog_meat_cooked");
 	}
 	
