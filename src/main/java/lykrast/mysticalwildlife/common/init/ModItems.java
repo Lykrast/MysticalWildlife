@@ -26,8 +26,8 @@ public class ModItems {
 	static
 	{
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
-		vrontausaurusRaw = initItem(new ItemFood(2, 0.3F, true), "vrontausaurus_meat_raw");
-		vrontausaurusCooked = initItem(new ItemFood(8, 1.0F, true), "vrontausaurus_meat_cooked");
+		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
+		vrontausaurusCooked = initItem(new ItemFood(9, 0.9F, true), "vrontausaurus_meat_cooked");
 	}
 	
 	@SubscribeEvent
