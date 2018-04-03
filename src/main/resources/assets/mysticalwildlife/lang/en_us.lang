@@ -18,3 +18,8 @@ item.mysticalwildlife.yaga_hog_meat_cooked.name=Cooked Yaga Hog
 #----------------------------
 entity.mysticalwildlife.vrontausaurus.name=Vrontausaurus
 entity.mysticalwildlife.yaga_hog.name=Yaga Hog
+
+#----------------------------
+#Potion effects
+#----------------------------
+potion.effect.mysticalwildlife.shocked=Shocked

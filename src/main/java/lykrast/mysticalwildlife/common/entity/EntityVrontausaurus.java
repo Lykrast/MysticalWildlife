@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModPotions;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -30,6 +31,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -77,7 +79,33 @@ public class EntityVrontausaurus extends EntityAnimal {
     @Override
     public boolean attackEntityAsMob(Entity entityIn)
     {
-    	return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
+        if (entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F))
+        {
+            if (entityIn instanceof EntityLivingBase)
+            {
+                int i = -1;
+
+                if (this.world.getDifficulty() == EnumDifficulty.NORMAL)
+                {
+                    i = 0;
+                }
+                else if (this.world.getDifficulty() == EnumDifficulty.HARD)
+                {
+                    i = 1;
+                }
+
+                if (i >= 0)
+                {
+                    ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(ModPotions.shocked, 60, i));
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     protected void updateAITasks()
