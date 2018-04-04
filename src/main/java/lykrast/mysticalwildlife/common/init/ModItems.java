@@ -3,6 +3,7 @@ package lykrast.mysticalwildlife.common.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import lykrast.mysticalwildlife.common.item.ItemBrush;
 import lykrast.mysticalwildlife.common.util.CreativeTabsMysticalWildlife;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -21,13 +22,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber
 public class ModItems {
-	public static Item vrontausaurusFur, vrontausaurusRaw, vrontausaurusCooked,
+	public static Item brush,
+		vrontausaurusFur, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
 	static
 	{
+		//Tools
+		brush = initItem(new ItemBrush(65), "brush");
+		
+		//Monsters
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
 		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
 		vrontausaurusCooked = initItem(new ItemFood(9, 0.9F, true), "vrontausaurus_meat_cooked");

@@ -6,6 +6,8 @@ itemGroup.mysticalwildlife=Mystical Wildlife
 #----------------------------
 #Items
 #----------------------------
+item.mysticalwildlife.brush.name=Brush
+
 item.mysticalwildlife.vrontausaurus_fur.name=Vrontausaurus Fur
 item.mysticalwildlife.vrontausaurus_meat_raw.name=Raw Vrontausaurus
 item.mysticalwildlife.vrontausaurus_meat_cooked.name=Cooked Vrontausaurus

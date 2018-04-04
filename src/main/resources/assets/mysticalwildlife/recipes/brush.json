@@ -1,0 +1,13 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "WP",
+        " S"
+    ],
+    "key": {
+        "W": { "ore": "cropWheat", "type": "forge:ore_dict" },
+        "P": { "ore": "plankWood", "type": "forge:ore_dict" },
+        "S": { "ore": "stickWood", "type": "forge:ore_dict" }
+    },
+    "result": { "item": "mysticalwildlife:brush" }
+}
