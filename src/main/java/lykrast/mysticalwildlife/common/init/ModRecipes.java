@@ -10,6 +10,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 @Mod.EventBusSubscriber
 public class ModRecipes {
+	public static final String meatRaw = "listAllmeatraw",
+			meatCooked = "listAllmeatcooked",
+			leather = "leather";
 	
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
@@ -20,10 +23,13 @@ public class ModRecipes {
 	public static void initOreDict()
 	{
 		//Meat
-		OreDictionary.registerOre("listAllmeatraw", ModItems.vrontausaurusRaw);
-		OreDictionary.registerOre("listAllmeatcooked", ModItems.vrontausaurusCooked);
-		OreDictionary.registerOre("listAllmeatraw", ModItems.yagaHogRaw);
-		OreDictionary.registerOre("listAllmeatcooked", ModItems.yagaHogCooked);
+		OreDictionary.registerOre(meatRaw, ModItems.vrontausaurusRaw);
+		OreDictionary.registerOre(meatCooked, ModItems.vrontausaurusCooked);
+		OreDictionary.registerOre(meatRaw, ModItems.yagaHogRaw);
+		OreDictionary.registerOre(meatCooked, ModItems.yagaHogCooked);
+		
+		//Leather
+		OreDictionary.registerOre(leather, ModItems.vrontausaurusFur);
 	}
 	
 	public static void initSmelting()
