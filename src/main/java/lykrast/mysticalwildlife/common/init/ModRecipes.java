@@ -27,9 +27,12 @@ public class ModRecipes {
 		OreDictionary.registerOre(meatCooked, ModItems.vrontausaurusCooked);
 		OreDictionary.registerOre(meatRaw, ModItems.yagaHogRaw);
 		OreDictionary.registerOre(meatCooked, ModItems.yagaHogCooked);
+		OreDictionary.registerOre(meatRaw, ModItems.duskLurkerRaw);
+		OreDictionary.registerOre(meatCooked, ModItems.duskLurkerCooked);
 		
 		//Leather
 		OreDictionary.registerOre(leather, ModItems.vrontausaurusFur);
+		OreDictionary.registerOre(leather, ModItems.duskLurkerFur);
 	}
 	
 	public static void initSmelting()

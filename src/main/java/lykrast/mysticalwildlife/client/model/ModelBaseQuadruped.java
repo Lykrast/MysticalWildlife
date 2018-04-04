@@ -18,7 +18,7 @@ public class ModelBaseQuadruped extends ModelBase {
 	public ModelRenderer legRightBack;
 	public ModelRenderer legLeftBack;
 	public ModelRenderer legLeftFront;
-	public ModelRenderer leftRightFront;
+	public ModelRenderer legRightFront;
 	
     /**
      * Sets the models various rotation angles then renders the model.
@@ -39,7 +39,7 @@ public class ModelBaseQuadruped extends ModelBase {
             this.body.render(scale);
             this.legRightBack.render(scale);
             this.legLeftBack.render(scale);
-            this.leftRightFront.render(scale);
+            this.legRightFront.render(scale);
             this.legLeftFront.render(scale);
             GlStateManager.popMatrix();
         }
@@ -49,7 +49,7 @@ public class ModelBaseQuadruped extends ModelBase {
             this.body.render(scale);
             this.legRightBack.render(scale);
             this.legLeftBack.render(scale);
-            this.leftRightFront.render(scale);
+            this.legRightFront.render(scale);
             this.legLeftFront.render(scale);
         }
     }
@@ -66,7 +66,7 @@ public class ModelBaseQuadruped extends ModelBase {
         this.body.rotateAngleX = ((float)Math.PI / 2F);
         this.legRightBack.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.legLeftBack.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.leftRightFront.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.legRightFront.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
         this.legLeftFront.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
     }
 

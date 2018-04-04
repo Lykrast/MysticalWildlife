@@ -18,10 +18,10 @@ public class ModelVrontausaurus extends ModelBaseQuadruped {
 	    
 		this.textureWidth = 128;
 		this.textureHeight = 64;
-		this.leftRightFront = new ModelRenderer(this, 0, 38);
-		this.leftRightFront.mirror = true;
-		this.leftRightFront.setRotationPoint(-12.0F, 6.0F, -4.0F);
-		this.leftRightFront.addBox(-4.0F, 0.0F, -4.0F, 8, 18, 8, 0.0F);
+		this.legRightFront = new ModelRenderer(this, 0, 38);
+		this.legRightFront.mirror = true;
+		this.legRightFront.setRotationPoint(-12.0F, 6.0F, -4.0F);
+		this.legRightFront.addBox(-4.0F, 0.0F, -4.0F, 8, 18, 8, 0.0F);
 		this.body = new ModelRenderer(this, 68, 18);
 		this.body.setRotationPoint(0.0F, 8.0F, 0.0F);
 		this.body.addBox(-8.0F, -12.0F, -9.0F, 16, 32, 14, 0.0F);

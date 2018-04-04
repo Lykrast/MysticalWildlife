@@ -15,11 +15,16 @@ item.mysticalwildlife.vrontausaurus_meat_cooked.name=Cooked Vrontausaurus
 item.mysticalwildlife.yaga_hog_meat_raw.name=Raw Yaga Hog
 item.mysticalwildlife.yaga_hog_meat_cooked.name=Cooked Yaga Hog
 
+item.mysticalwildlife.dusk_lurker_fur.name=Dusk Lurker Fur
+item.mysticalwildlife.dusk_lurker_meat_raw.name=Raw Dusk Lurker
+item.mysticalwildlife.dusk_lurker_meat_cooked.name=Cooked Dusk Lurker
+
 #----------------------------
 #Mobs
 #----------------------------
 entity.mysticalwildlife.vrontausaurus.name=Vrontausaurus
 entity.mysticalwildlife.yaga_hog.name=Yaga Hog
+entity.mysticalwildlife.dusk_lurker.name=Dusk Lurker
 
 #----------------------------
 #Potion effects
