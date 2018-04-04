@@ -131,23 +131,6 @@ public class EntityVrontausaurus extends EntityAnimal {
         super.onLivingUpdate();
     }
 
-    /**
-     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
-     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
-     */
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
-    {
-        livingdata = super.onInitialSpawn(difficulty, livingdata);
-
-        if (this.rand.nextInt(5) == 0)
-        {
-            this.setGrowingAge(-24000);
-        }
-        
-        return livingdata;
-    }
-
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntityVrontausaurus(world);
