@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -51,8 +52,8 @@ public class EntityDuskLurker extends EntityAnimal {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.6D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(4, new EntityAIAvoidEntity<EntityPlayer>(this, EntityPlayer.class, 12.0F, 1.0D, 1.25D));
+        this.tasks.addTask(3, new AITempt(this, 0.8D, false, TEMPTATION_ITEMS));
+        this.tasks.addTask(4, new EntityAIAvoidEntity<EntityPlayer>(this, EntityPlayer.class, 10.0F, 1.0D, 1.25D));
         this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 24.0F, 1.0F));
@@ -103,6 +104,23 @@ public class EntityDuskLurker extends EntityAnimal {
      */
     public boolean isBreedingItem(ItemStack stack)
     {
+    	if (world.isDaytime()) return false;
         return TEMPTATION_ITEMS.contains(stack.getItem());
+    }
+    
+    private static class AITempt extends EntityAITempt {
+    	//Private in the super class, damn it
+    	private EntityCreature tempted;
+    	
+		public AITempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Set<Item> temptItemIn) {
+			super(temptedEntityIn, speedIn, scaredByPlayerMovementIn, temptItemIn);
+			tempted = temptedEntityIn;
+		}
+
+		@Override
+	    public boolean shouldExecute() {
+			if (tempted.world.isDaytime()) return false;
+			return super.shouldExecute();
+		}
     }
 }

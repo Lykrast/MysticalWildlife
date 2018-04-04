@@ -40,7 +40,7 @@ import net.minecraft.world.World;
 
 public class EntityVrontausaurus extends EntityAnimal {
     public static final ResourceLocation LOOT = new ResourceLocation(MysticalWildlife.MODID, "entities/vrontausaurus");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.BEEF);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP);
 	
 	public EntityVrontausaurus(World worldIn)
 	{
@@ -59,7 +59,7 @@ public class EntityVrontausaurus extends EntityAnimal {
         this.tasks.addTask(1, new AIPanic(1.2D));
         this.tasks.addTask(2, new AIAttackMeleeShortrange(this, 1.2D, false));
         this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        this.tasks.addTask(4, new AITempt(this, 1.2D, false, TEMPTATION_ITEMS));
         this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -198,6 +198,22 @@ public class EntityVrontausaurus extends EntityAnimal {
             return (double)(9.0F + attackTarget.width);
         }
     	
+    }
+    
+    private static class AITempt extends EntityAITempt {
+    	//Private in the super class, damn it
+    	private EntityCreature tempted;
+    	
+		public AITempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Set<Item> temptItemIn) {
+			super(temptedEntityIn, speedIn, scaredByPlayerMovementIn, temptItemIn);
+			tempted = temptedEntityIn;
+		}
+
+		@Override
+	    public boolean shouldExecute() {
+			if (!tempted.world.isRaining()) return false;
+			return super.shouldExecute();
+		}
     }
 
 }
