@@ -25,7 +25,7 @@ public class ModItems {
 	public static Item brush,
 		vrontausaurusFur, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked,
-		duskLurkerFur, duskLurkerRaw, duskLurkerCooked;
+		duskAsh, duskLurkerFur, duskLurkerRaw, duskLurkerCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
@@ -42,6 +42,7 @@ public class ModItems {
 		yagaHogRaw = initItem(new ItemFood(2, 0.3F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "yaga_hog_meat_raw");
 		yagaHogCooked = initItem(new ItemFood(6, 0.7F, true), "yaga_hog_meat_cooked");
 
+		duskAsh = initItem(new Item(), "dusk_ash");
 		duskLurkerFur = initItem(new Item(), "dusk_lurker_fur");
 		duskLurkerRaw = initItem(new ItemFood(2, 0.5F, true), "dusk_lurker_meat_raw");
 		duskLurkerCooked = initItem(new ItemFood(6, 1.2F, true), "dusk_lurker_meat_cooked");

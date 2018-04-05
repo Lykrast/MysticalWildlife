@@ -27,6 +27,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -65,6 +66,23 @@ public class EntityDuskLurker extends EntityAnimal {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    }
+    
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+    	if (world.isRemote && amount > 0)
+    	{
+            for (int i = 0; i < 10; ++i)
+            {
+                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, 
+                		this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
+                		this.posY + this.rand.nextDouble() * (double)this.height, 
+                		this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
+                		0.0D, 0.0D, 0.0D);
+            }
+    	}
+    	
+    	return super.attackEntityFrom(source, amount);
     }
 
 	@Override

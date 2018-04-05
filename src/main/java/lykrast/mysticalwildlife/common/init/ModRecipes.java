@@ -33,6 +33,9 @@ public class ModRecipes {
 		//Leather
 		OreDictionary.registerOre(leather, ModItems.vrontausaurusFur);
 		OreDictionary.registerOre(leather, ModItems.duskLurkerFur);
+		
+		//Other
+		OreDictionary.registerOre("dustAsh", ModItems.duskAsh);
 	}
 	
 	public static void initSmelting()
