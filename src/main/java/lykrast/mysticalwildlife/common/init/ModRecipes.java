@@ -34,6 +34,9 @@ public class ModRecipes {
 		OreDictionary.registerOre(leather, ModItems.vrontausaurusFur);
 		OreDictionary.registerOre(leather, ModItems.duskLurkerFur);
 		
+		//Dye
+		OreDictionary.registerOre("dyeBlack", ModItems.duskAsh);
+		
 		//Other
 		OreDictionary.registerOre("dustAsh", ModItems.duskAsh);
 	}
