@@ -1,7 +1,7 @@
 package lykrast.mysticalwildlife.client.render;
 
 import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
-import lykrast.mysticalwildlife.common.util.TextureUtil;
+import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderYagaHog extends RenderLiving<EntityYagaHog> {
-	private static final ResourceLocation TEXTURES = TextureUtil.getEntityTexture("yaga_hog"),
-			EYES = TextureUtil.getEntityTexture("yaga_hog_eyes");
+	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("yaga_hog"),
+			EYES = ResourceUtil.getEntityTexture("yaga_hog_eyes");
     public static final Factory FACTORY = new Factory();
 	
 	public RenderYagaHog(RenderManager renderManagerIn)

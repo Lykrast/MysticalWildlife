@@ -3,10 +3,14 @@ package lykrast.mysticalwildlife.common.util;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.util.ResourceLocation;
 
-public class TextureUtil {
-	private TextureUtil() {}
+public class ResourceUtil {
+	private ResourceUtil() {}
 	
 	public static ResourceLocation getEntityTexture(String name) {
 		return new ResourceLocation(MysticalWildlife.MODID, "textures/entity/" + name + ".png");
+	}
+	
+	public static ResourceLocation getEntityLootTable(String name) {
+		return new ResourceLocation(MysticalWildlife.MODID, "entities/" + name);
 	}
 }

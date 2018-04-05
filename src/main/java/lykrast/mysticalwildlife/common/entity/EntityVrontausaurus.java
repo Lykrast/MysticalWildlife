@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Sets;
 
 import lykrast.mysticalwildlife.common.init.ModPotions;
-import lykrast.mysticalwildlife.core.MysticalWildlife;
+import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -39,7 +39,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityVrontausaurus extends EntityAnimal {
-    public static final ResourceLocation LOOT = new ResourceLocation(MysticalWildlife.MODID, "entities/vrontausaurus");
+    public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("vrontausaurus");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP);
 	
 	public EntityVrontausaurus(World worldIn)

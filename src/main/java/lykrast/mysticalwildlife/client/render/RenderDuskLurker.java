@@ -2,7 +2,7 @@ package lykrast.mysticalwildlife.client.render;
 
 import lykrast.mysticalwildlife.client.model.ModelDuskLurker;
 import lykrast.mysticalwildlife.common.entity.EntityDuskLurker;
-import lykrast.mysticalwildlife.common.util.TextureUtil;
+import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDuskLurker extends RenderLiving<EntityDuskLurker> {
-	private static final ResourceLocation TEXTURES = TextureUtil.getEntityTexture("dusk_lurker"),
-			EYES = TextureUtil.getEntityTexture("dusk_lurker_eyes");
+	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("dusk_lurker"),
+			EYES = ResourceUtil.getEntityTexture("dusk_lurker_eyes");
     public static final Factory FACTORY = new Factory();
 	
 	public RenderDuskLurker(RenderManager renderManagerIn)

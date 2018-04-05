@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
-import lykrast.mysticalwildlife.core.MysticalWildlife;
+import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
@@ -33,7 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityDuskLurker extends EntityAnimal {
-    public static final ResourceLocation LOOT = new ResourceLocation(MysticalWildlife.MODID, "entities/dusk_lurker");
+    public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("dusk_lurker");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.RABBIT);
 	
 	public EntityDuskLurker(World worldIn)
