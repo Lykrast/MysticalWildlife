@@ -1,0 +1,31 @@
+{
+	"lizard.idle": {
+		"category": "neutral",
+		"sounds": [
+			"mysticalwildlife:lizard/idle1",
+			"mysticalwildlife:lizard/idle2",
+			"mysticalwildlife:lizard/idle3",
+			"mysticalwildlife:lizard/idle4",
+			"mysticalwildlife:lizard/idle5",
+			"mysticalwildlife:lizard/idle6",
+			"mysticalwildlife:lizard/idle7",
+			"mysticalwildlife:lizard/idle8"
+		]
+	},
+	"lizard.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"mysticalwildlife:lizard/hurt1",
+			"mysticalwildlife:lizard/hurt2",
+			"mysticalwildlife:lizard/hurt3",
+			"mysticalwildlife:lizard/hurt4",
+			"mysticalwildlife:lizard/hurt5"
+		]
+	},
+	"lizard.death": {
+		"category": "neutral",
+		"sounds": [
+			"mysticalwildlife:lizard/death"
+		]
+	}
+}

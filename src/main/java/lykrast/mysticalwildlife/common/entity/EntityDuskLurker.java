@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -89,20 +90,23 @@ public class EntityDuskLurker extends EntityAnimal {
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntityDuskLurker(world);
 	}
-    
+
+	@Override
     protected SoundEvent getAmbientSound()
     {
-        return SoundEvents.ENTITY_COW_AMBIENT;
+        return ModSounds.lizardIdle;
     }
 
+	@Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_)
     {
-        return SoundEvents.ENTITY_COW_HURT;
+        return ModSounds.lizardHurt;
     }
 
+	@Override
     protected SoundEvent getDeathSound()
     {
-        return SoundEvents.ENTITY_COW_DEATH;
+        return ModSounds.lizardDeath;
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
