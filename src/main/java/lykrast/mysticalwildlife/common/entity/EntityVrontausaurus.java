@@ -1,5 +1,7 @@
 package lykrast.mysticalwildlife.common.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -37,9 +39,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class EntityVrontausaurus extends EntityAnimal {
+public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("vrontausaurus");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP);
 	
@@ -117,6 +120,24 @@ public class EntityVrontausaurus extends EntityAnimal {
     	
     	super.updateAITasks();
     }
+
+	@Override
+	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
+		return !isChild() && getAttackTarget() == null;
+	}
+
+	@Override
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		List<ItemStack> list = new ArrayList<>();
+		
+		if (rand.nextInt(4) == 0)
+		{
+			player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
+		}
+		//TODO: fur
+		
+		return list;
+	}
 
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons

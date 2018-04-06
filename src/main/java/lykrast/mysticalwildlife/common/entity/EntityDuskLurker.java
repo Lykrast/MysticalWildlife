@@ -1,12 +1,16 @@
 package lykrast.mysticalwildlife.common.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModSounds;
+import lykrast.mysticalwildlife.common.util.RandomUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -32,9 +36,12 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityDuskLurker extends EntityAnimal {
+public class EntityDuskLurker extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("dusk_lurker");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.RABBIT);
 	
@@ -69,21 +76,57 @@ public class EntityDuskLurker extends EntityAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
     
+    private void spawnAshParticles() {
+    	for (int i = 0; i < 10; ++i)
+    	{
+    		this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, 
+    				this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
+    				this.posY + this.rand.nextDouble() * (double)this.height, 
+    				this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
+    				0.0D, 0.0D, 0.0D);
+    	}
+    }
+    
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-    	if (world.isRemote && amount > 0)
-    	{
-            for (int i = 0; i < 10; ++i)
-            {
-                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, 
-                		this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
-                		this.posY + this.rand.nextDouble() * (double)this.height, 
-                		this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
-                		0.0D, 0.0D, 0.0D);
-            }
-    	}
+    	if (world.isRemote && amount > 0) spawnAshParticles();
     	
     	return super.attackEntityFrom(source, amount);
+    }
+
+	@Override
+	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
+		return !isChild();
+	}
+
+	@Override
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		List<ItemStack> list = new ArrayList<>();
+		
+		int ashes = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		if (ashes > 0) list.add(new ItemStack(ModItems.duskAsh, ashes));
+		//TODO: fur
+
+		//Spawns the particles
+        this.world.setEntityState(this, (byte)10);
+		
+		return list;
+	}
+
+    /**
+     * Handler for {@link World#setEntityState}
+     */
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id)
+    {
+        if (id == 10)
+        {
+        	spawnAshParticles();
+        }
+        else
+        {
+            super.handleStatusUpdate(id);
+        }
     }
 
 	@Override

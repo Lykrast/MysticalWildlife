@@ -1,11 +1,14 @@
 package lykrast.mysticalwildlife.common.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.util.RandomUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -21,6 +24,7 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -33,9 +37,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class EntityYagaHog extends EntityAnimal {
+public class EntityYagaHog extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("yaga_hog");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.BREAD);
 	
@@ -105,6 +110,25 @@ public class EntityYagaHog extends EntityAnimal {
 
     	this.world.spawnEntity(entityareaeffectcloud);
     }
+
+	@Override
+	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
+		return !isChild();
+	}
+
+	@Override
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		List<ItemStack> list = new ArrayList<>();
+		
+		int dirt = RandomUtil.boundedInt(rand, 0, 2);
+		dirt += RandomUtil.boundedIntRepeated(rand, 0, 1, fortune);
+		if (dirt > 0) list.add(new ItemStack(Blocks.DIRT, dirt));
+		//TODO: vines and cleaning the dirt
+		
+        playSound(SoundEvents.ENTITY_SLIME_JUMP, 1.0F, 1.0F);
+		
+		return list;
+	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
