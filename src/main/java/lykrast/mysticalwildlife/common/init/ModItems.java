@@ -23,9 +23,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Mod.EventBusSubscriber
 public class ModItems {
 	public static Item brush,
-		vrontausaurusFur, vrontausaurusRaw, vrontausaurusCooked,
+		vrontausaurusFur, vrontausaurusFurTuft, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked,
-		duskAsh, duskLurkerFur, duskLurkerRaw, duskLurkerCooked;
+		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
@@ -36,6 +36,7 @@ public class ModItems {
 		
 		//Monsters
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
+		vrontausaurusFurTuft = initItem(new Item(), "vrontausaurus_fur_tuft");
 		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
 		vrontausaurusCooked = initItem(new ItemFood(9, 0.9F, true), "vrontausaurus_meat_cooked");
 		
@@ -44,6 +45,7 @@ public class ModItems {
 
 		duskAsh = initItem(new Item(), "dusk_ash");
 		duskLurkerFur = initItem(new Item(), "dusk_lurker_fur");
+		duskLurkerFurTuft = initItem(new Item(), "dusk_lurker_fur_tuft");
 		duskLurkerRaw = initItem(new ItemFood(2, 0.5F, true), "dusk_lurker_meat_raw");
 		duskLurkerCooked = initItem(new ItemFood(6, 1.2F, true), "dusk_lurker_meat_cooked");
 	}

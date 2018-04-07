@@ -2,7 +2,7 @@
   "parent": "mysticalwildlife:recipes/root",
   "rewards": {
     "recipes": [
-      "mysticalwildlife:brush"
+      "mysticalwildlife:fur/dusk_lurker_fur"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:wheat"
+            "item": "mysticalwildlife:dusk_lurker_fur_tuft"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mysticalwildlife:brush"
+        "recipe": "mysticalwildlife:fur/dusk_lurker_fur"
       }
     }
   },

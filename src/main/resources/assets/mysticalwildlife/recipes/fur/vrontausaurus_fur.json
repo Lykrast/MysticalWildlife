@@ -1,0 +1,12 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"TTT",
+		"TTT",
+		"TTT"
+	],
+	"key": {
+		"T": { "item": "mysticalwildlife:vrontausaurus_fur_tuft" }
+	},
+	"result": { "item": "mysticalwildlife:vrontausaurus_fur" }
+}

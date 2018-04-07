@@ -8,8 +8,10 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModPotions;
 import lykrast.mysticalwildlife.common.init.ModSounds;
+import lykrast.mysticalwildlife.common.util.RandomUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -134,7 +136,9 @@ public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
 		{
 			player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
 		}
-		//TODO: fur
+		
+		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		if (tmp > 0) list.add(new ItemStack(ModItems.vrontausaurusFurTuft, tmp));
 		
 		return list;
 	}

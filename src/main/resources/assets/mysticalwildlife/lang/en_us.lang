@@ -9,6 +9,7 @@ itemGroup.mysticalwildlife=Mystical Wildlife
 item.mysticalwildlife.brush.name=Brush
 
 item.mysticalwildlife.vrontausaurus_fur.name=Vrontausaurus Fur
+item.mysticalwildlife.vrontausaurus_fur_tuft.name=Vrontausaurus Fur Tuft
 item.mysticalwildlife.vrontausaurus_meat_raw.name=Raw Vrontausaurus
 item.mysticalwildlife.vrontausaurus_meat_cooked.name=Cooked Vrontausaurus
 
@@ -17,6 +18,7 @@ item.mysticalwildlife.yaga_hog_meat_cooked.name=Cooked Yaga Hog
 
 item.mysticalwildlife.dusk_ash.name=Dusk Ash
 item.mysticalwildlife.dusk_lurker_fur.name=Dusk Lurker Fur
+item.mysticalwildlife.dusk_lurker_fur_tuft.name=Dusk Lurker Fur Tuft
 item.mysticalwildlife.dusk_lurker_meat_raw.name=Raw Dusk Lurker
 item.mysticalwildlife.dusk_lurker_meat_cooked.name=Cooked Dusk Lurker
 

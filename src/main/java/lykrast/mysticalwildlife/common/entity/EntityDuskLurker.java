@@ -103,10 +103,12 @@ public class EntityDuskLurker extends EntityAnimal implements IBrushable {
 	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		List<ItemStack> list = new ArrayList<>();
 		
-		int ashes = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
-		if (ashes > 0) list.add(new ItemStack(ModItems.duskAsh, ashes));
-		//TODO: fur
+		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		if (tmp > 0) list.add(new ItemStack(ModItems.duskAsh, tmp));
 
+		tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		if (tmp > 0) list.add(new ItemStack(ModItems.duskLurkerFurTuft, tmp));
+		
 		//Spawns the particles
         this.world.setEntityState(this, (byte)10);
 		
