@@ -29,6 +29,8 @@ public class ModRecipes {
 		OreDictionary.registerOre(meatCooked, ModItems.yagaHogCooked);
 		OreDictionary.registerOre(meatRaw, ModItems.duskLurkerRaw);
 		OreDictionary.registerOre(meatCooked, ModItems.duskLurkerCooked);
+		OreDictionary.registerOre(meatRaw, ModItems.cicapteraRaw);
+		OreDictionary.registerOre(meatCooked, ModItems.cicapteraCooked);
 		
 		//Leather
 		OreDictionary.registerOre(leather, ModItems.vrontausaurusFur);
@@ -46,5 +48,6 @@ public class ModRecipes {
 		GameRegistry.addSmelting(ModItems.vrontausaurusRaw, new ItemStack(ModItems.vrontausaurusCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.yagaHogRaw, new ItemStack(ModItems.yagaHogCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.duskLurkerRaw, new ItemStack(ModItems.duskLurkerCooked), 0.35F);
+		GameRegistry.addSmelting(ModItems.cicapteraRaw, new ItemStack(ModItems.cicapteraCooked), 0.35F);
 	}
 }

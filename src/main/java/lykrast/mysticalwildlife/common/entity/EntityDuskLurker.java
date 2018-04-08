@@ -50,12 +50,7 @@ public class EntityDuskLurker extends EntityAnimal implements IBrushable {
 		super(worldIn);
         this.setSize(0.9F, 0.9F);
 	}
-
-    protected void entityInit()
-    {
-        super.entityInit();
-    }
-
+	
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));

@@ -25,7 +25,8 @@ public class ModItems {
 	public static Item brush,
 		vrontausaurusFur, vrontausaurusFurTuft, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked,
-		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked;
+		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked,
+		cicapteraRaw, cicapteraCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
@@ -38,7 +39,7 @@ public class ModItems {
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
 		vrontausaurusFurTuft = initItem(new Item(), "vrontausaurus_fur_tuft");
 		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
-		vrontausaurusCooked = initItem(new ItemFood(9, 0.9F, true), "vrontausaurus_meat_cooked");
+		vrontausaurusCooked = initItem(new ItemFood(10, 0.9F, true), "vrontausaurus_meat_cooked");
 		
 		yagaHogRaw = initItem(new ItemFood(2, 0.3F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "yaga_hog_meat_raw");
 		yagaHogCooked = initItem(new ItemFood(6, 0.7F, true), "yaga_hog_meat_cooked");
@@ -48,6 +49,9 @@ public class ModItems {
 		duskLurkerFurTuft = initItem(new Item(), "dusk_lurker_fur_tuft");
 		duskLurkerRaw = initItem(new ItemFood(2, 0.5F, true), "dusk_lurker_meat_raw");
 		duskLurkerCooked = initItem(new ItemFood(6, 1.2F, true), "dusk_lurker_meat_cooked");
+		
+		cicapteraRaw = initItem(new ItemFood(3, 0.4F, true), "cicaptera_meat_raw");
+		cicapteraCooked = initItem(new ItemFood(8, 0.8F, true), "cicaptera_meat_cooked");
 	}
 	
 	@SubscribeEvent

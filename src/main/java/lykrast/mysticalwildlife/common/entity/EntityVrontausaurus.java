@@ -54,11 +54,6 @@ public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
         this.setSize(2.2F, 1.4F);
 	}
 
-    protected void entityInit()
-    {
-        super.entityInit();
-    }
-
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));

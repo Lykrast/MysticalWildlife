@@ -42,6 +42,10 @@ public class ModEntities {
 				.spawn(EnumCreatureType.CREATURE, 8, 2, 4, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
 				.spawn(EnumCreatureType.CREATURE, 14, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.SPOOKY)));
         LootTableList.register(EntityDuskLurker.LOOT);
+        
+		register(create(EntityCicaptera.class, "cicaptera_azure", 0x0084d7, 0x262626)
+				.spawn(EnumCreatureType.CREATURE, 12, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS)));
+        LootTableList.register(EntityCicaptera.LOOT);
 	}
 
 	@SubscribeEvent
@@ -71,6 +75,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityVrontausaurus.class, RenderVrontausaurus.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityYagaHog.class, RenderYagaHog.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityDuskLurker.class, RenderDuskLurker.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.class, RenderCicapteraAzure.FACTORY);
     }
 
 }

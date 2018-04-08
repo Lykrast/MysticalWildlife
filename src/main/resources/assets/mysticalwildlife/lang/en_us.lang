@@ -22,12 +22,16 @@ item.mysticalwildlife.dusk_lurker_fur_tuft.name=Dusk Lurker Fur Tuft
 item.mysticalwildlife.dusk_lurker_meat_raw.name=Raw Dusk Lurker
 item.mysticalwildlife.dusk_lurker_meat_cooked.name=Cooked Dusk Lurker
 
+item.mysticalwildlife.cicaptera_meat_raw.name=Raw Cicaptera
+item.mysticalwildlife.cicaptera_meat_cooked.name=Cooked Cicaptera
+
 #----------------------------
 #Mobs
 #----------------------------
 entity.mysticalwildlife.vrontausaurus.name=Vrontausaurus
 entity.mysticalwildlife.yaga_hog.name=Yaga Hog
 entity.mysticalwildlife.dusk_lurker.name=Dusk Lurker
+entity.mysticalwildlife.cicaptera_azure.name=Azure Cicaptera
 
 #----------------------------
 #Potion effects
