@@ -31,7 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityCicaptera extends EntityAnimal {
-    public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera");
+    public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/azure");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
 	
 	public EntityCicaptera(World worldIn)

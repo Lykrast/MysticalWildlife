@@ -44,7 +44,7 @@ public class ModEntities {
         LootTableList.register(EntityDuskLurker.LOOT);
         
 		register(create(EntityCicaptera.class, "cicaptera_azure", 0x0084d7, 0x262626)
-				.spawn(EnumCreatureType.CREATURE, 12, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS)));
+				.spawn(EnumCreatureType.CREATURE, 10, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS)));
         LootTableList.register(EntityCicaptera.LOOT);
 	}
 
