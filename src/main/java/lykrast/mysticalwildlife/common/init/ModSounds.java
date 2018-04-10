@@ -12,7 +12,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class ModSounds {
-	public static SoundEvent lizardIdle, lizardHurt, lizardDeath;
+	public static SoundEvent lizardIdle, lizardHurt, lizardDeath, 
+			cicapteraIdle, cicapteraHurt, cicapteraDeath;
 	private static List<SoundEvent> soundList = new ArrayList<>();
 	
 	
@@ -21,6 +22,9 @@ public class ModSounds {
 		lizardIdle = registerSoundEvent("lizard.idle");
 		lizardHurt = registerSoundEvent("lizard.hurt");
 		lizardDeath = registerSoundEvent("lizard.death");
+		cicapteraIdle = registerSoundEvent("cicaptera.idle");
+		cicapteraHurt = registerSoundEvent("cicaptera.hurt");
+		cicapteraDeath = registerSoundEvent("cicaptera.death");
 	}
 
 	@SubscribeEvent

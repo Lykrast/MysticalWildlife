@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -82,25 +83,24 @@ public class EntityCicaptera extends EntityAnimal {
 		return new EntityCicaptera(world);
 	}
     
-	//TODO: real sounds
     protected SoundEvent getAmbientSound()
     {
-        return SoundEvents.ENTITY_PIG_AMBIENT;
+        return ModSounds.cicapteraIdle;
     }
 
     protected SoundEvent getHurtSound(DamageSource p_184601_1_)
     {
-        return SoundEvents.ENTITY_PIG_HURT;
+        return ModSounds.cicapteraHurt;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return SoundEvents.ENTITY_PIG_DEATH;
+        return ModSounds.cicapteraDeath;
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }
 
 	@Override

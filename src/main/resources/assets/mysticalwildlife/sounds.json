@@ -27,5 +27,28 @@
 		"sounds": [
 			"mysticalwildlife:lizard/death"
 		]
+	},
+	"cicaptera.idle": {
+		"category": "neutral",
+		"sounds": [
+			"mysticalwildlife:cicaptera/idle1",
+			"mysticalwildlife:cicaptera/idle2",
+			"mysticalwildlife:cicaptera/idle3",
+			"mysticalwildlife:cicaptera/idle4",
+			"mysticalwildlife:cicaptera/idle5"
+		]
+	},
+	"cicaptera.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"mysticalwildlife:cicaptera/hurt1",
+			"mysticalwildlife:cicaptera/hurt2"
+		]
+	},
+	"cicaptera.death": {
+		"category": "neutral",
+		"sounds": [
+			"mysticalwildlife:cicaptera/death"
+		]
 	}
 }
