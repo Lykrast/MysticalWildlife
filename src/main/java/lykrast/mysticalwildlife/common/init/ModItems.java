@@ -62,8 +62,6 @@ public class ModItems {
 		//for (Item i : itemBlockList) event.getRegistry().register(i);
 		for (Item i : itemList) event.getRegistry().register(i);
 		ModRecipes.initOreDict();
-		//We no longer use it afterwards
-		itemList = null;
 	}
 	
 	@SubscribeEvent
@@ -72,6 +70,9 @@ public class ModItems {
 	{
 		//for (Item i : itemBlockList) initModel(i);
 		for (Item i : itemList) initModel(i);
+		
+		//We no longer use it afterwards
+		itemList = null;
 	}
 	
 	public static Item initItem(Item item, String name)
