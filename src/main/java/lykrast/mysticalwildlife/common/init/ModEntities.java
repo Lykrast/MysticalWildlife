@@ -3,10 +3,14 @@ package lykrast.mysticalwildlife.common.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.Level;
-
-import lykrast.mysticalwildlife.client.render.*;
-import lykrast.mysticalwildlife.common.entity.*;
+import lykrast.mysticalwildlife.client.render.RenderCicapteraAzure;
+import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
+import lykrast.mysticalwildlife.client.render.RenderVrontausaurus;
+import lykrast.mysticalwildlife.client.render.RenderYagaHog;
+import lykrast.mysticalwildlife.common.entity.EntityCicaptera;
+import lykrast.mysticalwildlife.common.entity.EntityDuskLurker;
+import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
+import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -51,8 +55,9 @@ public class ModEntities {
 	@SubscribeEvent
 	public static void registerEntities(RegistryEvent.Register<EntityEntry> event)
 	{
-		MysticalWildlife.logger.log(Level.INFO, "Registerings ENTITIES");
 		for (EntityEntry e : entityList) event.getRegistry().register(e);
+		//We no longer use it afterwards
+		entityList = null;
 	}
 	
 	public static void register(EntityEntryBuilder<? extends Entity> entry) {
