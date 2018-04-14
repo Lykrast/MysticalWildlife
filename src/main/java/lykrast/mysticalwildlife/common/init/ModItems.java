@@ -5,6 +5,7 @@ import java.util.List;
 
 import lykrast.mysticalwildlife.common.item.*;
 import lykrast.mysticalwildlife.common.util.CreativeTabsMysticalWildlife;
+import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -33,7 +34,7 @@ public class ModItems {
 	static
 	{
 		//Tools
-		brush = initItem(new ItemBrush(65), "brush");
+		if (ModConfig.brushEnabled) brush = initItem(new ItemBrush(65), "brush");
 		
 		//Monsters
 		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");

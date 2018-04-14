@@ -57,3 +57,4 @@ config.mysticalwildlife.spawning.mingroup=Min spawn group size
 config.mysticalwildlife.spawning.maxgroup=Max spawn group size
 config.mysticalwildlife.spawning.dusk_lurker.forest=Dusk Lurker (Forest)
 config.mysticalwildlife.spawning.dusk_lurker.spooky=Dusk Lurker (Spooky)
+config.mysticalwildlife.brush=Enable Brush

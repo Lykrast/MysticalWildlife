@@ -13,9 +13,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Config(modid = MysticalWildlife.MODID)
 @LangKey("config." + MysticalWildlife.MODID + ".title")
 public class ModConfig {
-	public static final Spawning SPAWNING = new Spawning();
-	
 	@LangKey("config." + MysticalWildlife.MODID + ".spawning.title")
+	public static final Spawning SPAWNING = new Spawning();
+
+	@RequiresMcRestart
+	@LangKey("config." + MysticalWildlife.MODID + ".brush")
+	public static boolean brushEnabled = true;
+	
 	public static class Spawning {
 
 		@LangKey("entity." + MysticalWildlife.MODID + ".vrontausaurus.name")
