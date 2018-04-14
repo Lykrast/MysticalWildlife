@@ -95,7 +95,7 @@ public class ModelCicaptera extends ModelBase {
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         
-        if (!entityIn.onGround) //In the air, deploy wings
+        if (!entityIn.onGround && !entityIn.isInWater()) //In the air, deploy wings
         {
             this.body.rotateAngleX = PI_THIRD;
             this.legRightBack.rotateAngleX = -PI_THIRD;
