@@ -5,11 +5,14 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * cicaptera - Lykrast
  * Created using Tabula 7.0.0
  */
+@SideOnly(Side.CLIENT)
 public class ModelCicaptera extends ModelBase {
 	protected float PI_HALF = ((float)Math.PI / 2F); //90°
 	protected float PI_THIRD = ((float)Math.PI / 3F); //60°

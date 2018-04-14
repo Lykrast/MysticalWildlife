@@ -5,10 +5,13 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * This is to simplify animation on my Tabula models. If you're wondering why not directly use ModelQuadruped, then I don't know either.
  */
+@SideOnly(Side.CLIENT)
 public class ModelBaseQuadruped extends ModelBase {
     protected float childYOffset = 8.0F;
     protected float childZOffset = 4.0F;

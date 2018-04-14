@@ -1,10 +1,13 @@
 package lykrast.mysticalwildlife.client.model;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * vrontausurus2 - Lykrast Created using Tabula 7.0.0
  */
+@SideOnly(Side.CLIENT)
 public class ModelVrontausaurus extends ModelBaseQuadruped {
 	public ModelRenderer plateLowerFront;
 	public ModelRenderer plateLowerBack;
