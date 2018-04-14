@@ -3,14 +3,8 @@ package lykrast.mysticalwildlife.common.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import lykrast.mysticalwildlife.client.render.RenderCicapteraAzure;
-import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
-import lykrast.mysticalwildlife.client.render.RenderVrontausaurus;
-import lykrast.mysticalwildlife.client.render.RenderYagaHog;
-import lykrast.mysticalwildlife.common.entity.EntityCicaptera;
-import lykrast.mysticalwildlife.common.entity.EntityDuskLurker;
-import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
-import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
+import lykrast.mysticalwildlife.client.render.*;
+import lykrast.mysticalwildlife.common.entity.*;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -47,9 +41,21 @@ public class ModEntities {
 				.spawn(EnumCreatureType.CREATURE, 14, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.SPOOKY)));
         LootTableList.register(EntityDuskLurker.LOOT);
         
-		register(create(EntityCicaptera.class, "cicaptera_azure", 0x0084d7, 0x262626)
+		register(create(EntityCicaptera.Azure.class, "cicaptera_azure", 0x0084d7, 0x262626)
 				.spawn(EnumCreatureType.CREATURE, 10, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS)));
-        LootTableList.register(EntityCicaptera.LOOT);
+        LootTableList.register(EntityCicaptera.Azure.LOOT);
+		register(create(EntityCicaptera.Verdant.class, "cicaptera_verdant", 0x4f6028, 0x262626)
+				.spawn(EnumCreatureType.CREATURE, 10, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST)));
+        LootTableList.register(EntityCicaptera.Verdant.LOOT);
+		register(create(EntityCicaptera.Crimson.class, "cicaptera_crimson", 0x8b2b29, 0x262626)
+				.spawn(EnumCreatureType.CREATURE, 6, 3, 4, BiomeDictionary.getBiomes(BiomeDictionary.Type.HOT)));
+        LootTableList.register(EntityCicaptera.Crimson.LOOT);
+		register(create(EntityCicaptera.Sandy.class, "cicaptera_sandy", 0xbdb98A, 0x262626)
+				.spawn(EnumCreatureType.CREATURE, 10, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.SANDY)));
+        LootTableList.register(EntityCicaptera.Sandy.LOOT);
+		register(create(EntityCicaptera.Wintry.class, "cicaptera_wintry", 0xcad7d7, 0x262626)
+				.spawn(EnumCreatureType.CREATURE, 10, 4, 6, BiomeDictionary.getBiomes(BiomeDictionary.Type.SNOWY)));
+        LootTableList.register(EntityCicaptera.Wintry.LOOT);
 	}
 
 	@SubscribeEvent
@@ -80,7 +86,11 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityVrontausaurus.class, RenderVrontausaurus.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityYagaHog.class, RenderYagaHog.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityDuskLurker.class, RenderDuskLurker.FACTORY);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.class, RenderCicapteraAzure.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Azure.class, RenderCicaptera.Azure.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Verdant.class, RenderCicaptera.Verdant.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Crimson.class, RenderCicaptera.Crimson.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Sandy.class, RenderCicaptera.Sandy.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Wintry.class, RenderCicaptera.Wintry.FACTORY);
     }
 
 }

@@ -3,7 +3,7 @@ package lykrast.mysticalwildlife.common.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import lykrast.mysticalwildlife.common.item.ItemBrush;
+import lykrast.mysticalwildlife.common.item.*;
 import lykrast.mysticalwildlife.common.util.CreativeTabsMysticalWildlife;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -26,7 +26,7 @@ public class ModItems {
 		vrontausaurusFur, vrontausaurusFurTuft, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked,
 		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked,
-		cicapteraRaw, cicapteraCooked, cicapteraHuskAzure;
+		cicapteraRaw, cicapteraCooked, cicapteraHusk;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
@@ -52,7 +52,7 @@ public class ModItems {
 		
 		cicapteraRaw = initItem(new ItemFood(3, 0.4F, true), "cicaptera_meat_raw");
 		cicapteraCooked = initItem(new ItemFood(8, 0.8F, true), "cicaptera_meat_cooked");
-		cicapteraHuskAzure = initItem(new Item(), "cicaptera_husk_azure");
+		cicapteraHusk = initItem(new ItemVariant("azure", "verdant", "crimson", "sandy", "wintry"), "cicaptera_husk");
 	}
 	
 	@SubscribeEvent
@@ -94,8 +94,7 @@ public class ModItems {
 	@SideOnly(Side.CLIENT)
 	private static void initModel(Item i)
 	{
-//		if (i instanceof IItemCustomModel) ((IItemCustomModel)i).initModel();
-//		else ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
-		ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
+		if (i instanceof IItemCustomModel) ((IItemCustomModel)i).initModel();
+		else ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
 	}
 }

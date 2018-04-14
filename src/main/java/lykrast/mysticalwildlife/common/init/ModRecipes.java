@@ -38,7 +38,11 @@ public class ModRecipes {
 		
 		//Dye
 		OreDictionary.registerOre("dyeBlack", ModItems.duskAsh);
-		OreDictionary.registerOre("dyeBlue", ModItems.cicapteraHuskAzure);
+		OreDictionary.registerOre("dyeBlue", new ItemStack(ModItems.cicapteraHusk, 1, 0));
+		OreDictionary.registerOre("dyeGreen", new ItemStack(ModItems.cicapteraHusk, 1, 1));
+		OreDictionary.registerOre("dyeRed", new ItemStack(ModItems.cicapteraHusk, 1, 2));
+		OreDictionary.registerOre("dyeYellow", new ItemStack(ModItems.cicapteraHusk, 1, 3));
+		OreDictionary.registerOre("dyeWhite", new ItemStack(ModItems.cicapteraHusk, 1, 4));
 		
 		//Other
 		OreDictionary.registerOre("dustAsh", ModItems.duskAsh);

@@ -31,8 +31,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityCicaptera extends EntityAnimal {
-    public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/azure");
+public abstract class EntityCicaptera extends EntityAnimal {
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
 	
 	public EntityCicaptera(World worldIn)
@@ -80,8 +79,19 @@ public class EntityCicaptera extends EntityAnimal {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityCicaptera(world);
+		if (ageable instanceof EntityCicaptera && rand.nextBoolean()) return ((EntityCicaptera) ageable).createOwnChild();
+		else return createOwnChild();
 	}
+
+	@Override
+    public boolean canMateWith(EntityAnimal otherAnimal)
+    {
+        if (otherAnimal == this || !(otherAnimal instanceof EntityCicaptera)) return false;
+        
+        return this.isInLove() && otherAnimal.isInLove();
+    }
+	
+	protected abstract EntityAgeable createOwnChild();
     
     protected SoundEvent getAmbientSound()
     {
@@ -103,12 +113,6 @@ public class EntityCicaptera extends EntityAnimal {
         this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }
 
-	@Override
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LOOT;
-    }
-
     /**
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
@@ -116,5 +120,101 @@ public class EntityCicaptera extends EntityAnimal {
     public boolean isBreedingItem(ItemStack stack)
     {
         return TEMPTATION_ITEMS.contains(stack.getItem());
+    }
+    
+    public static class Azure extends EntityCicaptera {
+        public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/azure");
+
+    	public Azure(World worldIn) {
+    		super(worldIn);
+    	}
+
+    	@Override
+        @Nullable
+        protected ResourceLocation getLootTable() {
+            return LOOT;
+        }
+
+    	@Override
+    	protected EntityAgeable createOwnChild() {
+    		return new Azure(world);
+    	}
+    }
+    
+    public static class Verdant extends EntityCicaptera {
+        public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/verdant");
+
+    	public Verdant(World worldIn) {
+    		super(worldIn);
+    	}
+
+    	@Override
+        @Nullable
+        protected ResourceLocation getLootTable() {
+            return LOOT;
+        }
+
+    	@Override
+    	protected EntityAgeable createOwnChild() {
+    		return new Verdant(world);
+    	}
+    }
+    
+    public static class Crimson extends EntityCicaptera {
+        public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/crimson");
+
+        //TODO: Crimson are hostile
+    	public Crimson(World worldIn) {
+    		super(worldIn);
+    	}
+
+    	@Override
+        @Nullable
+        protected ResourceLocation getLootTable() {
+            return LOOT;
+        }
+
+    	@Override
+    	protected EntityAgeable createOwnChild() {
+    		return new Crimson(world);
+    	}
+    }
+    
+    public static class Sandy extends EntityCicaptera {
+        public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/sandy");
+
+    	public Sandy(World worldIn) {
+    		super(worldIn);
+    	}
+
+    	@Override
+        @Nullable
+        protected ResourceLocation getLootTable() {
+            return LOOT;
+        }
+
+    	@Override
+    	protected EntityAgeable createOwnChild() {
+    		return new Sandy(world);
+    	}
+    }
+    
+    public static class Wintry extends EntityCicaptera {
+        public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/wintry");
+
+    	public Wintry(World worldIn) {
+    		super(worldIn);
+    	}
+
+    	@Override
+        @Nullable
+        protected ResourceLocation getLootTable() {
+            return LOOT;
+        }
+
+    	@Override
+    	protected EntityAgeable createOwnChild() {
+    		return new Wintry(world);
+    	}
     }
 }

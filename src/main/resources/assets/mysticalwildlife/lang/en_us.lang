@@ -24,7 +24,11 @@ item.mysticalwildlife.dusk_lurker_meat_cooked.name=Cooked Dusk Lurker
 
 item.mysticalwildlife.cicaptera_meat_raw.name=Raw Cicaptera
 item.mysticalwildlife.cicaptera_meat_cooked.name=Cooked Cicaptera
-item.mysticalwildlife.cicaptera_husk_azure.name=Azure Cicaptera Husk
+item.mysticalwildlife.cicaptera_husk.azure.name=Azure Cicaptera Husk
+item.mysticalwildlife.cicaptera_husk.verdant.name=Verdant Cicaptera Husk
+item.mysticalwildlife.cicaptera_husk.crimson.name=Crimson Cicaptera Husk
+item.mysticalwildlife.cicaptera_husk.sandy.name=Sandy Cicaptera Husk
+item.mysticalwildlife.cicaptera_husk.wintry.name=Wintry Cicaptera Husk
 
 #----------------------------
 #Mobs
@@ -33,6 +37,10 @@ entity.mysticalwildlife.vrontausaurus.name=Vrontausaurus
 entity.mysticalwildlife.yaga_hog.name=Yaga Hog
 entity.mysticalwildlife.dusk_lurker.name=Dusk Lurker
 entity.mysticalwildlife.cicaptera_azure.name=Azure Cicaptera
+entity.mysticalwildlife.cicaptera_verdant.name=Verdant Cicaptera
+entity.mysticalwildlife.cicaptera_crimson.name=Crimson Cicaptera
+entity.mysticalwildlife.cicaptera_sandy.name=Sandy Cicaptera
+entity.mysticalwildlife.cicaptera_wintry.name=Wintry Cicaptera
 
 #----------------------------
 #Potion effects
