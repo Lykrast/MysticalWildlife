@@ -9,9 +9,15 @@ import com.google.common.collect.Sets;
 import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -29,6 +35,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public abstract class EntityCicaptera extends EntityAnimal {
@@ -163,10 +171,54 @@ public abstract class EntityCicaptera extends EntityAnimal {
     public static class Crimson extends EntityCicaptera {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/crimson");
 
-        //TODO: Crimson are hostile
     	public Crimson(World worldIn) {
     		super(worldIn);
     	}
+    	
+    	@Override
+        protected void initEntityAI()
+        {
+            this.tasks.addTask(0, new EntityAISwimming(this));
+            this.tasks.addTask(1, new AICrimsonLeap(this));
+            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.2D, false));
+            this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
+            this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+            this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+            this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+            this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+            this.tasks.addTask(8, new EntityAILookIdle(this));
+            this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
+        }
+        
+        @Override
+        public boolean attackEntityAsMob(Entity entityIn)
+        {
+        	boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
+        	
+            if (flag)
+            {
+            	entityIn.motionX += motionX;
+            	entityIn.motionY += motionY;
+            	entityIn.motionZ += motionZ;
+            }
+        	motionX *= -1;
+        	motionY *= -1;
+        	motionZ *= -1;
+        	
+        	return flag;
+        }
+
+        @Override
+        protected void updateAITasks()
+        {
+        	if (world.getDifficulty() == EnumDifficulty.PEACEFUL)
+        	{
+            	if (this.getAttackTarget() != null) this.setAttackTarget(null);
+            	if (this.getRevengeTarget() != null) this.setRevengeTarget(null);
+        	}
+        	
+        	super.updateAITasks();
+        }
 
     	@Override
         @Nullable
@@ -177,6 +229,55 @@ public abstract class EntityCicaptera extends EntityAnimal {
     	@Override
     	protected EntityAgeable createOwnChild() {
     		return new Crimson(world);
+    	}
+    	
+    	private static class AICrimsonLeap extends EntityAILeapAtTarget {
+    		//Damn it package private access
+    		private EntityLiving leaper;
+    		//Only attack once per leap
+    	    private boolean attacked;
+    		
+			public AICrimsonLeap(EntityCicaptera leapingEntity) {
+				super(leapingEntity, 0.5F);
+				this.leaper = leapingEntity;
+			}
+			
+			@Override
+		    public void startExecuting()
+		    {
+				attacked = false;
+				EntityLivingBase leapTarget = leaper.getAttackTarget();
+				if (leapTarget == null) return;
+				
+		        double d0 = leapTarget.posX - this.leaper.posX;
+		        double d1 = leapTarget.posZ - this.leaper.posZ;
+		        float f = MathHelper.sqrt(d0 * d0 + d1 * d1);
+
+		        if ((double)f >= 1.0E-4D)
+		        {
+		            this.leaper.motionX += d0 / (double)f * 0.8D + this.leaper.motionX * 0.2D;
+		            this.leaper.motionZ += d1 / (double)f * 0.8D + this.leaper.motionZ * 0.2D;
+		        }
+
+		        this.leaper.motionY = 0.5D;
+		    }
+			
+			@Override
+		    public void updateTask()
+		    {
+				EntityLivingBase leapTarget = leaper.getAttackTarget();
+				if (leapTarget == null || attacked) return;
+				double distance = this.leaper.getDistanceSq(leapTarget.posX, 
+						(leapTarget.getEntityBoundingBox().minY + leapTarget.getEntityBoundingBox().maxY) / 2.0, 
+						leapTarget.posZ);
+				double range = (double)(this.leaper.width * this.leaper.width + leapTarget.width);
+				
+				if (distance <= range)
+				{
+					attacked = true;
+					leaper.attackEntityAsMob(leapTarget);
+				}
+		    }
     	}
     }
     
