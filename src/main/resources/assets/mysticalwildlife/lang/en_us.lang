@@ -46,3 +46,36 @@ entity.mysticalwildlife.cicaptera_wintry.name=Wintry Cicaptera
 #Potion effects
 #----------------------------
 potion.effect.mysticalwildlife.shocked=Shocked
+
+#----------------------------
+#Config
+#----------------------------
+config.mysticalwildlife.title=Mystical Wildlife
+config.mysticalwildlife.spawning.title=Spawning
+config.mysticalwildlife.spawning.vrontausaurus.weight=Vrontausaurus spawn weight
+config.mysticalwildlife.spawning.vrontausaurus.mingroup=Vrontausaurus min spawn group size
+config.mysticalwildlife.spawning.vrontausaurus.maxgroup=Vrontausaurus max spawn group size
+config.mysticalwildlife.spawning.yaga_hog.weight=Yaga Hog spawn weight
+config.mysticalwildlife.spawning.yaga_hog.mingroup=Yaga Hog min spawn group size
+config.mysticalwildlife.spawning.yaga_hog.maxgroup=Yaga Hog max spawn group size
+config.mysticalwildlife.spawning.dusk_lurker.forest.weight=Dusk Lurker forest spawn weight
+config.mysticalwildlife.spawning.dusk_lurker.forest.mingroup=Dusk Lurker forest min spawn group size
+config.mysticalwildlife.spawning.dusk_lurker.forest.maxgroup=Dusk Lurker forest max spawn group size
+config.mysticalwildlife.spawning.dusk_lurker.spooky.weight=Dusk Lurker spooky spawn weight
+config.mysticalwildlife.spawning.dusk_lurker.spooky.mingroup=Dusk Lurker spooky min spawn group size
+config.mysticalwildlife.spawning.dusk_lurker.spooky.maxgroup=Dusk Lurker spooky max spawn group size
+config.mysticalwildlife.spawning.cicaptera_azure.weight=Azure Cicaptera spawn weight
+config.mysticalwildlife.spawning.cicaptera_azure.mingroup=Azure Cicaptera min spawn group size
+config.mysticalwildlife.spawning.cicaptera_azure.maxgroup=Azure Cicaptera max spawn group size
+config.mysticalwildlife.spawning.cicaptera_verdant.weight=Verdant Cicaptera spawn weight
+config.mysticalwildlife.spawning.cicaptera_verdant.mingroup=Verdant Cicaptera min spawn group size
+config.mysticalwildlife.spawning.cicaptera_verdant.maxgroup=Verdant Cicaptera max spawn group size
+config.mysticalwildlife.spawning.cicaptera_crimson.weight=Crimson Cicaptera spawn weight
+config.mysticalwildlife.spawning.cicaptera_crimson.mingroup=Crimson Cicaptera min spawn group size
+config.mysticalwildlife.spawning.cicaptera_crimson.maxgroup=Crimson Cicaptera max spawn group size
+config.mysticalwildlife.spawning.cicaptera_sandy.weight=Sandy Cicaptera spawn weight
+config.mysticalwildlife.spawning.cicaptera_sandy.mingroup=Sandy Cicaptera min spawn group size
+config.mysticalwildlife.spawning.cicaptera_sandy.maxgroup=Sandy Cicaptera max spawn group size
+config.mysticalwildlife.spawning.cicaptera_wintry.weight=Wintry Cicaptera spawn weight
+config.mysticalwildlife.spawning.cicaptera_wintry.mingroup=Wintry Cicaptera min spawn group size
+config.mysticalwildlife.spawning.cicaptera_wintry.maxgroup=Wintry Cicaptera max spawn group size
