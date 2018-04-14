@@ -1,12 +1,18 @@
 package lykrast.mysticalwildlife.common.init;
 
+import static lykrast.mysticalwildlife.common.util.ModConfig.SPAWNING;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static lykrast.mysticalwildlife.common.util.ModConfig.SPAWNING;
-
-import lykrast.mysticalwildlife.client.render.*;
-import lykrast.mysticalwildlife.common.entity.*;
+import lykrast.mysticalwildlife.client.render.RenderCicaptera;
+import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
+import lykrast.mysticalwildlife.client.render.RenderVrontausaurus;
+import lykrast.mysticalwildlife.client.render.RenderYagaHog;
+import lykrast.mysticalwildlife.common.entity.EntityCicaptera;
+import lykrast.mysticalwildlife.common.entity.EntityDuskLurker;
+import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
+import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -32,48 +38,48 @@ public class ModEntities {
 	{
 		register(create(EntityVrontausaurus.class, "vrontausaurus", 0x515151, 0xd3d3d3)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.vrontausaurusWeight, SPAWNING.vrontausaurusMinGroup, SPAWNING.vrontausaurusMaxGroup, 
+						SPAWNING.vrontausaurus.weight, SPAWNING.vrontausaurus.minGroup, SPAWNING.vrontausaurus.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.MOUNTAIN)));
         LootTableList.register(EntityVrontausaurus.LOOT);
         
 		register(create(EntityYagaHog.class, "yaga_hog", 0x9c7f5f, 0x443225)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.yagaHogWeight, SPAWNING.yagaHogMinGroup, SPAWNING.yagaHogMaxGroup, 
+						SPAWNING.yagaHog.weight, SPAWNING.yagaHog.minGroup, SPAWNING.yagaHog.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP)));
         LootTableList.register(EntityYagaHog.LOOT);
         
 		register(create(EntityDuskLurker.class, "dusk_lurker", 0x262626, 0x808080)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.duskLurkerForestWeight, SPAWNING.duskLurkerForestMinGroup, SPAWNING.duskLurkerForestMaxGroup, 
+						SPAWNING.duskLurkerForest.weight, SPAWNING.duskLurkerForest.minGroup, SPAWNING.duskLurkerForest.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.duskLurkerSpookyWeight, SPAWNING.duskLurkerSpookyMinGroup, SPAWNING.duskLurkerSpookyMaxGroup, 
+						SPAWNING.duskLurkerSpooky.weight, SPAWNING.duskLurkerSpooky.minGroup, SPAWNING.duskLurkerSpooky.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.SPOOKY)));
         LootTableList.register(EntityDuskLurker.LOOT);
         
 		register(create(EntityCicaptera.Azure.class, "cicaptera_azure", 0x0084d7, 0x262626)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapetraAzureWeight, SPAWNING.cicapetraAzureMinGroup, SPAWNING.cicapetraAzureMaxGroup, 
+						SPAWNING.cicapteraAzure.weight, SPAWNING.cicapteraAzure.minGroup, SPAWNING.cicapteraAzure.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS)));
         LootTableList.register(EntityCicaptera.Azure.LOOT);
 		register(create(EntityCicaptera.Verdant.class, "cicaptera_verdant", 0x4f6028, 0x262626)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapetraVerdantWeight, SPAWNING.cicapetraVerdantMinGroup, SPAWNING.cicapetraVerdantMaxGroup, 
+						SPAWNING.cicapteraVerdant.weight, SPAWNING.cicapteraVerdant.minGroup, SPAWNING.cicapteraVerdant.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST)));
         LootTableList.register(EntityCicaptera.Verdant.LOOT);
 		register(create(EntityCicaptera.Crimson.class, "cicaptera_crimson", 0x8b2b29, 0x262626)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapetraCrimsonWeight, SPAWNING.cicapetraCrimsonMinGroup, SPAWNING.cicapetraCrimsonMaxGroup, 
+						SPAWNING.cicapteraCrimson.weight, SPAWNING.cicapteraCrimson.minGroup, SPAWNING.cicapteraCrimson.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.HOT)));
         LootTableList.register(EntityCicaptera.Crimson.LOOT);
 		register(create(EntityCicaptera.Sandy.class, "cicaptera_sandy", 0xbdb98A, 0x262626)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapetraSandyWeight, SPAWNING.cicapetraSandyMinGroup, SPAWNING.cicapetraSandyMaxGroup, 
+						SPAWNING.cicapteraSandy.weight, SPAWNING.cicapteraSandy.minGroup, SPAWNING.cicapteraSandy.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.SANDY)));
         LootTableList.register(EntityCicaptera.Sandy.LOOT);
 		register(create(EntityCicaptera.Wintry.class, "cicaptera_wintry", 0xcad7d7, 0x262626)
 				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapetraWintryWeight, SPAWNING.cicapetraWintryMinGroup, SPAWNING.cicapetraWintryMaxGroup, 
+						SPAWNING.cicapteraWintry.weight, SPAWNING.cicapteraWintry.minGroup, SPAWNING.cicapteraWintry.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.SNOWY)));
         LootTableList.register(EntityCicaptera.Wintry.LOOT);
 	}
