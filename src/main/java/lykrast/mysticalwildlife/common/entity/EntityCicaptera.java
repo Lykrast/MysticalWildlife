@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -97,6 +98,15 @@ public abstract class EntityCicaptera extends EntityAnimal {
         if (otherAnimal == this || !(otherAnimal instanceof EntityCicaptera)) return false;
         
         return this.isInLove() && otherAnimal.isInLove();
+    }
+
+    /**
+     * Get this Entity's EnumCreatureAttribute
+     */
+	@Override
+    public EnumCreatureAttribute getCreatureAttribute()
+    {
+        return EnumCreatureAttribute.ARTHROPOD;
     }
 	
 	protected abstract EntityAgeable createOwnChild();
