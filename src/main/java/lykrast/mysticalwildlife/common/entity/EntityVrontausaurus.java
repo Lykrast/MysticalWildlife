@@ -95,6 +95,7 @@ public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
 
                 if (i >= 0)
                 {
+                    playSound(ModSounds.spark, 1.0F, 1.0F);
                     ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(ModPotions.shocked, 60, i));
                 }
             }
@@ -134,8 +135,9 @@ public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
 		
 		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
 		if (tmp > 0) list.add(new ItemStack(ModItems.vrontausaurusFurTuft, tmp));
-		
+
         playSound(ModSounds.brushing, 1.0F, 1.0F);
+        playSound(ModSounds.spark, 1.0F, 1.0F);
 		
 		return list;
 	}

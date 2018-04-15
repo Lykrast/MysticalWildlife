@@ -56,5 +56,13 @@
 		"sounds": [
 			"mysticalwildlife:brushing"
 		]
+	},
+	"lizard.spark": {
+		"sounds": [
+			"mysticalwildlife:lizard/spark1",
+			"mysticalwildlife:lizard/spark2",
+			"mysticalwildlife:lizard/spark3",
+			"mysticalwildlife:lizard/spark4"
+		]
 	}
 }
