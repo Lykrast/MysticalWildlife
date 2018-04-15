@@ -42,7 +42,8 @@
 		"subtitle": "subtitles.mysticalwildlife.entity.cicaptera.hurt",
 		"sounds": [
 			"mysticalwildlife:cicaptera/hurt1",
-			"mysticalwildlife:cicaptera/hurt2"
+			"mysticalwildlife:cicaptera/hurt2",
+			"mysticalwildlife:cicaptera/hurt3"
 		]
 	},
 	"cicaptera.death": {
