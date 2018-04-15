@@ -1,5 +1,6 @@
 {
 	"lizard.idle": {
+		"subtitle": "subtitles.mysticalwildlife.entity.lizard.idle",
 		"sounds": [
 			"mysticalwildlife:lizard/idle1",
 			"mysticalwildlife:lizard/idle2",
@@ -12,6 +13,7 @@
 		]
 	},
 	"lizard.hurt": {
+		"subtitle": "subtitles.mysticalwildlife.entity.lizard.hurt",
 		"sounds": [
 			"mysticalwildlife:lizard/hurt1",
 			"mysticalwildlife:lizard/hurt2",
@@ -21,11 +23,13 @@
 		]
 	},
 	"lizard.death": {
+		"subtitle": "subtitles.mysticalwildlife.entity.lizard.death",
 		"sounds": [
 			"mysticalwildlife:lizard/death"
 		]
 	},
 	"cicaptera.idle": {
+		"subtitle": "subtitles.mysticalwildlife.entity.cicaptera.idle",
 		"sounds": [
 			"mysticalwildlife:cicaptera/idle1",
 			"mysticalwildlife:cicaptera/idle2",
@@ -35,12 +39,14 @@
 		]
 	},
 	"cicaptera.hurt": {
+		"subtitle": "subtitles.mysticalwildlife.entity.cicaptera.hurt",
 		"sounds": [
 			"mysticalwildlife:cicaptera/hurt1",
 			"mysticalwildlife:cicaptera/hurt2"
 		]
 	},
 	"cicaptera.death": {
+		"subtitle": "subtitles.mysticalwildlife.entity.cicaptera.death",
 		"sounds": [
 			"mysticalwildlife:cicaptera/death"
 		]

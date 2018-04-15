@@ -48,6 +48,16 @@ entity.mysticalwildlife.cicaptera_wintry.name=Wintry Cicaptera
 potion.effect.mysticalwildlife.shocked=Shocked
 
 #----------------------------
+#Subtitles
+#----------------------------
+subtitles.mysticalwildlife.entity.lizard.idle=Furzard hisses
+subtitles.mysticalwildlife.entity.lizard.hurt=Furzard hurt
+subtitles.mysticalwildlife.entity.lizard.death=Furzard dies
+subtitles.mysticalwildlife.entity.cicaptera.idle=Cicaptera sings
+subtitles.mysticalwildlife.entity.cicaptera.hurt=Cicaptera hurt
+subtitles.mysticalwildlife.entity.cicaptera.death=Cicaptera dies
+
+#----------------------------
 #Config
 #----------------------------
 config.mysticalwildlife.title=Mystical Wildlife
