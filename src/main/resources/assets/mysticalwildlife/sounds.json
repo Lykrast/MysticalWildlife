@@ -1,6 +1,5 @@
 {
 	"lizard.idle": {
-		"category": "neutral",
 		"sounds": [
 			"mysticalwildlife:lizard/idle1",
 			"mysticalwildlife:lizard/idle2",
@@ -13,7 +12,6 @@
 		]
 	},
 	"lizard.hurt": {
-		"category": "neutral",
 		"sounds": [
 			"mysticalwildlife:lizard/hurt1",
 			"mysticalwildlife:lizard/hurt2",
@@ -23,13 +21,11 @@
 		]
 	},
 	"lizard.death": {
-		"category": "neutral",
 		"sounds": [
 			"mysticalwildlife:lizard/death"
 		]
 	},
 	"cicaptera.idle": {
-		"category": "neutral",
 		"sounds": [
 			"mysticalwildlife:cicaptera/idle1",
 			"mysticalwildlife:cicaptera/idle2",
@@ -39,16 +35,19 @@
 		]
 	},
 	"cicaptera.hurt": {
-		"category": "neutral",
 		"sounds": [
 			"mysticalwildlife:cicaptera/hurt1",
 			"mysticalwildlife:cicaptera/hurt2"
 		]
 	},
 	"cicaptera.death": {
-		"category": "neutral",
 		"sounds": [
 			"mysticalwildlife:cicaptera/death"
+		]
+	},
+	"brushing": {
+		"sounds": [
+			"mysticalwildlife:brushing"
 		]
 	}
 }

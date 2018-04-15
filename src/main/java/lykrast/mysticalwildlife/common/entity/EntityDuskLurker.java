@@ -106,6 +106,7 @@ public class EntityDuskLurker extends EntityAnimal implements IBrushable {
 		
 		//Spawns the particles
         this.world.setEntityState(this, (byte)10);
+        playSound(ModSounds.brushing, 1.0F, 1.0F);
 		
 		return list;
 	}
