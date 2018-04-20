@@ -5,14 +5,8 @@ import static lykrast.mysticalwildlife.common.util.ModConfig.SPAWNING;
 import java.util.ArrayList;
 import java.util.List;
 
-import lykrast.mysticalwildlife.client.render.RenderCicaptera;
-import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
-import lykrast.mysticalwildlife.client.render.RenderVrontausaurus;
-import lykrast.mysticalwildlife.client.render.RenderYagaHog;
-import lykrast.mysticalwildlife.common.entity.EntityCicaptera;
-import lykrast.mysticalwildlife.common.entity.EntityDuskLurker;
-import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
-import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
+import lykrast.mysticalwildlife.client.render.*;
+import lykrast.mysticalwildlife.common.entity.*;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -82,6 +76,12 @@ public class ModEntities {
 						SPAWNING.cicapteraWintry.weight, SPAWNING.cicapteraWintry.minGroup, SPAWNING.cicapteraWintry.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.SNOWY)));
         LootTableList.register(EntityCicaptera.Wintry.LOOT);
+        
+		register(create(EntityPlumper.class, "plumper", 0x9a947b, 0x797461)
+				.spawn(EnumCreatureType.CREATURE, 
+						SPAWNING.plumper.weight, SPAWNING.plumper.minGroup, SPAWNING.plumper.maxGroup, 
+						BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH)));
+        LootTableList.register(EntityPlumper.LOOT);
 	}
 
 	@SubscribeEvent
@@ -117,6 +117,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Crimson.class, RenderCicaptera.Crimson.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Sandy.class, RenderCicaptera.Sandy.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Wintry.class, RenderCicaptera.Wintry.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityPlumper.class, RenderPlumper.FACTORY);
     }
 
 }

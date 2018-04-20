@@ -27,7 +27,8 @@ public class ModItems {
 		vrontausaurusFur, vrontausaurusFurTuft, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked,
 		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked,
-		cicapteraRaw, cicapteraCooked, cicapteraHusk;
+		cicapteraRaw, cicapteraCooked, cicapteraHusk,
+		plumperBlubber, plumperRaw, plumperCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
@@ -54,6 +55,10 @@ public class ModItems {
 		cicapteraRaw = initItem(new ItemFood(3, 0.4F, true), "cicaptera_meat_raw");
 		cicapteraCooked = initItem(new ItemFood(8, 0.8F, true), "cicaptera_meat_cooked");
 		cicapteraHusk = initItem(new ItemVariant("azure", "verdant", "crimson", "sandy", "wintry"), "cicaptera_husk");
+		
+		plumperBlubber = initItem(new ItemFuel(100), "plumper_blubber");
+		plumperRaw = initItem(new ItemFood(2, 0.6F, true), "plumper_meat_raw");
+		plumperCooked = initItem(new ItemFood(8, 1.0F, true), "plumper_meat_cooked");
 	}
 	
 	@SubscribeEvent

@@ -31,6 +31,8 @@ public class ModRecipes {
 		OreDictionary.registerOre(meatCooked, ModItems.duskLurkerCooked);
 		OreDictionary.registerOre(meatRaw, ModItems.cicapteraRaw);
 		OreDictionary.registerOre(meatCooked, ModItems.cicapteraCooked);
+		OreDictionary.registerOre(meatRaw, ModItems.plumperRaw);
+		OreDictionary.registerOre(meatCooked, ModItems.plumperCooked);
 		
 		//Leather
 		OreDictionary.registerOre(leather, ModItems.vrontausaurusFur);
@@ -46,6 +48,12 @@ public class ModRecipes {
 		
 		//Other
 		OreDictionary.registerOre("dustAsh", ModItems.duskAsh);
+		OreDictionary.registerOre("ash", ModItems.duskAsh);
+		
+		OreDictionary.registerOre("materialPressedwax", ModItems.plumperBlubber);
+		OreDictionary.registerOre("wax", ModItems.plumperBlubber);
+		OreDictionary.registerOre("tallow", ModItems.plumperBlubber);
+		OreDictionary.registerOre("beeswax", ModItems.plumperBlubber);
 	}
 	
 	public static void initSmelting()
@@ -54,5 +62,6 @@ public class ModRecipes {
 		GameRegistry.addSmelting(ModItems.yagaHogRaw, new ItemStack(ModItems.yagaHogCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.duskLurkerRaw, new ItemStack(ModItems.duskLurkerCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.cicapteraRaw, new ItemStack(ModItems.cicapteraCooked), 0.35F);
+		GameRegistry.addSmelting(ModItems.plumperRaw, new ItemStack(ModItems.plumperCooked), 0.35F);
 	}
 }
