@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -66,17 +67,17 @@ public class EntityPlumper extends EntityAnimal {
     
     protected SoundEvent getAmbientSound()
     {
-        return SoundEvents.ENTITY_PIG_AMBIENT;
+        return ModSounds.plumperIdle;
     }
 
     protected SoundEvent getHurtSound(DamageSource p_184601_1_)
     {
-        return SoundEvents.ENTITY_PIG_HURT;
+        return ModSounds.plumperHurt;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return SoundEvents.ENTITY_PIG_DEATH;
+        return ModSounds.plumperDeath;
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)

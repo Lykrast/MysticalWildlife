@@ -64,5 +64,35 @@
 			"mysticalwildlife:lizard/spark3",
 			"mysticalwildlife:lizard/spark4"
 		]
+	},
+	"plumper.idle": {
+		"subtitle": "subtitles.mysticalwildlife.entity.plumper.idle",
+		"sounds": [
+			"mysticalwildlife:plumper/idle1",
+			"mysticalwildlife:plumper/idle2",
+			"mysticalwildlife:plumper/idle3",
+			"mysticalwildlife:plumper/idle4",
+			"mysticalwildlife:plumper/idle5",
+			"mysticalwildlife:plumper/idle6",
+			"mysticalwildlife:plumper/idle7"
+		]
+	},
+	"plumper.hurt": {
+		"subtitle": "subtitles.mysticalwildlife.entity.plumper.hurt",
+		"sounds": [
+			"mysticalwildlife:plumper/hurt1",
+			"mysticalwildlife:plumper/hurt2",
+			"mysticalwildlife:plumper/hurt3",
+			"mysticalwildlife:plumper/hurt4",
+			"mysticalwildlife:plumper/hurt5",
+			"mysticalwildlife:plumper/hurt6",
+			"mysticalwildlife:plumper/hurt7"
+		]
+	},
+	"plumper.death": {
+		"subtitle": "subtitles.mysticalwildlife.entity.plumper.death",
+		"sounds": [
+			"mysticalwildlife:plumper/death"
+		]
 	}
 }

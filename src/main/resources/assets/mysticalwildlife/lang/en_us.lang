@@ -58,9 +58,12 @@ potion.effect.mysticalwildlife.shocked=Shocked
 subtitles.mysticalwildlife.entity.lizard.idle=Furzard hisses
 subtitles.mysticalwildlife.entity.lizard.hurt=Furzard hurt
 subtitles.mysticalwildlife.entity.lizard.death=Furzard dies
-subtitles.mysticalwildlife.entity.cicaptera.idle=Cicaptera sings
+subtitles.mysticalwildlife.entity.cicaptera.idle=Cicaptera chirps
 subtitles.mysticalwildlife.entity.cicaptera.hurt=Cicaptera hurt
 subtitles.mysticalwildlife.entity.cicaptera.death=Cicaptera dies
+subtitles.mysticalwildlife.entity.plumper.idle=Plumper barks
+subtitles.mysticalwildlife.entity.plumper.hurt=Plumper hurt
+subtitles.mysticalwildlife.entity.plumper.death=Plumper dies
 
 #----------------------------
 #Config
