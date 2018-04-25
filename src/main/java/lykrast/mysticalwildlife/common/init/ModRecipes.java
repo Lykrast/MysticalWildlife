@@ -53,7 +53,6 @@ public class ModRecipes {
 		OreDictionary.registerOre("materialPressedwax", ModItems.plumperBlubber);
 		OreDictionary.registerOre("wax", ModItems.plumperBlubber);
 		OreDictionary.registerOre("tallow", ModItems.plumperBlubber);
-		OreDictionary.registerOre("beeswax", ModItems.plumperBlubber);
 	}
 	
 	public static void initSmelting()
