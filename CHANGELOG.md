@@ -7,6 +7,7 @@
 * CHANGED: Dusk Lurkers can now also be breed with Cooked Rabit, Raw Cicaptera and Cooked Cicaptera
 * CHANGED: Vrontausauruses now drop a bit more Fur
 * CHANGED: Vrontausauruses can now also be breed with Cooked Porkchop, Raw Beef, Steak, Raw Mutton and Cooked Mutton
+* CHANGED: Plumpers can now also be breed with any cooked fish
 
 ## 1.1.0
 
