@@ -46,7 +46,7 @@ import net.minecraft.world.World;
 
 public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("vrontausaurus");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.MUTTON, Items.COOKED_MUTTON);
 	
 	public EntityVrontausaurus(World worldIn)
 	{

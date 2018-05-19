@@ -43,7 +43,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDuskLurker extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("dusk_lurker");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.RABBIT);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.RABBIT, Items.COOKED_RABBIT, ModItems.cicapteraRaw, ModItems.cicapteraCooked);
 	
 	public EntityDuskLurker(World worldIn)
 	{

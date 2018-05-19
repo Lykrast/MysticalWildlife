@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 
 public class EntityPlumper extends EntityAnimal {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("plumper");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.FISH);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.FISH, Items.COOKED_FISH);
 	
 	public EntityPlumper(World worldIn)
 	{
