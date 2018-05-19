@@ -32,7 +32,8 @@ public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {
     	{
     		super(renderManagerIn);
     	}
-    	
+
+        @Override
         protected ResourceLocation getEntityTexture(EntityCicaptera entity)
         {
             return TEXTURES;
@@ -54,7 +55,8 @@ public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {
     	{
     		super(renderManagerIn);
     	}
-    	
+
+        @Override
         protected ResourceLocation getEntityTexture(EntityCicaptera entity)
         {
             return TEXTURES;
@@ -76,7 +78,8 @@ public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {
     	{
     		super(renderManagerIn);
     	}
-    	
+
+        @Override
         protected ResourceLocation getEntityTexture(EntityCicaptera entity)
         {
             return TEXTURES;
@@ -98,7 +101,8 @@ public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {
     	{
     		super(renderManagerIn);
     	}
-    	
+
+        @Override
         protected ResourceLocation getEntityTexture(EntityCicaptera entity)
         {
             return TEXTURES;
@@ -120,7 +124,8 @@ public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {
     	{
     		super(renderManagerIn);
     	}
-    	
+
+        @Override
         protected ResourceLocation getEntityTexture(EntityCicaptera entity)
         {
             return TEXTURES;

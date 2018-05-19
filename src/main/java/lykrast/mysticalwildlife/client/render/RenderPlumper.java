@@ -20,7 +20,8 @@ public class RenderPlumper extends RenderLiving<EntityPlumper> {
 	{
 		super(renderManagerIn, new ModelPlumper(), 0.7F);
 	}
-	
+
+    @Override
     protected ResourceLocation getEntityTexture(EntityPlumper entity)
     {
         return TEXTURES;

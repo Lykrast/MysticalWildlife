@@ -20,7 +20,8 @@ public class RenderVrontausaurus extends RenderLiving<EntityVrontausaurus> {
 	{
 		super(renderManagerIn, new ModelVrontausaurus(), 1.2F);
 	}
-	
+
+    @Override
     protected ResourceLocation getEntityTexture(EntityVrontausaurus entity)
     {
         return TEXTURES;

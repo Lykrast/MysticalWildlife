@@ -22,7 +22,8 @@ public class RenderDuskLurker extends RenderLiving<EntityDuskLurker> {
 		super(renderManagerIn, new ModelDuskLurker(), 0.7F);
         this.addLayer(new LayerEyes<EntityDuskLurker>(EYES, this));
 	}
-	
+
+    @Override
     protected ResourceLocation getEntityTexture(EntityDuskLurker entity)
     {
         return TEXTURES;
