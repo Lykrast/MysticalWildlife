@@ -34,7 +34,7 @@ public class ModSounds {
 		plumperDeath = registerSoundEvent("plumper.death");
 		
 		brushing = registerSoundEvent("brushing");
-		brushing = registerSoundEvent("lizard.spark");
+		spark = registerSoundEvent("lizard.spark");
 	}
 
 	@SubscribeEvent
