@@ -25,7 +25,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -41,7 +40,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityDuskLurker extends EntityAnimal implements IBrushable {
+public class EntityDuskLurker extends EntityFurzard {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("dusk_lurker");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.RABBIT, Items.COOKED_RABBIT, ModItems.cicapteraRaw, ModItems.cicapteraCooked);
 	
@@ -90,26 +89,20 @@ public class EntityDuskLurker extends EntityAnimal implements IBrushable {
     }
 
 	@Override
-	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
-		return !isChild();
-	}
-
-	@Override
 	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		List<ItemStack> list = new ArrayList<>();
 		
-		if (rand.nextInt(3) == 0)
-		{
-			int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
-			if (tmp > 0) list.add(new ItemStack(ModItems.duskAsh, tmp));
-		}
-
 		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		if (tmp > 0) list.add(new ItemStack(ModItems.duskAsh, tmp));
+
+		tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
 		if (tmp > 0) list.add(new ItemStack(ModItems.duskLurkerFurTuft, tmp));
 		
 		//Spawns the particles
         this.world.setEntityState(this, (byte)10);
         playSound(ModSounds.brushing, 1.0F, 1.0F);
+        
+        if (rand.nextInt(3) == 0) setBrushTimer(3600 + rand.nextInt(2401));
 		
 		return list;
 	}

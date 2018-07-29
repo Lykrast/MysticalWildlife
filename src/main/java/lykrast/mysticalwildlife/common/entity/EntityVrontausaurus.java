@@ -29,7 +29,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -44,7 +43,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
+public class EntityVrontausaurus extends EntityFurzard {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("vrontausaurus");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.MUTTON, Items.COOKED_MUTTON);
 	
@@ -121,7 +120,7 @@ public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
 
 	@Override
 	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
-		return !isChild() && getAttackTarget() == null;
+		return !isChild() && isBrushable() && getAttackTarget() == null;
 	}
 
 	@Override
@@ -138,21 +137,11 @@ public class EntityVrontausaurus extends EntityAnimal implements IBrushable {
 
         playSound(ModSounds.brushing, 1.0F, 1.0F);
         playSound(ModSounds.spark, 1.0F, 1.0F);
+        
+        if (rand.nextInt(3) == 0) setBrushTimer(3600 + rand.nextInt(2401));
 		
 		return list;
 	}
-
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    @Override
-    public void onLivingUpdate()
-    {
-    	//TODO: lightning attack
-    	
-        super.onLivingUpdate();
-    }
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {

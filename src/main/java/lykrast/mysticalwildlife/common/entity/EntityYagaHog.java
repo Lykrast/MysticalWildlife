@@ -60,7 +60,7 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
 	@Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(DIRTY, Boolean.valueOf(true));
+        this.dataManager.register(DIRTY, Boolean.TRUE);
     }
 
 	@Override
