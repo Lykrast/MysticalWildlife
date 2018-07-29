@@ -95,14 +95,14 @@ public class EntityDuskLurker extends EntityFurzard {
 		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
 		if (tmp > 0) list.add(new ItemStack(ModItems.duskAsh, tmp));
 
-		tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1) + 1;
 		if (tmp > 0) list.add(new ItemStack(ModItems.duskLurkerFurTuft, tmp));
 		
 		//Spawns the particles
         this.world.setEntityState(this, (byte)10);
         playSound(ModSounds.brushing, 1.0F, 1.0F);
         
-        if (rand.nextInt(3) == 0) setBrushTimer(3600 + rand.nextInt(2401));
+        if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
 		
 		return list;
 	}

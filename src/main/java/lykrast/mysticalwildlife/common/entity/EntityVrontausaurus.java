@@ -132,13 +132,13 @@ public class EntityVrontausaurus extends EntityFurzard {
 			player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
 		}
 		
-		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
+		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1) + 1;
 		if (tmp > 0) list.add(new ItemStack(ModItems.vrontausaurusFurTuft, tmp));
 
         playSound(ModSounds.brushing, 1.0F, 1.0F);
         playSound(ModSounds.spark, 1.0F, 1.0F);
         
-        if (rand.nextInt(3) == 0) setBrushTimer(3600 + rand.nextInt(2401));
+        if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
 		
 		return list;
 	}
