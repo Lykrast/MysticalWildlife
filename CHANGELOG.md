@@ -1,5 +1,11 @@
 # 1.12.2
 
+## 1.1.2
+
+* CHANGED: Reduced sound volume of Cicapteras, Vrontausauruses and Dusk Lurkers
+* CHANGED: Vrontausauruses and Dusk Lurkers now have a cooldown that starts after a few brushes
+* CHANGED: Increased drop rate of all Vrontausaurus and Dusk Lurker brushing drops
+
 ## 1.1.1
 
 * CHANGED: Yaga Hog's dirt on their back now go away after a bit of brushing, and regrows after some time (regrows faster if they're in water or in rain)
