@@ -53,7 +53,7 @@ public abstract class EntityCicaptera extends EntityAnimal {
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(3, new EntityAIMate(this, 1.0D, EntityCicaptera.class));
         this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
         this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
