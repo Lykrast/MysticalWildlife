@@ -26,31 +26,33 @@ public class ItemBrush extends Item {
     @Override
     public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand)
     {
-        if (entity.world.isRemote)
-        {
-            return false;
-        }
         if (entity instanceof IBrushable)
         {
         	IBrushable target = (IBrushable)entity;
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ);
             if (target.isBrushable(player, itemstack, entity.world, pos))
             {
-                List<ItemStack> drops = target.onBrushed(player, itemstack, entity.world, pos,
-                        EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack));
-
-                if (!drops.isEmpty())
+                if (!entity.world.isRemote)
                 {
-                    Random rand = new Random();
-                    for(ItemStack stack : drops)
+                	List<ItemStack> drops = target.onBrushed(player, itemstack, entity.world, pos,
+                            EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack));
+
+                    if (!drops.isEmpty())
                     {
-                        EntityItem ent = entity.entityDropItem(stack, 1.0F);
-                        ent.motionY += rand.nextFloat() * 0.05F;
-                        ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-                        ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+                        Random rand = new Random();
+                        for(ItemStack stack : drops)
+                        {
+                            EntityItem ent = entity.entityDropItem(stack, 1.0F);
+                            ent.motionY += rand.nextFloat() * 0.05F;
+                            ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+                            ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+                        }
                     }
+                    itemstack.damageItem(1, entity);
                 }
-                itemstack.damageItem(1, entity);
+                else {
+                	player.swingArm(hand);
+                }
             }
             return true;
         }
