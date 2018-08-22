@@ -1,5 +1,12 @@
 # 1.12.2
 
+## 1.1.3
+
+* CHANGED: Reduced idle sound volume of Cicapteras, Vrontausauruses and Dusk Lurkers by a lot more
+* CHANGED: Brushes can now be enchanted at an Enchanting Table
+* CHANGED: Brushing an animal now swings the arm
+* FIXED: Cicapteras can now properly crossbreed as intended
+
 ## 1.1.2
 
 * CHANGED: Reduced sound volume of Cicapteras, Vrontausauruses and Dusk Lurkers
