@@ -65,4 +65,9 @@ public class ItemBrush extends Item {
 		if (enchantment == Enchantments.FORTUNE) return true;
         return super.canApplyAtEnchantingTable(stack, enchantment);
     }
+	
+	@Override
+    public int getItemEnchantability() {
+        return 1;
+    }
 }
