@@ -14,11 +14,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 @SideOnly(Side.CLIENT)
 public class ModelCicaptera extends ModelBase {
-	protected float PI_HALF = ((float)Math.PI / 2F); //90°
-	protected float PI_THIRD = ((float)Math.PI / 3F); //60°
-	protected float PI_NINTH = ((float)Math.PI / 9F); //20°
-	protected float PI_TWELVETH = ((float)Math.PI / 12F); //15°
-	protected float WING_BASE = 0.17453292519943295F; //From Tabula
+	protected static final float PI_HALF = ((float)Math.PI / 2F); //90°
+	protected static final float PI_THIRD = ((float)Math.PI / 3F); //60°
+	protected static final float PI_NINTH = ((float)Math.PI / 9F); //20°
+	protected static final float PI_TWELVETH = ((float)Math.PI / 12F); //15°
+	protected static final float WING_BASE = 0.17453292519943295F; //From Tabula
     
     public ModelRenderer body;
     public ModelRenderer head;

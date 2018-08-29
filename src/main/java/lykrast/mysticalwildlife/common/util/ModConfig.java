@@ -47,6 +47,9 @@ public class ModConfig {
 		@LangKey("entity." + MysticalWildlife.MODID + ".plumper.name")
 		public Entry plumper = new Entry(12, 3, 5);
 		
+		@LangKey("entity." + MysticalWildlife.MODID + ".krill.name")
+		public Entry krill = new Entry(12, 1, 3);
+		
 		public static class Entry {
 			@RangeInt(min = 0)
 			@RequiresMcRestart

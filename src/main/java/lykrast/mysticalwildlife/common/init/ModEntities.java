@@ -82,6 +82,12 @@ public class ModEntities {
 						SPAWNING.plumper.weight, SPAWNING.plumper.minGroup, SPAWNING.plumper.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH)));
         LootTableList.register(EntityPlumper.LOOT);
+        
+		register(create(EntityKrill.class, "krill", 0xfc6800, 0xf58000)
+				.spawn(EnumCreatureType.CREATURE, 
+						SPAWNING.krill.weight, SPAWNING.krill.minGroup, SPAWNING.krill.maxGroup, 
+						BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH)));
+        LootTableList.register(EntityKrill.LOOT);
 	}
 
 	@SubscribeEvent
@@ -118,6 +124,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Sandy.class, RenderCicaptera.Sandy::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Wintry.class, RenderCicaptera.Wintry::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPlumper.class, RenderPlumper::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityKrill.class, RenderKrill::new);
     }
 
 }
