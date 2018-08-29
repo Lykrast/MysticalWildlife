@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-			"name": "yaga_hog",
+			"name": "blubber",
             "rolls": 1,
             "entries": [
                 {
@@ -28,7 +28,7 @@
             ]
         },
         {
-			"name": "yaga_hog",
+			"name": "meat",
             "rolls": 1,
             "entries": [
                 {

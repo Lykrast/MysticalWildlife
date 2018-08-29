@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-			"name": "vrontausaurus",
+			"name": "fur",
             "rolls": 1,
             "entries": [
                 {
@@ -28,7 +28,7 @@
             ]
         },
         {
-			"name": "vrontausaurus",
+			"name": "meat",
             "rolls": 1,
             "entries": [
                 {

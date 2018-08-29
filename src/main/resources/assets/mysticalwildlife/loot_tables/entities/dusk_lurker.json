@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-			"name": "dusk_lurker",
+			"name": "ash",
             "rolls": 1,
             "entries": [
                 {
@@ -28,7 +28,7 @@
             ]
         },
         {
-			"name": "dusk_lurker",
+			"name": "fur",
             "rolls": 1,
             "entries": [
                 {
@@ -55,7 +55,7 @@
             ]
         },
         {
-			"name": "dusk_lurker",
+			"name": "meat",
             "rolls": 1,
             "entries": [
                 {
