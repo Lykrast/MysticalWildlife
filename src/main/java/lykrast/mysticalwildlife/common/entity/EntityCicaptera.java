@@ -28,6 +28,7 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -41,20 +42,24 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public abstract class EntityCicaptera extends EntityAnimal {
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
+    private static final Set<Item> SEEDS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
+    private static final Set<Item> FRUITS = Sets.newHashSet(Items.APPLE);
+    private static final Set<Item> CACTUS = Sets.newHashSet(Item.getItemFromBlock(Blocks.CACTUS));
 	
 	public EntityCicaptera(World worldIn)
 	{
 		super(worldIn);
         this.setSize(0.9F, 0.4F);
 	}
+	
+	protected abstract Set<Item> getTemptationItems();
 
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(3, new EntityAIMate(this, 1.0D, EntityCicaptera.class));
-        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, getTemptationItems()));
         this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -137,7 +142,7 @@ public abstract class EntityCicaptera extends EntityAnimal {
      */
     public boolean isBreedingItem(ItemStack stack)
     {
-        return TEMPTATION_ITEMS.contains(stack.getItem());
+        return getTemptationItems().contains(stack.getItem());
     }
     
     public static class Azure extends EntityCicaptera {
@@ -145,6 +150,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
 
     	public Azure(World worldIn) {
     		super(worldIn);
+    	}
+
+    	@Override
+    	protected Set<Item> getTemptationItems() {
+    		return SEEDS;
     	}
 
     	@Override
@@ -167,6 +177,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
     	}
 
     	@Override
+    	protected Set<Item> getTemptationItems() {
+    		return FRUITS;
+    	}
+
+    	@Override
         @Nullable
         protected ResourceLocation getLootTable() {
             return LOOT;
@@ -184,6 +199,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
     	public Crimson(World worldIn) {
     		super(worldIn);
     	}
+
+    	@Override
+    	protected Set<Item> getTemptationItems() {
+    		return CACTUS;
+    	}
     	
     	@Override
         protected void initEntityAI()
@@ -192,7 +212,7 @@ public abstract class EntityCicaptera extends EntityAnimal {
             this.tasks.addTask(1, new AICrimsonLeap(this));
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.2D, false));
             this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-            this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+            this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, SEEDS));
             this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
             this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
             this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -299,6 +319,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
     	}
 
     	@Override
+    	protected Set<Item> getTemptationItems() {
+    		return CACTUS;
+    	}
+
+    	@Override
         @Nullable
         protected ResourceLocation getLootTable() {
             return LOOT;
@@ -315,6 +340,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
 
     	public Wintry(World worldIn) {
     		super(worldIn);
+    	}
+
+    	@Override
+    	protected Set<Item> getTemptationItems() {
+    		return SEEDS;
     	}
 
     	@Override
