@@ -56,7 +56,7 @@ public class ModItems {
 		cicapteraCooked = initItem(new ItemFood(8, 0.8F, true), "cicaptera_meat_cooked");
 		cicapteraHusk = initItem(new ItemVariant("azure", "verdant", "crimson", "sandy", "wintry"), "cicaptera_husk");
 		
-		plumperBlubber = initItem(new ItemFuel(100), "plumper_blubber");
+		plumperBlubber = initItem(new ItemFuel(200), "plumper_blubber");
 		plumperRaw = initItem(new ItemFood(2, 0.6F, true), "plumper_meat_raw");
 		plumperCooked = initItem(new ItemFood(8, 1.0F, true), "plumper_meat_cooked");
 	}
