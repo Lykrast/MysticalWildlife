@@ -74,9 +74,10 @@ subtitles.mysticalwildlife.entity.plumper.death=Plumper dies
 #----------------------------
 config.mysticalwildlife.title=Mystical Wildlife
 config.mysticalwildlife.spawning.title=Spawning
-config.mysticalwildlife.spawning.weight=Spawn weight
+config.mysticalwildlife.spawning.weight=Spawn weight (0 disables)
 config.mysticalwildlife.spawning.mingroup=Min spawn group size
 config.mysticalwildlife.spawning.maxgroup=Max spawn group size
 config.mysticalwildlife.spawning.dusk_lurker.forest=Dusk Lurker (Forest)
 config.mysticalwildlife.spawning.dusk_lurker.spooky=Dusk Lurker (Spooky)
 config.mysticalwildlife.brush=Enable Brush
+config.mysticalwildlife.krill.forage_chance=Krill forage chance (1 in X, 0 disables)

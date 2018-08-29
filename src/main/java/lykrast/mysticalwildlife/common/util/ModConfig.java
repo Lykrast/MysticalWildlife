@@ -20,6 +20,10 @@ public class ModConfig {
 	@LangKey("config." + MysticalWildlife.MODID + ".brush")
 	public static boolean brushEnabled = true;
 	
+	@RangeInt(min = 0)
+	@LangKey("config." + MysticalWildlife.MODID + ".krill.forage_chance")
+	public static int krillForageChance = 2000;
+	
 	public static class Spawning {
 
 		@LangKey("entity." + MysticalWildlife.MODID + ".vrontausaurus.name")

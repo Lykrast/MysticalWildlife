@@ -88,6 +88,7 @@ public class ModEntities {
 						SPAWNING.krill.weight, SPAWNING.krill.minGroup, SPAWNING.krill.maxGroup, 
 						BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH)));
         LootTableList.register(EntityKrill.LOOT);
+        LootTableList.register(EntityKrill.LOOT_FORAGE);
 	}
 
 	@SubscribeEvent

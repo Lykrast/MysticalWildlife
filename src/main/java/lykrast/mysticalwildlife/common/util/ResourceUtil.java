@@ -13,4 +13,8 @@ public class ResourceUtil {
 	public static ResourceLocation getEntityLootTable(String name) {
 		return new ResourceLocation(MysticalWildlife.MODID, "entities/" + name);
 	}
+	
+	public static ResourceLocation getSpecialLootTable(String name) {
+		return new ResourceLocation(MysticalWildlife.MODID, "special/" + name);
+	}
 }

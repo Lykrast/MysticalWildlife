@@ -1,9 +1,11 @@
 package lykrast.mysticalwildlife.client.model;
 
+import lykrast.mysticalwildlife.common.entity.EntityKrill;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
 /**
@@ -14,6 +16,7 @@ public class ModelKrill extends ModelBase {
 	protected static final float LEG_ANGLE = 2.356194490192345F; //From Tabula
 	protected static final float FOOT_ANGLE = 2.1816615649929116F; //From Tabula
 	protected static final float HEAD_ANGLE = 0.2617993877991494F; //From Tabula
+	protected static final float FORAGE_ANGLE = (float)Math.PI / 3; //60°
 	
     public ModelRenderer body;
     public ModelRenderer head;
@@ -132,6 +135,8 @@ public class ModelKrill extends ModelBase {
         this.head.addChild(this.tentacleUL);
         this.head.addChild(this.tentacleUR);
     }
+    
+    private float headRotateX = -1;
 
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
@@ -141,7 +146,7 @@ public class ModelKrill extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
-        this.head.rotateAngleX = headPitch * 0.017453292F + HEAD_ANGLE;
+        this.head.rotateAngleX = headRotateX <= 0 ? headPitch * 0.017453292F + HEAD_ANGLE : headRotateX;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         
         float forwards = MathHelper.cos(limbSwing) * 0.523599F * limbSwingAmount;
@@ -160,9 +165,23 @@ public class ModelKrill extends ModelBase {
         this.legMR.rotateAngleY = backwards;
         this.legBR.rotateAngleX = backwards;
         this.legBR.rotateAngleY = forwards;
-        
-        //this.finLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.8F * limbSwingAmount;
-        //this.finRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.8F * limbSwingAmount;
+    }
+    
+    @Override
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+        super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
+
+    	int timer = ((EntityKrill)entitylivingbaseIn).forageTimer;
+    	if (timer > 0)
+    	{
+    		if (timer <= 4)
+    			headRotateX = (float)MathHelper.clampedLerp(HEAD_ANGLE, FORAGE_ANGLE, (timer - partialTickTime)/4);
+    		else if (timer > 36)
+    			headRotateX = (float)MathHelper.clampedLerp(HEAD_ANGLE, FORAGE_ANGLE, (40 - timer + partialTickTime)/4);
+    		else
+    			headRotateX = FORAGE_ANGLE;
+    	}
+    	else headRotateX = -1;
     }
 
     @Override
