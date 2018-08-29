@@ -13,14 +13,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderKrill extends RenderLiving<EntityKrill> {
 	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("krill");
 	
-	public RenderKrill(RenderManager renderManagerIn)
-	{
+	public RenderKrill(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelKrill(), 0.45F);
 	}
 
+    protected float getDeathMaxRotation(EntityKrill entityLivingBaseIn) {
+        return 180.0F;
+    }
+
     @Override
-    protected ResourceLocation getEntityTexture(EntityKrill entity)
-    {
+    protected ResourceLocation getEntityTexture(EntityKrill entity) {
         return TEXTURES;
     }
 

@@ -28,7 +28,8 @@ public class ModItems {
 		yagaHogRaw, yagaHogCooked,
 		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked,
 		cicapteraRaw, cicapteraCooked, cicapteraHusk,
-		plumperBlubber, plumperRaw, plumperCooked;
+		plumperBlubber, plumperRaw, plumperCooked,
+		krillRaw, krillCooked;
 	private static List<Item> itemList = new ArrayList<>();
 	//static List<Item> itemBlockList = new ArrayList<>();
 	
@@ -59,6 +60,9 @@ public class ModItems {
 		plumperBlubber = initItem(new ItemFuel(200), "plumper_blubber");
 		plumperRaw = initItem(new ItemFood(2, 0.6F, true), "plumper_meat_raw");
 		plumperCooked = initItem(new ItemFood(8, 1.0F, true), "plumper_meat_cooked");
+		
+		krillRaw = initItem(new ItemFood(2, 0.1F, true), "krill_meat_raw");
+		krillCooked = initItem(new ItemFood(4, 0.6F, true), "krill_meat_cooked");
 	}
 	
 	@SubscribeEvent

@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
-import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -74,12 +73,12 @@ public class EntityKrill extends EntityAnimal {
 
     protected SoundEvent getHurtSound(DamageSource p_184601_1_)
     {
-        return SoundEvents.ENTITY_SKELETON_DEATH;
+        return SoundEvents.ENTITY_SKELETON_HURT;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return ModSounds.plumperDeath;
+        return SoundEvents.ENTITY_SKELETON_DEATH;
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
