@@ -39,7 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityKrill extends EntityAnimal {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("krill");
     public static final ResourceLocation LOOT_FORAGE = ResourceUtil.getSpecialLootTable("krill_forage");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.FISH, Items.COOKED_FISH);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
     
     public int forageTimer;
     private EntityAIForage forageAI;
