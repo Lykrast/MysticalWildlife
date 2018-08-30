@@ -15,6 +15,7 @@ public class ModSounds {
 	public static SoundEvent lizardIdle, lizardHurt, lizardDeath, 
 			cicapteraIdle, cicapteraHurt, cicapteraDeath,
 			plumperIdle, plumperHurt, plumperDeath,
+			krillIdle, krillHurt, krillDeath,
 			brushing, spark;
 	private static List<SoundEvent> soundList = new ArrayList<>();
 	
@@ -32,6 +33,10 @@ public class ModSounds {
 		plumperIdle = registerSoundEvent("plumper.idle");
 		plumperHurt = registerSoundEvent("plumper.hurt");
 		plumperDeath = registerSoundEvent("plumper.death");
+		
+		krillIdle = registerSoundEvent("krill.idle");
+		krillHurt = registerSoundEvent("krill.hurt");
+		krillDeath = registerSoundEvent("krill.death");
 		
 		brushing = registerSoundEvent("brushing");
 		spark = registerSoundEvent("lizard.spark");

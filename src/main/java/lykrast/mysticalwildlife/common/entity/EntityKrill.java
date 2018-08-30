@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Sets;
 
 import lykrast.mysticalwildlife.common.entity.ai.EntityAIForage;
+import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -108,17 +109,17 @@ public class EntityKrill extends EntityAnimal {
 
 	@Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SKELETON_AMBIENT;
+        return ModSounds.krillIdle;
     }
 
 	@Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-        return SoundEvents.ENTITY_SKELETON_HURT;
+        return ModSounds.krillHurt;
     }
 
 	@Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SKELETON_DEATH;
+        return ModSounds.krillDeath;
     }
 
 	@Override

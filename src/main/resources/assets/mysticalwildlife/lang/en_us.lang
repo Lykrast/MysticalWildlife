@@ -68,6 +68,9 @@ subtitles.mysticalwildlife.entity.cicaptera.death=Cicaptera dies
 subtitles.mysticalwildlife.entity.plumper.idle=Plumper barks
 subtitles.mysticalwildlife.entity.plumper.hurt=Plumper hurt
 subtitles.mysticalwildlife.entity.plumper.death=Plumper dies
+subtitles.mysticalwildlife.entity.krill.idle=Krill chirps
+subtitles.mysticalwildlife.entity.krill.hurt=Krill hurt
+subtitles.mysticalwildlife.entity.krill.death=Krill dies
 
 #----------------------------
 #Config

@@ -94,5 +94,31 @@
 		"sounds": [
 			"mysticalwildlife:plumper/death"
 		]
+	},
+	"krill.idle": {
+		"subtitle": "subtitles.mysticalwildlife.entity.krill.idle",
+		"sounds": [
+			"mysticalwildlife:krill/idle1",
+			"mysticalwildlife:krill/idle2",
+			"mysticalwildlife:krill/idle3",
+			"mysticalwildlife:krill/idle4",
+			"mysticalwildlife:krill/idle5",
+			"mysticalwildlife:krill/idle6"
+		]
+	},
+	"krill.hurt": {
+		"subtitle": "subtitles.mysticalwildlife.entity.krill.hurt",
+		"sounds": [
+			"mysticalwildlife:krill/hurt1",
+			"mysticalwildlife:krill/hurt2",
+			"mysticalwildlife:krill/hurt3",
+			"mysticalwildlife:krill/hurt4"
+		]
+	},
+	"krill.death": {
+		"subtitle": "subtitles.mysticalwildlife.entity.krill.death",
+		"sounds": [
+			"mysticalwildlife:krill/death"
+		]
 	}
 }
