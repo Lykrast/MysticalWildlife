@@ -1,6 +1,5 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +9,7 @@ import com.google.common.collect.Sets;
 
 import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModSounds;
-import lykrast.mysticalwildlife.common.util.RandomUtil;
+import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -37,11 +36,13 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDuskLurker extends EntityFurzard {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("dusk_lurker");
+    public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_dusk_lurker");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.RABBIT, Items.COOKED_RABBIT, ModItems.cicapteraRaw, ModItems.cicapteraCooked);
 	
 	public EntityDuskLurker(World worldIn)
@@ -89,22 +90,15 @@ public class EntityDuskLurker extends EntityFurzard {
     }
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		List<ItemStack> list = new ArrayList<>();
-		
-		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1);
-		if (tmp > 0) list.add(new ItemStack(ModItems.duskAsh, tmp));
-
-		tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1) + 1;
-		if (tmp > 0) list.add(new ItemStack(ModItems.duskLurkerFurTuft, tmp));
-		
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {		
 		//Spawns the particles
         this.world.setEntityState(this, (byte)10);
         playSound(ModSounds.brushing, 1.0F, 1.0F);
         
         if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
-		
-		return list;
+        
+    	LootTable loottable = this.world.getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
+		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
 	}
 
     /**

@@ -1,6 +1,5 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
-import lykrast.mysticalwildlife.common.util.RandomUtil;
+import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -24,7 +23,6 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -43,9 +41,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTable;
 
 public class EntityYagaHog extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("yaga_hog");
+    public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_yaga_hog");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.BREAD);
     
     private static final DataParameter<Boolean> DIRTY = EntityDataManager.<Boolean>createKey(EntityAgeable.class, DataSerializers.BOOLEAN);
@@ -146,18 +146,13 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
 	}
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		List<ItemStack> list = new ArrayList<>();
-		
-		int dirt = RandomUtil.boundedInt(rand, 1, 2);
-		dirt += RandomUtil.boundedIntRepeated(rand, 0, 1, fortune);
-		list.add(new ItemStack(Blocks.DIRT, dirt));
-		
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {		
         playSound(SoundEvents.ENTITY_SLIME_JUMP, 1.0F, 1.0F);
         
         if (rand.nextInt(3) == 0) setDirtTimer(3600 + rand.nextInt(2401));
-		
-		return list;
+        
+    	LootTable loottable = this.world.getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
+		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
 	}
 
 	@Override

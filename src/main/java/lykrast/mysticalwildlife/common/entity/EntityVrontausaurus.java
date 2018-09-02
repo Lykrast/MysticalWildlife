@@ -1,6 +1,5 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,10 +7,9 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
-import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModPotions;
 import lykrast.mysticalwildlife.common.init.ModSounds;
-import lykrast.mysticalwildlife.common.util.RandomUtil;
+import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -42,9 +40,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTable;
 
 public class EntityVrontausaurus extends EntityFurzard {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("vrontausaurus");
+    public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_vrontausaurus");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.MUTTON, Items.COOKED_MUTTON);
 	
 	public EntityVrontausaurus(World worldIn)
@@ -125,22 +125,15 @@ public class EntityVrontausaurus extends EntityFurzard {
 
 	@Override
 	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		List<ItemStack> list = new ArrayList<>();
-		
-		if (rand.nextInt(4) == 0)
-		{
-			player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
-		}
-		
-		int tmp = RandomUtil.boundedIntRepeated(rand, 0, 1, fortune + 1) + 1;
-		if (tmp > 0) list.add(new ItemStack(ModItems.vrontausaurusFurTuft, tmp));
+		if (rand.nextInt(4) == 0) player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
 
         playSound(ModSounds.brushing, 1.0F, 1.0F);
         playSound(ModSounds.spark, 1.0F, 1.0F);
         
         if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
-		
-		return list;
+        
+    	LootTable loottable = this.world.getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
+		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
 	}
 
 	@Override
