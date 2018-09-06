@@ -1,5 +1,14 @@
 # 1.12.2
 
+## 1.2.0
+
+* ADDED: Krills, find them foraging in beaches, maybe they'll find something precious if you let them do it long enough
+* CHANGED: Plumper Blubber now smelts 1 item instead of 0.5
+* CHANGED: Verdant Cicapteras are now bred with Apples instead of Seeds
+* CHANGED: Sandy and Crimson Cicapteras are now bred with Cactus instead of Seeds
+* CHANGED: Changed names of some loot table pools to be clearer
+* CHANGED: Drops from brushing are now in their own loot tables so other mods can change them
+
 ## 1.1.3
 
 * CHANGED: Reduced idle sound volume of Cicapteras, Vrontausauruses and Dusk Lurkers by a lot more
