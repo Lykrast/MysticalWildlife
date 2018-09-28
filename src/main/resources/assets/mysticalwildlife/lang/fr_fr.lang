@@ -1,0 +1,86 @@
+#----------------------------
+#Creative Tabs
+#----------------------------
+itemGroup.mysticalwildlife=Mystical Wildlife
+
+#----------------------------
+#Items
+#----------------------------
+item.mysticalwildlife.brush.name=Brosse
+
+item.mysticalwildlife.vrontausaurus_fur.name=Fourrure de vrontausaure
+item.mysticalwildlife.vrontausaurus_fur_tuft.name=Touffe de vrontausaure
+item.mysticalwildlife.vrontausaurus_meat_raw.name=Vrontausaure cru
+item.mysticalwildlife.vrontausaurus_meat_cooked.name=Vrontausaure cuit
+
+item.mysticalwildlife.yaga_hog_meat_raw.name=Porc yaga cru
+item.mysticalwildlife.yaga_hog_meat_cooked.name=Porc yaga cuit
+
+item.mysticalwildlife.dusk_ash.name=Cendre du crépuscule
+item.mysticalwildlife.dusk_lurker_fur.name=Fourrure de rôdeur du crépuscule
+item.mysticalwildlife.dusk_lurker_fur_tuft.name=Touffe de rôdeur du crépuscule
+item.mysticalwildlife.dusk_lurker_meat_raw.name=Rôdeur du crépuscule cru
+item.mysticalwildlife.dusk_lurker_meat_cooked.name=Rôdeur du crépuscule cuit
+
+item.mysticalwildlife.cicaptera_meat_raw.name=Cigaptère cru
+item.mysticalwildlife.cicaptera_meat_cooked.name=Cigaptère cuit
+item.mysticalwildlife.cicaptera_husk.azure.name=Carapace de cigaptère d'azure
+item.mysticalwildlife.cicaptera_husk.verdant.name=Carapace de cigaptère verdoyant
+item.mysticalwildlife.cicaptera_husk.crimson.name=Carapace de cigaptère cramoisi
+item.mysticalwildlife.cicaptera_husk.sandy.name=Carapace de cigaptère sablonneux
+item.mysticalwildlife.cicaptera_husk.wintry.name=Carapace de cigaptère hivernal
+
+item.mysticalwildlife.plumper_blubber.name=Graisse de potelé
+item.mysticalwildlife.plumper_meat_raw.name=Potelé cru
+item.mysticalwildlife.plumper_meat_cooked.name=Potelé cuit
+
+item.mysticalwildlife.krill_meat_raw.name=Krill cru
+item.mysticalwildlife.krill_meat_cooked.name=Krill cuit
+
+#----------------------------
+#Mobs
+#----------------------------
+entity.mysticalwildlife.vrontausaurus.name=Vrontausaure
+entity.mysticalwildlife.yaga_hog.name=Porc yaga
+entity.mysticalwildlife.dusk_lurker.name=Rôdeur du crépuscule
+entity.mysticalwildlife.cicaptera_azure.name=Cigaptère d'azure
+entity.mysticalwildlife.cicaptera_verdant.name=Cigaptère verdoyant
+entity.mysticalwildlife.cicaptera_crimson.name=Cigaptère cramoisi
+entity.mysticalwildlife.cicaptera_sandy.name=Cigaptère sablonneux
+entity.mysticalwildlife.cicaptera_wintry.name=Cigaptère hivernal
+entity.mysticalwildlife.plumper.name=Potelé
+entity.mysticalwildlife.krill.name=Krill
+
+#----------------------------
+#Potion effects
+#----------------------------
+potion.effect.mysticalwildlife.shocked=Choqué
+
+#----------------------------
+#Subtitles
+#----------------------------
+subtitles.mysticalwildlife.entity.lizard.idle=Fourzard siffle
+subtitles.mysticalwildlife.entity.lizard.hurt=Fourzard blessé
+subtitles.mysticalwildlife.entity.lizard.death=Fourzard meurt
+subtitles.mysticalwildlife.entity.cicaptera.idle=Cigaptère chante
+subtitles.mysticalwildlife.entity.cicaptera.hurt=Cigaptère blessé
+subtitles.mysticalwildlife.entity.cicaptera.death=Cigaptère meurt
+subtitles.mysticalwildlife.entity.plumper.idle=Potelé glapit
+subtitles.mysticalwildlife.entity.plumper.hurt=Potelé blessé
+subtitles.mysticalwildlife.entity.plumper.death=Potelé meurt
+subtitles.mysticalwildlife.entity.krill.idle=Krill chante
+subtitles.mysticalwildlife.entity.krill.hurt=Krill blessé
+subtitles.mysticalwildlife.entity.krill.death=Krill meurt
+
+#----------------------------
+#Config
+#----------------------------
+config.mysticalwildlife.title=Mystical Wildlife
+config.mysticalwildlife.spawning.title=Spawning
+config.mysticalwildlife.spawning.weight=Poids de spawn (0 désactive)
+config.mysticalwildlife.spawning.mingroup=Taille de groupe min
+config.mysticalwildlife.spawning.maxgroup=Taille de groupe max
+config.mysticalwildlife.spawning.dusk_lurker.forest=Rôdeur du crépuscule (forêts)
+config.mysticalwildlife.spawning.dusk_lurker.spooky=Rôdeur du crépuscule (sombre)
+config.mysticalwildlife.brush=Activer la brosse
+config.mysticalwildlife.krill.forage_chance=Chance de fouille du krill (1 chance sur X, 0 désactive)
