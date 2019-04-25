@@ -1,5 +1,9 @@
 # 1.12.2
 
+## 1.2.1
+
+* ADDED: Russian translation by goro-hypnos
+
 ## 1.2.0
 
 * ADDED: Krills, find them foraging in beaches, maybe they'll find something precious if you let them do it long enough
