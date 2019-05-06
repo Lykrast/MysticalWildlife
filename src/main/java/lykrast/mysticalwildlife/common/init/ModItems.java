@@ -93,7 +93,7 @@ public class ModItems {
 	public static Item initItem(Item item, String name, CreativeTabs tab)
 	{
 		item.setRegistryName(name);
-		item.setUnlocalizedName(MysticalWildlife.MODID + "." + name);
+		item.setTranslationKey(MysticalWildlife.MODID + "." + name);
 		if (tab != null) item.setCreativeTab(tab);
 		
 		itemList.add(item);

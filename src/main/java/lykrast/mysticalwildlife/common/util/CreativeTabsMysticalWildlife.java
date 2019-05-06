@@ -13,7 +13,7 @@ public class CreativeTabsMysticalWildlife extends CreativeTabs {
 	}
 
 	@Override
-	public ItemStack getTabIconItem() {
+	public ItemStack createIcon() {
 		return new ItemStack(ModItems.vrontausaurusFur);
 	}
 

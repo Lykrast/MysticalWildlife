@@ -22,10 +22,10 @@ public class ItemVariant extends Item implements IItemCustomModel {
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		int i = stack.getMetadata();
 		if (i < 0 || i >= VARIANTS.length) i = 0;
-		return super.getUnlocalizedName() + "." + VARIANTS[i];
+		return super.getTranslationKey() + "." + VARIANTS[i];
 	}
 
 	@Override
