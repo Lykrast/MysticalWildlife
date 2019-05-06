@@ -1,5 +1,9 @@
 # 1.12.2
 
+## 1.2.2
+
+* FIXED: Crash when spawns of some mobs are disabled in biomes where they would be no other spawns (reported by Ghostrider231)
+
 ## 1.2.1
 
 * ADDED: Russian translation by goro-hypnos
