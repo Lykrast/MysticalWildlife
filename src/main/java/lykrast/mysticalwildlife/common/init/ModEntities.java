@@ -28,72 +28,85 @@ public class ModEntities {
 	private static int id = 1;
 	private static List<EntityEntry> entityList = new ArrayList<>();
 	
-	public static void init()
-	{
-		register(create(EntityVrontausaurus.class, "vrontausaurus", 0x515151, 0xd3d3d3)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.vrontausaurus.weight, SPAWNING.vrontausaurus.minGroup, SPAWNING.vrontausaurus.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.MOUNTAIN)));
+	public static void init() {
+		EntityEntryBuilder<?> builder;
+		builder = create(EntityVrontausaurus.class, "vrontausaurus", 0x515151, 0xd3d3d3);
+		if (SPAWNING.vrontausaurus.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.vrontausaurus.weight, SPAWNING.vrontausaurus.minGroup, SPAWNING.vrontausaurus.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.MOUNTAIN));
+		register(builder);
         LootTableList.register(EntityVrontausaurus.LOOT);
-        
-		register(create(EntityYagaHog.class, "yaga_hog", 0x9c7f5f, 0x443225)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.yagaHog.weight, SPAWNING.yagaHog.minGroup, SPAWNING.yagaHog.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP)));
+        LootTableList.register(EntityVrontausaurus.LOOT_BRUSH);
+
+		builder = create(EntityYagaHog.class, "yaga_hog", 0x9c7f5f, 0x443225);
+		if (SPAWNING.yagaHog.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.yagaHog.weight, SPAWNING.yagaHog.minGroup, SPAWNING.yagaHog.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.SWAMP));
+		register(builder);
         LootTableList.register(EntityYagaHog.LOOT);
-        
-		register(create(EntityDuskLurker.class, "dusk_lurker", 0x262626, 0x808080)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.duskLurkerForest.weight, SPAWNING.duskLurkerForest.minGroup, SPAWNING.duskLurkerForest.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST))
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.duskLurkerSpooky.weight, SPAWNING.duskLurkerSpooky.minGroup, SPAWNING.duskLurkerSpooky.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.SPOOKY)));
+        LootTableList.register(EntityYagaHog.LOOT_BRUSH);
+
+		builder = create(EntityDuskLurker.class, "dusk_lurker", 0x262626, 0x808080);
+		if (SPAWNING.duskLurkerForest.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.duskLurkerForest.weight, SPAWNING.duskLurkerForest.minGroup, SPAWNING.duskLurkerForest.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST));
+		if (SPAWNING.duskLurkerSpooky.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.duskLurkerSpooky.weight, SPAWNING.duskLurkerSpooky.minGroup, SPAWNING.duskLurkerSpooky.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.SPOOKY));
+		register(builder);
         LootTableList.register(EntityDuskLurker.LOOT);
+        LootTableList.register(EntityDuskLurker.LOOT_BRUSH);
         
-		register(create(EntityCicaptera.Azure.class, "cicaptera_azure", 0x0084d7, 0x262626)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapteraAzure.weight, SPAWNING.cicapteraAzure.minGroup, SPAWNING.cicapteraAzure.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS)));
+		builder = create(EntityCicaptera.Azure.class, "cicaptera_azure", 0x0084d7, 0x262626);
+		if (SPAWNING.cicapteraAzure.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.cicapteraAzure.weight, SPAWNING.cicapteraAzure.minGroup, SPAWNING.cicapteraAzure.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS));
+		register(builder);
         LootTableList.register(EntityCicaptera.Azure.LOOT);
-		register(create(EntityCicaptera.Verdant.class, "cicaptera_verdant", 0x4f6028, 0x262626)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapteraVerdant.weight, SPAWNING.cicapteraVerdant.minGroup, SPAWNING.cicapteraVerdant.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST)));
+		builder = create(EntityCicaptera.Verdant.class, "cicaptera_verdant", 0x4f6028, 0x262626);
+		if (SPAWNING.cicapteraVerdant.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.cicapteraVerdant.weight, SPAWNING.cicapteraVerdant.minGroup, SPAWNING.cicapteraVerdant.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST));
+		register(builder);
         LootTableList.register(EntityCicaptera.Verdant.LOOT);
-		register(create(EntityCicaptera.Crimson.class, "cicaptera_crimson", 0x8b2b29, 0x262626)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapteraCrimson.weight, SPAWNING.cicapteraCrimson.minGroup, SPAWNING.cicapteraCrimson.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.HOT)));
+		builder = create(EntityCicaptera.Crimson.class, "cicaptera_crimson", 0x8b2b29, 0x262626);
+		if (SPAWNING.cicapteraCrimson.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.cicapteraCrimson.weight, SPAWNING.cicapteraCrimson.minGroup, SPAWNING.cicapteraCrimson.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.HOT));
+		register(builder);
         LootTableList.register(EntityCicaptera.Crimson.LOOT);
-		register(create(EntityCicaptera.Sandy.class, "cicaptera_sandy", 0xbdb98A, 0x262626)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapteraSandy.weight, SPAWNING.cicapteraSandy.minGroup, SPAWNING.cicapteraSandy.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.SANDY)));
+		builder = create(EntityCicaptera.Sandy.class, "cicaptera_sandy", 0xbdb98A, 0x262626);
+		if (SPAWNING.cicapteraSandy.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.cicapteraSandy.weight, SPAWNING.cicapteraSandy.minGroup, SPAWNING.cicapteraSandy.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.SANDY));
+		register(builder);
         LootTableList.register(EntityCicaptera.Sandy.LOOT);
-		register(create(EntityCicaptera.Wintry.class, "cicaptera_wintry", 0xcad7d7, 0x262626)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.cicapteraWintry.weight, SPAWNING.cicapteraWintry.minGroup, SPAWNING.cicapteraWintry.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.SNOWY)));
+		builder = create(EntityCicaptera.Wintry.class, "cicaptera_wintry", 0xcad7d7, 0x262626);
+		if (SPAWNING.cicapteraWintry.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.cicapteraWintry.weight, SPAWNING.cicapteraWintry.minGroup, SPAWNING.cicapteraWintry.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.SNOWY));
+		register(builder);
         LootTableList.register(EntityCicaptera.Wintry.LOOT);
         
-		register(create(EntityPlumper.class, "plumper", 0x9a947b, 0x797461)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.plumper.weight, SPAWNING.plumper.minGroup, SPAWNING.plumper.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH)));
+		builder = create(EntityPlumper.class, "plumper", 0x9a947b, 0x797461);
+		if (SPAWNING.plumper.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.plumper.weight, SPAWNING.plumper.minGroup, SPAWNING.plumper.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH));
+		register(builder);
         LootTableList.register(EntityPlumper.LOOT);
         
-		register(create(EntityKrill.class, "krill", 0xfc6800, 0xf58000)
-				.spawn(EnumCreatureType.CREATURE, 
-						SPAWNING.krill.weight, SPAWNING.krill.minGroup, SPAWNING.krill.maxGroup, 
-						BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH)));
+		builder = create(EntityKrill.class, "krill", 0xfc6800, 0xf58000);
+		if (SPAWNING.krill.weight > 0) builder
+		.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.krill.weight, SPAWNING.krill.minGroup, SPAWNING.krill.maxGroup, 
+				BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH));
+		register(builder);
         LootTableList.register(EntityKrill.LOOT);
         LootTableList.register(EntityKrill.LOOT_FORAGE);
 	}
 
 	@SubscribeEvent
-	public static void registerEntities(RegistryEvent.Register<EntityEntry> event)
-	{
+	public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
 		for (EntityEntry e : entityList) event.getRegistry().register(e);
 		//We no longer use it afterwards
 		entityList = null;
@@ -103,8 +116,7 @@ public class ModEntities {
 		entityList.add(entry.build());
 	}
 	
-	public static EntityEntryBuilder<? extends Entity> create(Class<? extends Entity> entityClass, String name, int colorBack, int colorFront)
-	{
+	public static EntityEntryBuilder<? extends Entity> create(Class<? extends Entity> entityClass, String name, int colorBack, int colorFront) {
 		EntityEntryBuilder<Entity> builder = EntityEntryBuilder.create()
 				.entity(entityClass)
 				.name(MysticalWildlife.MODID + "." + name)
