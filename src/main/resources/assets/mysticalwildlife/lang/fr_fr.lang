@@ -58,6 +58,20 @@ entity.mysticalwildlife.krill.name=Krill
 #Potion effects
 #----------------------------
 potion.effect.mysticalwildlife.shocked=Choqué
+potion.effect.mysticalwildlife.breeding=Excitation
+potion.effect.mysticalwildlife.breeding_instant=Amour instantané
+
+#----------------------------
+#Potions
+#----------------------------
+potion.effect.breeding=Potion d'excitation
+potion.effect.breeding_instant=Potion d'amour instantané
+splash_potion.effect.breeding=Potion d'excitation jetable
+splash_potion.effect.breeding_instant=Potion d'amour instantané jetable
+lingering_potion.effect.breeding=Potion d'excitation persistante
+lingering_potion.effect.breeding_instant=Potion d'amour instantané persistante
+tipped_arrow.effect.breeding=Flèche d'excitation
+tipped_arrow.effect.breeding_instant=Flèche d'amour instantané
 
 #----------------------------
 #Subtitles
@@ -79,11 +93,19 @@ subtitles.mysticalwildlife.entity.krill.death=Krill meurt
 #Config
 #----------------------------
 config.mysticalwildlife.title=Mystical Wildlife
+
 config.mysticalwildlife.spawning.title=Spawning
 config.mysticalwildlife.spawning.weight=Poids de spawn (0 désactive)
 config.mysticalwildlife.spawning.mingroup=Taille de groupe min
 config.mysticalwildlife.spawning.maxgroup=Taille de groupe max
+
 config.mysticalwildlife.spawning.dusk_lurker.forest=Rôdeur du crépuscule (forêts)
 config.mysticalwildlife.spawning.dusk_lurker.spooky=Rôdeur du crépuscule (sombre)
+
 config.mysticalwildlife.brush=Activer la brosse
+config.mysticalwildlife.potion.breeding=Activer la potion d'excitation
+config.mysticalwildlife.potion.breeding_instant=Activer la potion d'amour instantané
+
 config.mysticalwildlife.krill.forage_chance=Chance de fouille du krill (1 chance sur X, 0 désactive)
+config.mysticalwildlife.cicaptera_lovely.essence_time.base=Temps de base (ticks) pour drop d'essence d'Aphrodite
+config.mysticalwildlife.cicaptera_lovely.essence_time.extra=Temps extra max (ticks) pour drop d'essence d'Aphrodite

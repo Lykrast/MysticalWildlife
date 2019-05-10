@@ -58,6 +58,20 @@ entity.mysticalwildlife.krill.name=Krill
 #Potion effects
 #----------------------------
 potion.effect.mysticalwildlife.shocked=Shocked
+potion.effect.mysticalwildlife.breeding=Arousal
+potion.effect.mysticalwildlife.breeding_instant=Instant Love
+
+#----------------------------
+#Potions
+#----------------------------
+potion.effect.breeding=Potion of Arousal
+potion.effect.breeding_instant=Potion of Instant Love
+splash_potion.effect.breeding=Splash Potion of Arousal
+splash_potion.effect.breeding_instant=Splash Potion of Instant Love
+lingering_potion.effect.breeding=Lingering Potion of Arousal
+lingering_potion.effect.breeding_instant=Lingering Potion of Instant Love
+tipped_arrow.effect.breeding=Arrow of Arousal
+tipped_arrow.effect.breeding_instant=Arrow of Instant Love
 
 #----------------------------
 #Subtitles
@@ -79,13 +93,19 @@ subtitles.mysticalwildlife.entity.krill.death=Krill dies
 #Config
 #----------------------------
 config.mysticalwildlife.title=Mystical Wildlife
+
 config.mysticalwildlife.spawning.title=Spawning
 config.mysticalwildlife.spawning.weight=Spawn weight (0 disables)
 config.mysticalwildlife.spawning.mingroup=Min spawn group size
 config.mysticalwildlife.spawning.maxgroup=Max spawn group size
+
 config.mysticalwildlife.spawning.dusk_lurker.forest=Dusk Lurker (Forest)
 config.mysticalwildlife.spawning.dusk_lurker.spooky=Dusk Lurker (Spooky)
+
 config.mysticalwildlife.brush=Enable Brush
+config.mysticalwildlife.potion.breeding=Enable Potion of Arousal
+config.mysticalwildlife.potion.breeding_instant=Enable Potion of Instant Love
+
 config.mysticalwildlife.krill.forage_chance=Krill forage chance (1 in X, 0 disables)
 config.mysticalwildlife.cicaptera_lovely.essence_time.base=Base time (ticks) for Aphrodite Essence drops
 config.mysticalwildlife.cicaptera_lovely.essence_time.extra=Max extra time (ticks) for Aphrodite Essence drops

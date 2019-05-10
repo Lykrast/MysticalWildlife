@@ -33,7 +33,7 @@ public class PotionGeneric extends Potion {
     {
 		if (tickrate < 0) return false;
 		
-		return tickrate <= 0 || duration % tickrate == 0;
+		return tickrate <= 1 || duration % tickrate == 0;
     }
 
 }

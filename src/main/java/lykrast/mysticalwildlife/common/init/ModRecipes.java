@@ -1,7 +1,11 @@
 package lykrast.mysticalwildlife.common.init;
 
+import lykrast.mysticalwildlife.common.util.ModConfig;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.potion.PotionHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -15,13 +19,12 @@ public class ModRecipes {
 			leather = "leather";
 	
 	@SubscribeEvent
-	public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
-	{
+	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 		initSmelting();
+		initBrewing();
 	}
 	
-	public static void initOreDict()
-	{
+	public static void initOreDict() {
 		//Meat
 		OreDictionary.registerOre(meatRaw, ModItems.vrontausaurusRaw);
 		OreDictionary.registerOre(meatCooked, ModItems.vrontausaurusCooked);
@@ -58,13 +61,22 @@ public class ModRecipes {
 		OreDictionary.registerOre("tallow", ModItems.plumperBlubber);
 	}
 	
-	public static void initSmelting()
-	{
+	public static void initSmelting() {
 		GameRegistry.addSmelting(ModItems.vrontausaurusRaw, new ItemStack(ModItems.vrontausaurusCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.yagaHogRaw, new ItemStack(ModItems.yagaHogCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.duskLurkerRaw, new ItemStack(ModItems.duskLurkerCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.cicapteraRaw, new ItemStack(ModItems.cicapteraCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.plumperRaw, new ItemStack(ModItems.plumperCooked), 0.35F);
 		GameRegistry.addSmelting(ModItems.krillRaw, new ItemStack(ModItems.krillCooked), 0.35F);
+	}
+	
+	public static void initBrewing() {
+		if (ModConfig.potionBreedingEnabled) {
+			PotionHelper.addMix(PotionTypes.AWKWARD, ModItems.aphroditeEssence, ModPotions.potBreeding);
+			PotionHelper.addMix(ModPotions.potBreeding, Items.REDSTONE, ModPotions.potBreedingLong);
+			PotionHelper.addMix(ModPotions.potBreeding, Items.GLOWSTONE_DUST, ModPotions.potBreedingStrong);
+			if (ModConfig.potionBreedingInstantEnabled) PotionHelper.addMix(ModPotions.potBreeding, Items.SUGAR, ModPotions.potBreedingInstant);
+		}
+		else if (ModConfig.potionBreedingInstantEnabled) PotionHelper.addMix(PotionTypes.AWKWARD, ModItems.aphroditeEssence, ModPotions.potBreedingInstant);
 	}
 }

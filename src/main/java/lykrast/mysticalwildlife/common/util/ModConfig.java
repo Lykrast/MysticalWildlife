@@ -30,6 +30,13 @@ public class ModConfig {
 	@RangeInt(min = 0)
 	@LangKey("config." + MysticalWildlife.MODID + ".cicaptera_lovely.essence_time.extra")
 	public static int cicapteraLovelyEssenceTimeExtra = 12000;
+
+	@RequiresMcRestart
+	@LangKey("config." + MysticalWildlife.MODID + ".potion.breeding")
+	public static boolean potionBreedingEnabled = true;
+	@RequiresMcRestart
+	@LangKey("config." + MysticalWildlife.MODID + ".potion.breeding_instant")
+	public static boolean potionBreedingInstantEnabled = true;
 	
 	public static class Spawning {
 
