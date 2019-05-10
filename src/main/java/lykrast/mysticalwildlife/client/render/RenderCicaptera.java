@@ -13,96 +13,97 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {	
-	public RenderCicaptera(RenderManager renderManagerIn)
-	{
+	public RenderCicaptera(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelCicaptera(), 0.4F);
 	}
 
-    @Override
-    protected float getDeathMaxRotation(EntityCicaptera entityLivingBaseIn)
-    {
-        return 180.0F;
-    }
+	@Override
+	protected float getDeathMaxRotation(EntityCicaptera entityLivingBaseIn) {
+		return 180.0F;
+	}
     
-    public static class Azure extends RenderCicaptera {
-    	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_azure");
-    	
-    	public Azure(RenderManager renderManagerIn)
-    	{
-    		super(renderManagerIn);
-    	}
+	public static class Azure extends RenderCicaptera {
+		private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_azure");
 
-        @Override
-        protected ResourceLocation getEntityTexture(EntityCicaptera entity)
-        {
-            return TEXTURES;
-        }
-        
-        public static class Factory implements IRenderFactory<EntityCicaptera> {
-            @Override
-            public Render<? super EntityCicaptera> createRenderFor(RenderManager manager) {
-                return new Azure(manager);
-            }
-        }
-    }
-    
-    public static class Verdant extends RenderCicaptera {
-    	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_verdant");
-    	
-    	public Verdant(RenderManager renderManagerIn)
-    	{
-    		super(renderManagerIn);
-    	}
+		public Azure(RenderManager renderManagerIn) {
+			super(renderManagerIn);
+		}
 
-        @Override
-        protected ResourceLocation getEntityTexture(EntityCicaptera entity)
-        {
-            return TEXTURES;
-        }
-    }
-    
-    public static class Crimson extends RenderCicaptera {
-    	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_crimson");
-    	
-    	public Crimson(RenderManager renderManagerIn)
-    	{
-    		super(renderManagerIn);
-    	}
+		@Override
+		protected ResourceLocation getEntityTexture(EntityCicaptera entity) {
+			return TEXTURES;
+		}
 
-        @Override
-        protected ResourceLocation getEntityTexture(EntityCicaptera entity)
-        {
-            return TEXTURES;
-        }
-    }
-    
-    public static class Sandy extends RenderCicaptera {
-    	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_sandy");
-    	
-    	public Sandy(RenderManager renderManagerIn)
-    	{
-    		super(renderManagerIn);
-    	}
+		public static class Factory implements IRenderFactory<EntityCicaptera> {
+			@Override
+			public Render<? super EntityCicaptera> createRenderFor(RenderManager manager) {
+				return new Azure(manager);
+			}
+		}
+	}
 
-        @Override
-        protected ResourceLocation getEntityTexture(EntityCicaptera entity)
-        {
-            return TEXTURES;
-        }
-    }
-    
-    public static class Wintry extends RenderCicaptera {
-    	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_wintry");
-    	
-    	public Wintry(RenderManager renderManagerIn)
-    	{
-    		super(renderManagerIn);
-    	}
+	public static class Verdant extends RenderCicaptera {
+		private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_verdant");
 
-        @Override
-        protected ResourceLocation getEntityTexture(EntityCicaptera entity)
-        {
-            return TEXTURES;
-        }
-    }
+		public Verdant(RenderManager renderManagerIn) {
+			super(renderManagerIn);
+		}
+
+		@Override
+		protected ResourceLocation getEntityTexture(EntityCicaptera entity) {
+			return TEXTURES;
+		}
+	}
+
+	public static class Crimson extends RenderCicaptera {
+		private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_crimson");
+
+		public Crimson(RenderManager renderManagerIn) {
+			super(renderManagerIn);
+		}
+
+		@Override
+		protected ResourceLocation getEntityTexture(EntityCicaptera entity) {
+			return TEXTURES;
+		}
+	}
+
+	public static class Sandy extends RenderCicaptera {
+		private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_sandy");
+
+		public Sandy(RenderManager renderManagerIn) {
+			super(renderManagerIn);
+		}
+
+		@Override
+		protected ResourceLocation getEntityTexture(EntityCicaptera entity) {
+			return TEXTURES;
+		}
+	}
+
+	public static class Wintry extends RenderCicaptera {
+		private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_wintry");
+
+		public Wintry(RenderManager renderManagerIn) {
+			super(renderManagerIn);
+		}
+
+		@Override
+		protected ResourceLocation getEntityTexture(EntityCicaptera entity) {
+			return TEXTURES;
+		}
+	}
+
+	public static class Lovely extends RenderCicaptera {
+		private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("cicaptera_lovely");
+
+		public Lovely(RenderManager renderManagerIn) {
+			super(renderManagerIn);
+		}
+
+		@Override
+		protected ResourceLocation getEntityTexture(EntityCicaptera entity) {
+			return TEXTURES;
+		}
+	}
 }

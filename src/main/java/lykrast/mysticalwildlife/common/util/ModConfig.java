@@ -24,6 +24,13 @@ public class ModConfig {
 	@LangKey("config." + MysticalWildlife.MODID + ".krill.forage_chance")
 	public static int krillForageChance = 2000;
 	
+	@RangeInt(min = 0)
+	@LangKey("config." + MysticalWildlife.MODID + ".cicaptera_lovely.essence_time.base")
+	public static int cicapteraLovelyEssenceTimeBase = 12000;
+	@RangeInt(min = 0)
+	@LangKey("config." + MysticalWildlife.MODID + ".cicaptera_lovely.essence_time.extra")
+	public static int cicapteraLovelyEssenceTimeExtra = 12000;
+	
 	public static class Spawning {
 
 		@LangKey("entity." + MysticalWildlife.MODID + ".vrontausaurus.name")
@@ -47,6 +54,8 @@ public class ModConfig {
 		public Entry cicapteraSandy = new Entry(10, 4, 6);
 		@LangKey("entity." + MysticalWildlife.MODID + ".cicaptera_wintry.name")
 		public Entry cicapteraWintry = new Entry(10, 4, 6);
+		@LangKey("entity." + MysticalWildlife.MODID + ".cicaptera_lovely.name")
+		public Entry cicapteraLovely = new Entry(6, 2, 3);
 		
 		@LangKey("entity." + MysticalWildlife.MODID + ".plumper.name")
 		public Entry plumper = new Entry(12, 3, 5);

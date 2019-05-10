@@ -29,6 +29,8 @@ item.mysticalwildlife.cicaptera_husk.verdant.name=Carapace de cigaptère verdoya
 item.mysticalwildlife.cicaptera_husk.crimson.name=Carapace de cigaptère cramoisi
 item.mysticalwildlife.cicaptera_husk.sandy.name=Carapace de cigaptère sablonneux
 item.mysticalwildlife.cicaptera_husk.wintry.name=Carapace de cigaptère hivernal
+item.mysticalwildlife.cicaptera_husk.lovely.name=Carapace de cigaptère charmant
+item.mysticalwildlife.aphrodite_essence.name=Essence d'Aphrodite
 
 item.mysticalwildlife.plumper_blubber.name=Graisse de potelé
 item.mysticalwildlife.plumper_meat_raw.name=Potelé cru
@@ -48,6 +50,7 @@ entity.mysticalwildlife.cicaptera_verdant.name=Cigaptère verdoyant
 entity.mysticalwildlife.cicaptera_crimson.name=Cigaptère cramoisi
 entity.mysticalwildlife.cicaptera_sandy.name=Cigaptère sablonneux
 entity.mysticalwildlife.cicaptera_wintry.name=Cigaptère hivernal
+entity.mysticalwildlife.cicaptera_lovely.name=Cigaptère charmant
 entity.mysticalwildlife.plumper.name=Potelé
 entity.mysticalwildlife.krill.name=Krill
 

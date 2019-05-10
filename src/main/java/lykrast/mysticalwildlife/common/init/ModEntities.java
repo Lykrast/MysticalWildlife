@@ -3,14 +3,28 @@ package lykrast.mysticalwildlife.common.init;
 import static lykrast.mysticalwildlife.common.util.ModConfig.SPAWNING;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import lykrast.mysticalwildlife.client.render.*;
-import lykrast.mysticalwildlife.common.entity.*;
+import lykrast.mysticalwildlife.client.render.RenderCicaptera;
+import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
+import lykrast.mysticalwildlife.client.render.RenderKrill;
+import lykrast.mysticalwildlife.client.render.RenderPlumper;
+import lykrast.mysticalwildlife.client.render.RenderVrontausaurus;
+import lykrast.mysticalwildlife.client.render.RenderYagaHog;
+import lykrast.mysticalwildlife.common.entity.EntityCicaptera;
+import lykrast.mysticalwildlife.common.entity.EntityDuskLurker;
+import lykrast.mysticalwildlife.common.entity.EntityKrill;
+import lykrast.mysticalwildlife.common.entity.EntityPlumper;
+import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
+import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
@@ -87,6 +101,12 @@ public class ModEntities {
 				BiomeDictionary.getBiomes(BiomeDictionary.Type.SNOWY));
 		register(builder);
         LootTableList.register(EntityCicaptera.Wintry.LOOT);
+		builder = create(EntityCicaptera.Lovely.class, "cicaptera_lovely", 0xdf64cf, 0x262626);
+		if (SPAWNING.cicapteraLovely.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
+				SPAWNING.cicapteraLovely.weight, SPAWNING.cicapteraLovely.minGroup, SPAWNING.cicapteraLovely.maxGroup, 
+				getLovelyBiomes());
+		register(builder);
+        LootTableList.register(EntityCicaptera.Lovely.LOOT);
         
 		builder = create(EntityPlumper.class, "plumper", 0x9a947b, 0x797461);
 		if (SPAWNING.plumper.weight > 0) builder.spawn(EnumCreatureType.CREATURE, 
@@ -103,6 +123,17 @@ public class ModEntities {
 		register(builder);
         LootTableList.register(EntityKrill.LOOT);
         LootTableList.register(EntityKrill.LOOT_FORAGE);
+	}
+	
+	private static Set<Biome> getLovelyBiomes() {
+		Set<Biome> set = new HashSet<>();
+		set.addAll(BiomeDictionary.getBiomes(BiomeDictionary.Type.MAGICAL));
+		//Sunflower Plains
+		set.add(Biomes.MUTATED_PLAINS);
+		//Flower Forest
+		set.add(Biomes.MUTATED_FOREST);
+		
+		return set;
 	}
 
 	@SubscribeEvent
@@ -136,6 +167,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Crimson.class, RenderCicaptera.Crimson::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Sandy.class, RenderCicaptera.Sandy::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Wintry.class, RenderCicaptera.Wintry::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCicaptera.Lovely.class, RenderCicaptera.Lovely::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPlumper.class, RenderPlumper::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityKrill.class, RenderKrill::new);
     }

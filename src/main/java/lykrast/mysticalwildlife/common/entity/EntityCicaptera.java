@@ -6,7 +6,9 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModSounds;
+import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -33,6 +35,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -45,6 +48,7 @@ public abstract class EntityCicaptera extends EntityAnimal {
     private static final Set<Item> SEEDS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
     private static final Set<Item> FRUITS = Sets.newHashSet(Items.APPLE);
     private static final Set<Item> CACTUS = Sets.newHashSet(Item.getItemFromBlock(Blocks.CACTUS));
+    private static final Set<Item> SUGAR = Sets.newHashSet(Items.SUGAR);
 	
 	public EntityCicaptera(World worldIn)
 	{
@@ -356,6 +360,60 @@ public abstract class EntityCicaptera extends EntityAnimal {
     	@Override
     	protected EntityAgeable createOwnChild() {
     		return new Wintry(world);
+    	}
+    }
+    
+    public static class Lovely extends EntityCicaptera {
+        public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/lovely");
+        public int timeUntilNextEssence;
+
+    	public Lovely(World worldIn) {
+    		super(worldIn);
+    		resetEssenceTime();
+    	}
+    	
+    	@Override
+        public void onLivingUpdate() {
+    		super.onLivingUpdate();
+
+			if (!world.isRemote && !isChild() && --timeUntilNextEssence <= 0) {
+				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				dropItem(ModItems.aphroditeEssence, 1);
+				resetEssenceTime();
+			}
+    	}
+    	
+    	private void resetEssenceTime() {
+    		timeUntilNextEssence = rand.nextInt(ModConfig.cicapteraLovelyEssenceTimeBase) + ModConfig.cicapteraLovelyEssenceTimeExtra;
+    	}
+    	
+
+    	@Override
+		public void readEntityFromNBT(NBTTagCompound compound) {
+			super.readEntityFromNBT(compound);
+			if (compound.hasKey("EssenceTime")) timeUntilNextEssence = compound.getInteger("EssenceTime");
+		}
+
+		@Override
+		public void writeEntityToNBT(NBTTagCompound compound) {
+			super.writeEntityToNBT(compound);
+			compound.setInteger("EssenceTime", timeUntilNextEssence);
+		}
+
+    	@Override
+    	protected Set<Item> getTemptationItems() {
+    		return SUGAR;
+    	}
+
+    	@Override
+        @Nullable
+        protected ResourceLocation getLootTable() {
+            return LOOT;
+        }
+
+    	@Override
+    	protected EntityAgeable createOwnChild() {
+    		return new Lovely(world);
     	}
     }
 }
