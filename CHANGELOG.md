@@ -1,5 +1,13 @@
 # 1.12.2
 
+## 1.3.0
+
+* ADDED: Lovely Cicapteras, find them in magical or (vanilla) flowery biomes
+* ADDED: Aphrodite Essence, dropped by Lovely Cicapteras over time
+* ADDED: Potion of Arousal and Potion of Instant Love to make animal breed, brew with Aphrodite Essence
+* ADDED: Tamed mobs can now be brushed for hearts for no durability lost (suggested by Febilian)
+* FIXED: Cicapteras no longer deploy their wings when their AI is disabled
+
 ## 1.2.2
 
 * FIXED: Crash when spawns of some mobs are disabled in biomes where they would be no other spawns (reported by Ghostrider231)
