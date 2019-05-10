@@ -29,6 +29,7 @@ public class ItemBrush extends Item {
 
 	@SubscribeEvent
 	public static void onInteract(EntityInteract evt) {
+		//Prevents tamed animals from sitting
 		if (evt.getItemStack().getItem() instanceof ItemBrush && evt.getTarget() instanceof EntityLivingBase) {
 			ItemStack item = evt.getItemStack();
 			if (item.getItem().itemInteractionForEntity(item, evt.getEntityPlayer(), (EntityLivingBase) evt.getTarget(), evt.getHand())) {
