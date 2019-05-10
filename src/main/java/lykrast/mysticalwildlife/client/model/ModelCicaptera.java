@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -90,13 +91,12 @@ public class ModelCicaptera extends ModelBase {
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         
-        if (!entityIn.onGround && !entityIn.isInWater()) //In the air, deploy wings
-        {
+        if (!entityIn.onGround && !entityIn.isInWater() && !((EntityLiving)entityIn).isAIDisabled()) {
+        	//In the air, deploy wings
             this.body.rotateAngleX = PI_THIRD;
             this.legRightBack.rotateAngleX = -PI_THIRD;
             this.legLeftBack.rotateAngleX = -PI_THIRD;
@@ -109,8 +109,8 @@ public class ModelCicaptera extends ModelBase {
             this.wingLeft.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * PI_TWELVETH * limbSwingAmount + PI_NINTH;
             this.wingRight.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * PI_TWELVETH * limbSwingAmount * (-1) - PI_NINTH;
         }
-        else //On the ground, do as normal
-        {
+        else {
+        	//On the ground, do as normal
             this.body.rotateAngleX = PI_HALF;
             this.legRightBack.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount - PI_HALF;
             this.legLeftBack.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount - PI_HALF;
@@ -129,8 +129,7 @@ public class ModelCicaptera extends ModelBase {
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) { 
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
 
-        if (this.isChild)
-        {
+        if (this.isChild) {
             GlStateManager.pushMatrix();
             GlStateManager.scale(0.5F, 0.5F, 0.5F);
             GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
@@ -138,8 +137,7 @@ public class ModelCicaptera extends ModelBase {
             this.body.render(scale);
             GlStateManager.popMatrix();
         }
-        else
-        {
+        else {
             this.head.render(scale);
             this.body.render(scale);
         }
