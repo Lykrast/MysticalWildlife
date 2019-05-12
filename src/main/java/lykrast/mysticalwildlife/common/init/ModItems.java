@@ -1,111 +1,74 @@
 package lykrast.mysticalwildlife.common.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import lykrast.mysticalwildlife.common.item.*;
-import lykrast.mysticalwildlife.common.util.CreativeTabsMysticalWildlife;
+import lykrast.mysticalwildlife.common.item.ItemBrush;
+import lykrast.mysticalwildlife.common.item.ItemFuel;
+import lykrast.mysticalwildlife.common.util.ItemGroupMysticalWildlife;
 import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MysticalWildlife.MODID)
 public class ModItems {
 	public static Item brush,
 		vrontausaurusFur, vrontausaurusFurTuft, vrontausaurusRaw, vrontausaurusCooked,
 		yagaHogRaw, yagaHogCooked,
 		duskAsh, duskLurkerFur, duskLurkerFurTuft, duskLurkerRaw, duskLurkerCooked,
-		cicapteraRaw, cicapteraCooked, cicapteraHusk, aphroditeEssence,
+		cicapteraRaw, cicapteraCooked, cicapteraHuskAzure, cicapteraHuskVerdant, cicapteraHuskCrimson, cicapteraHuskSandy, cicapteraHuskWintry, cicapteraHuskLovely, aphroditeEssence,
 		plumperBlubber, plumperRaw, plumperCooked,
 		krillRaw, krillCooked;
-	private static List<Item> itemList = new ArrayList<>();
-	//static List<Item> itemBlockList = new ArrayList<>();
-	
-	static
-	{
+
+    @SubscribeEvent
+	public static void registerItems(final RegistryEvent.Register<Item> event) {
+    	IForgeRegistry<Item> reg = event.getRegistry();
+    	
+    	Item.Properties def = new Item.Properties().group(ItemGroupMysticalWildlife.INSTANCE);
+    	
 		//Tools
-		if (ModConfig.brushEnabled) brush = initItem(new ItemBrush(65), "brush");
+		if (ModConfig.brushEnabled) brush = initItem(reg, new ItemBrush(new Item.Properties().defaultMaxDamage(65).maxStackSize(1).group(ItemGroupMysticalWildlife.INSTANCE)), "brush");
 		
 		//Monsters
-		vrontausaurusFur = initItem(new Item(), "vrontausaurus_fur");
-		vrontausaurusFurTuft = initItem(new Item(), "vrontausaurus_fur_tuft");
-		vrontausaurusRaw = initItem(new ItemFood(3, 0.4F, true), "vrontausaurus_meat_raw");
-		vrontausaurusCooked = initItem(new ItemFood(10, 0.9F, true), "vrontausaurus_meat_cooked");
+		vrontausaurusFur = initItem(reg, new Item(def), "vrontausaurus_fur");
+		vrontausaurusFurTuft = initItem(reg, new Item(def), "vrontausaurus_fur_tuft");
+		vrontausaurusRaw = initItem(reg, new ItemFood(3, 0.4F, true, def), "vrontausaurus_meat_raw");
+		vrontausaurusCooked = initItem(reg, new ItemFood(10, 0.9F, true, def), "vrontausaurus_meat_cooked");
 		
-		yagaHogRaw = initItem(new ItemFood(2, 0.3F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "yaga_hog_meat_raw");
-		yagaHogCooked = initItem(new ItemFood(6, 0.7F, true), "yaga_hog_meat_cooked");
+		yagaHogRaw = initItem(reg, new ItemFood(2, 0.3F, true, def).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 600, 0), 0.6F), "yaga_hog_meat_raw");
+		yagaHogCooked = initItem(reg, new ItemFood(6, 0.7F, true, def), "yaga_hog_meat_cooked");
 
-		duskAsh = initItem(new Item(), "dusk_ash");
-		duskLurkerFur = initItem(new Item(), "dusk_lurker_fur");
-		duskLurkerFurTuft = initItem(new Item(), "dusk_lurker_fur_tuft");
-		duskLurkerRaw = initItem(new ItemFood(2, 0.5F, true), "dusk_lurker_meat_raw");
-		duskLurkerCooked = initItem(new ItemFood(6, 1.2F, true), "dusk_lurker_meat_cooked");
+		duskAsh = initItem(reg, new Item(def), "dusk_ash");
+		duskLurkerFur = initItem(reg, new Item(def), "dusk_lurker_fur");
+		duskLurkerFurTuft = initItem(reg, new Item(def), "dusk_lurker_fur_tuft");
+		duskLurkerRaw = initItem(reg, new ItemFood(2, 0.5F, true, def), "dusk_lurker_meat_raw");
+		duskLurkerCooked = initItem(reg, new ItemFood(6, 1.2F, true, def), "dusk_lurker_meat_cooked");
 		
-		cicapteraRaw = initItem(new ItemFood(3, 0.4F, true), "cicaptera_meat_raw");
-		cicapteraCooked = initItem(new ItemFood(8, 0.8F, true), "cicaptera_meat_cooked");
-		cicapteraHusk = initItem(new ItemVariant("azure", "verdant", "crimson", "sandy", "wintry", "lovely"), "cicaptera_husk");
-		aphroditeEssence = initItem(new Item(), "aphrodite_essence");
+		cicapteraRaw = initItem(reg, new ItemFood(3, 0.4F, true, def), "cicaptera_meat_raw");
+		cicapteraCooked = initItem(reg, new ItemFood(8, 0.8F, true, def), "cicaptera_meat_cooked");
+		cicapteraHuskAzure = initItem(reg, new Item(def), "cicaptera_husk_azure");
+		cicapteraHuskVerdant = initItem(reg, new Item(def), "cicaptera_husk_verdant");
+		cicapteraHuskCrimson = initItem(reg, new Item(def), "cicaptera_husk_crimson");
+		cicapteraHuskSandy = initItem(reg, new Item(def), "cicaptera_husk_sandy");
+		cicapteraHuskWintry = initItem(reg, new Item(def), "cicaptera_husk_wintry");
+		cicapteraHuskLovely = initItem(reg, new Item(def), "cicaptera_husk_lovely");
+		aphroditeEssence = initItem(reg, new Item(def), "aphrodite_essence");
 		
-		plumperBlubber = initItem(new ItemFuel(200), "plumper_blubber");
-		plumperRaw = initItem(new ItemFood(2, 0.6F, true), "plumper_meat_raw");
-		plumperCooked = initItem(new ItemFood(8, 1.0F, true), "plumper_meat_cooked");
+		plumperBlubber = initItem(reg, new ItemFuel(200, def), "plumper_blubber");
+		plumperRaw = initItem(reg, new ItemFood(2, 0.6F, true, def), "plumper_meat_raw");
+		plumperCooked = initItem(reg, new ItemFood(8, 1.0F, true, def), "plumper_meat_cooked");
 		
-		krillRaw = initItem(new ItemFood(2, 0.1F, true), "krill_meat_raw");
-		krillCooked = initItem(new ItemFood(4, 0.6F, true), "krill_meat_cooked");
+		krillRaw = initItem(reg, new ItemFood(2, 0.1F, true, def), "krill_meat_raw");
+		krillCooked = initItem(reg, new ItemFood(4, 0.6F, true, def), "krill_meat_cooked");
 	}
 	
-	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event)
-	{
-		//Just making sure item blocks get registered before items
-		//for (Item i : itemBlockList) event.getRegistry().register(i);
-		for (Item i : itemList) event.getRegistry().register(i);
-		ModRecipes.initOreDict();
-	}
-	
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public static void registerModels(ModelRegistryEvent evt)
-	{
-		//for (Item i : itemBlockList) initModel(i);
-		for (Item i : itemList) initModel(i);
-		
-		//We no longer use it afterwards
-		itemList = null;
-	}
-	
-	public static Item initItem(Item item, String name)
-	{
-		return initItem(item, name, CreativeTabsMysticalWildlife.instance);
-	}
-	
-	public static Item initItem(Item item, String name, CreativeTabs tab)
-	{
-		item.setRegistryName(name);
-		item.setTranslationKey(MysticalWildlife.MODID + "." + name);
-		if (tab != null) item.setCreativeTab(tab);
-		
-		itemList.add(item);
-		
+	public static Item initItem(IForgeRegistry<Item> reg, Item item, String name) {
+		item.setRegistryName(MysticalWildlife.MODID, name);
+		reg.register(item);
 		return item;
-	}
-
-	@SideOnly(Side.CLIENT)
-	private static void initModel(Item i)
-	{
-		if (i instanceof IItemCustomModel) ((IItemCustomModel)i).initModel();
-		else ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
 	}
 }

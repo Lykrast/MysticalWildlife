@@ -18,7 +18,7 @@ public class LootUtil {
 		private int looting;
 		
 		public LootContextBrushing(float luckIn, WorldServer worldIn, Entity lootedEntityIn, EntityPlayer playerIn, int looting) {
-			super(luckIn, worldIn, worldIn.getLootTableManager(), lootedEntityIn, playerIn, null);
+			super(luckIn, worldIn, worldIn.getServer().getLootTableManager(), lootedEntityIn, playerIn, null, lootedEntityIn.getPosition());
 			this.looting = looting;
 		}
 		

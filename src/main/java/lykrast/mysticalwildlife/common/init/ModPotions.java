@@ -9,11 +9,11 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MysticalWildlife.MODID)
 public class ModPotions {
 	public static Potion shocked, breeding, breedingInstant;
 	public static PotionType potBreeding, potBreedingLong, potBreedingStrong, potBreedingInstant;
@@ -27,7 +27,6 @@ public class ModPotions {
 	}
 	
 	public static Potion register(IForgeRegistry<Potion> reg, Potion p, String name) {
-		p.setPotionName("potion.effect." + MysticalWildlife.MODID + "." + name);
 		p.setRegistryName(MysticalWildlife.MODID, name);
 		reg.register(p);
 		return p;

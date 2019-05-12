@@ -1,15 +1,13 @@
 package lykrast.mysticalwildlife.common.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
-
+import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -26,8 +24,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -39,65 +37,64 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTable;
 
 public class EntityYagaHog extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("yaga_hog");
     public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_yaga_hog");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.BREAD);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.BREAD);
     
     private static final DataParameter<Boolean> DIRTY = EntityDataManager.<Boolean>createKey(EntityAgeable.class, DataSerializers.BOOLEAN);
     private int dirtTime;
 	
 	public EntityYagaHog(World worldIn)
 	{
-		super(worldIn);
+		super(ModEntities.yagaHog, worldIn);
         this.setSize(0.9F, 0.9F);
 	}
 
 	@Override
-    protected void entityInit() {
-        super.entityInit();
-        this.dataManager.register(DIRTY, Boolean.TRUE);
+    protected void registerData() {
+        super.registerData();
+        getDataManager().register(DIRTY, Boolean.TRUE);
     }
 
 	@Override
     protected void initEntityAI()
     {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
+        tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        tasks.addTask(8, new EntityAILookIdle(this));
     }
 
 	@Override
-    protected void applyEntityAttributes()
+    protected void registerAttributes()
     {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        super.registerAttributes();
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 	
 	public boolean isDirty() {
-		return world.isRemote ? ((Boolean)this.dataManager.get(DIRTY)).booleanValue() : dirtTime <= 0;
+		return world.isRemote ? ((Boolean)getDataManager().get(DIRTY)).booleanValue() : dirtTime <= 0;
 	}
 	
     public void setDirtTimer(int timer)
     {
-        this.dataManager.set(DIRTY, Boolean.valueOf(timer <= 0));
+        getDataManager().set(DIRTY, Boolean.valueOf(timer <= 0));
         this.dirtTime = timer;
     }
     
     @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
+    public void livingTick() {
+        super.livingTick();
         
         if (!world.isRemote && !isDirty()) {
         	setDirtTimer(Math.max(0, dirtTime - (isWet() ? 3 : 1)));
@@ -141,17 +138,17 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     }
 
 	@Override
-	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
+	public boolean isBrushable(EntityPlayer player, ItemStack item, BlockPos pos) {
 		return !isChild() && isDirty();
 	}
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {		
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, BlockPos pos, int fortune) {		
         playSound(SoundEvents.ENTITY_SLIME_JUMP, 1.0F, 1.0F);
         
         if (rand.nextInt(3) == 0) setDirtTimer(3600 + rand.nextInt(2401));
         
-    	LootTable loottable = this.world.getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
+    	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
 		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
 	}
 
@@ -179,21 +176,21 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     }
 
 	@Override
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    protected void playStepSound(BlockPos pos, IBlockState blockIn)
     {
         this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
     }
 
 	@Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setInteger("DirtTimer", dirtTime);
+    public void writeAdditional(NBTTagCompound compound) {
+        super.writeAdditional(compound);
+        compound.setInt("DirtTimer", dirtTime);
     }
 
 	@Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        setDirtTimer(compound.getInteger("DirtTimer"));
+    public void readAdditional(NBTTagCompound compound) {
+        super.readAdditional(compound);
+        setDirtTimer(compound.getInt("DirtTimer"));
     }
 
 	@Override
@@ -209,6 +206,6 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
 	@Override
     public boolean isBreedingItem(ItemStack stack)
     {
-        return TEMPTATION_ITEMS.contains(stack.getItem());
+        return TEMPTATION_ITEMS.test(stack);
     }
 }

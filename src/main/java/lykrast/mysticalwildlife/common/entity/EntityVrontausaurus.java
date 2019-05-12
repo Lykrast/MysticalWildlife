@@ -1,17 +1,15 @@
 package lykrast.mysticalwildlife.common.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
-
+import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModPotions;
 import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
@@ -30,48 +28,49 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTable;
 
 public class EntityVrontausaurus extends EntityFurzard {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("vrontausaurus");
     public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_vrontausaurus");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.MUTTON, Items.COOKED_MUTTON);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.MUTTON, Items.COOKED_MUTTON);
 	
 	public EntityVrontausaurus(World worldIn)
 	{
-		super(worldIn);
+		super(ModEntities.vrontausaurus, worldIn);
         this.setSize(2.2F, 1.4F);
 	}
 
-    protected void initEntityAI()
+    @Override
+	protected void initEntityAI()
     {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new AIPanic(1.2D));
-        this.tasks.addTask(2, new AIAttackMeleeShortrange(this, 1.2D, false));
-        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(4, new AITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new AIPanic(1.2D));
+        tasks.addTask(2, new AIAttackMeleeShortrange(this, 1.2D, false));
+        tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        tasks.addTask(4, new AITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        tasks.addTask(8, new EntityAILookIdle(this));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
     }
     
-    protected void applyEntityAttributes()
+    @Override
+	protected void registerAttributes()
     {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
+        super.registerAttributes();
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
     }
     
     @Override
@@ -107,7 +106,8 @@ public class EntityVrontausaurus extends EntityFurzard {
         }
     }
     
-    protected void updateAITasks()
+    @Override
+	protected void updateAITasks()
     {
     	if (world.getDifficulty() == EnumDifficulty.PEACEFUL)
     	{
@@ -119,12 +119,12 @@ public class EntityVrontausaurus extends EntityFurzard {
     }
 
 	@Override
-	public boolean isBrushable(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos) {
+	public boolean isBrushable(EntityPlayer player, ItemStack item, BlockPos pos) {
 		return !isChild() && isBrushable() && getAttackTarget() == null;
 	}
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, BlockPos pos, int fortune) {
 		if (rand.nextInt(4) == 0) player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
 
         playSound(ModSounds.brushing, 1.0F, 1.0F);
@@ -132,7 +132,7 @@ public class EntityVrontausaurus extends EntityFurzard {
         
         if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
         
-    	LootTable loottable = this.world.getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
+    	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
 		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
 	}
 
@@ -159,9 +159,10 @@ public class EntityVrontausaurus extends EntityFurzard {
         return ModSounds.lizardDeath;
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    @Override
+	protected void playStepSound(BlockPos pos, IBlockState blockIn)
     {
-        this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0F, 1.0F);
     }
 
 	@Override
@@ -174,10 +175,11 @@ public class EntityVrontausaurus extends EntityFurzard {
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
-    public boolean isBreedingItem(ItemStack stack)
+    @Override
+	public boolean isBreedingItem(ItemStack stack)
     {
     	if (!world.isRaining()) return false;
-        return TEMPTATION_ITEMS.contains(stack.getItem());
+        return TEMPTATION_ITEMS.test(stack);
     }
     
     class AIPanic extends EntityAIPanic
@@ -190,7 +192,8 @@ public class EntityVrontausaurus extends EntityFurzard {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
-        public boolean shouldExecute()
+        @Override
+		public boolean shouldExecute()
         {
             return !EntityVrontausaurus.this.isChild() && !EntityVrontausaurus.this.isBurning() ? false : super.shouldExecute();
         }
@@ -214,7 +217,7 @@ public class EntityVrontausaurus extends EntityFurzard {
     	//Private in the super class, damn it
     	private EntityCreature tempted;
     	
-		public AITempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Set<Item> temptItemIn) {
+		public AITempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Ingredient temptItemIn) {
 			super(temptedEntityIn, speedIn, scaredByPlayerMovementIn, temptItemIn);
 			tempted = temptedEntityIn;
 		}

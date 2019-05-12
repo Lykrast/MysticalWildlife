@@ -1,15 +1,12 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
-
 import lykrast.mysticalwildlife.common.entity.ai.EntityAIForage;
+import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -24,8 +21,8 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -34,19 +31,19 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityKrill extends EntityAnimal {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("krill");
     public static final ResourceLocation LOOT_FORAGE = ResourceUtil.getSpecialLootTable("krill_forage");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
     
     public int forageTimer;
     private EntityAIForage forageAI;
 	
 	public EntityKrill(World worldIn) {
-		super(worldIn);
+		super(ModEntities.krill, worldIn);
         this.setSize(0.75F, 0.45F);
 	}
 
@@ -65,18 +62,18 @@ public class EntityKrill extends EntityAnimal {
     }
 
     @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(8.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
+    protected void registerAttributes() {
+        super.registerAttributes();
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+        getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
+        getAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(8.0D);
+        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
     }
     
     @Override
     public void eatGrassBonus() {
     	//Forage something
-    	LootTable loottable = world.getLootTableManager().getLootTableFromLocation(LOOT_FORAGE);
+    	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_FORAGE);
         LootContext.Builder builder = (new LootContext.Builder((WorldServer)world)).withLootedEntity(this);
         
 		for (ItemStack itemstack : loottable.generateLootForPools(rand, builder.build())) entityDropItem(itemstack, 0.0F);
@@ -89,13 +86,12 @@ public class EntityKrill extends EntityAnimal {
     }
     
     @Override
-    public void onLivingUpdate()
-    {
+    public void livingTick() {
         if (this.world.isRemote) forageTimer = Math.max(0, forageTimer - 1);
-        super.onLivingUpdate();
+        super.livingTick();
     }
     
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
 	@Override
     public void handleStatusUpdate(byte id) {
         if (id == 10) forageTimer = 40;
@@ -123,7 +119,7 @@ public class EntityKrill extends EntityAnimal {
     }
 
 	@Override
-    protected void playStepSound(BlockPos pos, Block blockIn) {
+    protected void playStepSound(BlockPos pos, IBlockState blockIn) {
         this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
     }
 
@@ -139,6 +135,6 @@ public class EntityKrill extends EntityAnimal {
      */
 	@Override
     public boolean isBreedingItem(ItemStack stack) {
-        return TEMPTATION_ITEMS.contains(stack.getItem());
+        return TEMPTATION_ITEMS.test(stack);
     }
 }

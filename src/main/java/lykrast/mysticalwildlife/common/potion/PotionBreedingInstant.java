@@ -32,7 +32,8 @@ public class PotionBreedingInstant extends PotionGeneric {
 		}
     }
 
-    public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, EntityLivingBase entity, int amplifier, double health) {
+    @Override
+	public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, EntityLivingBase entity, int amplifier, double health) {
 		if (!(entity instanceof EntityAnimal)) {
 			return;
 		}

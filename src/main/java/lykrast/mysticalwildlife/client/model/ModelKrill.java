@@ -1,9 +1,9 @@
 package lykrast.mysticalwildlife.client.model;
 
 import lykrast.mysticalwildlife.common.entity.EntityKrill;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.model.ModelBase;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
@@ -191,8 +191,8 @@ public class ModelKrill extends ModelBase {
         if (this.isChild)
         {
             GlStateManager.pushMatrix();
-            GlStateManager.scale(0.5F, 0.5F, 0.5F);
-            GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+            GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
             this.legBR.render(scale);
             this.legBL.render(scale);
             this.legFR.render(scale);

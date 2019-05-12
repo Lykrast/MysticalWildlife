@@ -1,21 +1,19 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
-
+import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
+import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -33,8 +31,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -45,38 +43,37 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public abstract class EntityCicaptera extends EntityAnimal {
-    private static final Set<Item> SEEDS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
-    private static final Set<Item> FRUITS = Sets.newHashSet(Items.APPLE);
-    private static final Set<Item> CACTUS = Sets.newHashSet(Item.getItemFromBlock(Blocks.CACTUS));
-    private static final Set<Item> SUGAR = Sets.newHashSet(Items.SUGAR);
+    private static final Ingredient SEEDS = Ingredient.fromItems(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
+    private static final Ingredient FRUITS = Ingredient.fromItems(Items.APPLE);
+    private static final Ingredient CACTUS = Ingredient.fromItems(Blocks.CACTUS, Items.CACTUS_GREEN);
+    private static final Ingredient SUGAR = Ingredient.fromItems(Items.SUGAR);
 	
-	public EntityCicaptera(World worldIn)
-	{
-		super(worldIn);
+	public EntityCicaptera(EntityType<? extends EntityCicaptera> type, World worldIn) {
+		super(type, worldIn);
         this.setSize(0.9F, 0.4F);
 	}
 	
-	protected abstract Set<Item> getTemptationItems();
+	protected abstract Ingredient getTemptationItems();
 
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(3, new EntityAIMate(this, 1.0D, EntityCicaptera.class));
-        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, getTemptationItems()));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+    @Override
+	protected void initEntityAI() {
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
+        tasks.addTask(3, new EntityAIMate(this, 1.0D, EntityCicaptera.class));
+        tasks.addTask(4, new EntityAITempt(this, 1.2D, false, getTemptationItems()));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        tasks.addTask(8, new EntityAILookIdle(this));
     }
     
-    protected void applyEntityAttributes()
-    {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(4.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27D);
+    @Override
+	protected void registerAttributes() {
+        super.registerAttributes();
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
+        getAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(4.0D);
+        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27D);
     }
 
     /**
@@ -84,14 +81,14 @@ public abstract class EntityCicaptera extends EntityAnimal {
      * use this to react to sunlight and start to burn.
      */
     @Override
-    public void onLivingUpdate()
-    {
-        super.onLivingUpdate();
+    public void livingTick() {
+        super.livingTick();
         
         if (!this.onGround && this.motionY < 0.0D) this.motionY *= 0.6D;
     }
 
-    public void fall(float distance, float damageMultiplier)
+    @Override
+	public void fall(float distance, float damageMultiplier)
     {
     }
 
@@ -113,24 +110,26 @@ public abstract class EntityCicaptera extends EntityAnimal {
      * Get this Entity's EnumCreatureAttribute
      */
 	@Override
-    public EnumCreatureAttribute getCreatureAttribute()
-    {
-        return EnumCreatureAttribute.ARTHROPOD;
+    public CreatureAttribute getCreatureAttribute() {
+        return CreatureAttribute.ARTHROPOD;
     }
 	
 	protected abstract EntityAgeable createOwnChild();
     
-    protected SoundEvent getAmbientSound()
+    @Override
+	protected SoundEvent getAmbientSound()
     {
         return ModSounds.cicapteraIdle;
     }
 
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_)
+    @Override
+	protected SoundEvent getHurtSound(DamageSource p_184601_1_)
     {
         return ModSounds.cicapteraHurt;
     }
 
-    protected SoundEvent getDeathSound()
+    @Override
+	protected SoundEvent getDeathSound()
     {
         return ModSounds.cicapteraDeath;
     }
@@ -144,20 +143,20 @@ public abstract class EntityCicaptera extends EntityAnimal {
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
-    public boolean isBreedingItem(ItemStack stack)
-    {
-        return getTemptationItems().contains(stack.getItem());
+    @Override
+	public boolean isBreedingItem(ItemStack stack) {
+        return getTemptationItems().test(stack);
     }
     
     public static class Azure extends EntityCicaptera {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/azure");
 
     	public Azure(World worldIn) {
-    		super(worldIn);
+    		super(ModEntities.cicapteraAzure, worldIn);
     	}
 
     	@Override
-    	protected Set<Item> getTemptationItems() {
+    	protected Ingredient getTemptationItems() {
     		return SEEDS;
     	}
 
@@ -177,11 +176,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/verdant");
 
     	public Verdant(World worldIn) {
-    		super(worldIn);
+    		super(ModEntities.cicapteraVerdant, worldIn);
     	}
 
     	@Override
-    	protected Set<Item> getTemptationItems() {
+    	protected Ingredient getTemptationItems() {
     		return FRUITS;
     	}
 
@@ -201,27 +200,27 @@ public abstract class EntityCicaptera extends EntityAnimal {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/crimson");
 
     	public Crimson(World worldIn) {
-    		super(worldIn);
+    		super(ModEntities.cicapteraCrimson, worldIn);
     	}
 
     	@Override
-    	protected Set<Item> getTemptationItems() {
+    	protected Ingredient getTemptationItems() {
     		return CACTUS;
     	}
     	
     	@Override
         protected void initEntityAI()
         {
-            this.tasks.addTask(0, new EntityAISwimming(this));
-            this.tasks.addTask(1, new AICrimsonLeap(this));
-            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.2D, false));
-            this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-            this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, SEEDS));
-            this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-            this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-            this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-            this.tasks.addTask(8, new EntityAILookIdle(this));
-            this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
+            tasks.addTask(0, new EntityAISwimming(this));
+            tasks.addTask(1, new AICrimsonLeap(this));
+            tasks.addTask(2, new EntityAIAttackMelee(this, 1.2D, false));
+            tasks.addTask(3, new EntityAIMate(this, 1.0D));
+            tasks.addTask(4, new EntityAITempt(this, 1.2D, false, SEEDS));
+            tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+            tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+            tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+            tasks.addTask(8, new EntityAILookIdle(this));
+            targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         }
         
         @Override
@@ -297,12 +296,12 @@ public abstract class EntityCicaptera extends EntityAnimal {
 		    }
 			
 			@Override
-		    public void updateTask()
+		    public void tick()
 		    {
 				EntityLivingBase leapTarget = leaper.getAttackTarget();
 				if (leapTarget == null || attacked) return;
 				double distance = this.leaper.getDistanceSq(leapTarget.posX, 
-						(leapTarget.getEntityBoundingBox().minY + leapTarget.getEntityBoundingBox().maxY) / 2.0, 
+						(leapTarget.getBoundingBox().minY + leapTarget.getBoundingBox().maxY) / 2.0, 
 						leapTarget.posZ);
 				double range = (double)(this.leaper.width * this.leaper.width + leapTarget.width);
 				
@@ -319,11 +318,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/sandy");
 
     	public Sandy(World worldIn) {
-    		super(worldIn);
+    		super(ModEntities.cicapteraSandy, worldIn);
     	}
 
     	@Override
-    	protected Set<Item> getTemptationItems() {
+    	protected Ingredient getTemptationItems() {
     		return CACTUS;
     	}
 
@@ -343,11 +342,11 @@ public abstract class EntityCicaptera extends EntityAnimal {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/wintry");
 
     	public Wintry(World worldIn) {
-    		super(worldIn);
+    		super(ModEntities.cicapteraLovely, worldIn);
     	}
 
     	@Override
-    	protected Set<Item> getTemptationItems() {
+    	protected Ingredient getTemptationItems() {
     		return SEEDS;
     	}
 
@@ -368,17 +367,17 @@ public abstract class EntityCicaptera extends EntityAnimal {
         public int timeUntilNextEssence;
 
     	public Lovely(World worldIn) {
-    		super(worldIn);
+    		super(ModEntities.cicapteraLovely, worldIn);
     		resetEssenceTime();
     	}
     	
     	@Override
-        public void onLivingUpdate() {
-    		super.onLivingUpdate();
+        public void livingTick() {
+    		super.livingTick();
 
 			if (!world.isRemote && !isChild() && --timeUntilNextEssence <= 0) {
 				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
-				dropItem(ModItems.aphroditeEssence, 1);
+				entityDropItem(ModItems.aphroditeEssence, 1);
 				resetEssenceTime();
 			}
     	}
@@ -389,19 +388,19 @@ public abstract class EntityCicaptera extends EntityAnimal {
     	
 
     	@Override
-		public void readEntityFromNBT(NBTTagCompound compound) {
-			super.readEntityFromNBT(compound);
-			if (compound.hasKey("EssenceTime")) timeUntilNextEssence = compound.getInteger("EssenceTime");
+		public void readAdditional(NBTTagCompound compound) {
+			super.readAdditional(compound);
+			if (compound.hasKey("EssenceTime")) timeUntilNextEssence = compound.getInt("EssenceTime");
 		}
 
 		@Override
-		public void writeEntityToNBT(NBTTagCompound compound) {
-			super.writeEntityToNBT(compound);
-			compound.setInteger("EssenceTime", timeUntilNextEssence);
+		public void writeAdditional(NBTTagCompound compound) {
+			super.writeAdditional(compound);
+			compound.setInt("EssenceTime", timeUntilNextEssence);
 		}
 
     	@Override
-    	protected Set<Item> getTemptationItems() {
+    	protected Ingredient getTemptationItems() {
     		return SUGAR;
     	}
 

@@ -6,14 +6,13 @@ import net.minecraft.item.ItemStack;
 public class ItemFuel extends Item {
 	private int burnTime;
 	
-	public ItemFuel(int burnTime)
-	{
+	public ItemFuel(int burnTime, Item.Properties properties) {
+		super(properties);
 		this.burnTime = burnTime;
 	}
 	
 	@Override
-	public int getItemBurnTime(ItemStack fuel)
-    {
+	public int getBurnTime(ItemStack fuel) {
     	return burnTime;
     }
 

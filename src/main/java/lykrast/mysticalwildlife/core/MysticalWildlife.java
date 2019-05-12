@@ -1,43 +1,36 @@
 package lykrast.mysticalwildlife.core;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.init.Blocks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(modid = MysticalWildlife.MODID, name = MysticalWildlife.NAME, version = MysticalWildlife.VERSION, acceptedMinecraftVersions = "[1.12, 1.13)")
-public class MysticalWildlife
-{
+@Mod(MysticalWildlife.MODID)
+public class MysticalWildlife {
     public static final String MODID = "mysticalwildlife";
-    public static final String NAME = "Mystical Wildlife";
-    public static final String VERSION = "@VERSION@";
-
-	@Instance
-	public static MysticalWildlife instance;
 	
-    public static Logger logger;
-    
-    @SidedProxy(clientSide = "lykrast.mysticalwildlife.core.ClientProxy", serverSide = "lykrast.mysticalwildlife.core.CommonProxy")
-	public static CommonProxy proxy;
-    
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent e) {
-        logger = e.getModLog();
-		proxy.preInit(e);
-	}
+	public static final Logger LOGGER = LogManager.getLogger();
+	
+	public MysticalWildlife() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-	@EventHandler
-	public void init(FMLInitializationEvent e) {
-		proxy.init(e);
+        MinecraftForge.EVENT_BUS.register(this);
 	}
+	
+	private void setup(final FMLCommonSetupEvent event) {
+        // some preinit code
+        LOGGER.info("HELLO FROM PREINIT");
+        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent e) {
-		proxy.postInit(e);
-	}
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        // do something that can only be done on the client
+        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+    }
 }

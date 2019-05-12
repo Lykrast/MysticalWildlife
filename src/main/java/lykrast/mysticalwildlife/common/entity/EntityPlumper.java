@@ -1,11 +1,8 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
-
+import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.Block;
@@ -23,8 +20,8 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -33,31 +30,33 @@ import net.minecraft.world.World;
 
 public class EntityPlumper extends EntityAnimal {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("plumper");
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.FISH, Items.COOKED_FISH);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.COD, Items.COOKED_COD, Items.SALMON, Items.COOKED_SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH);
 	
 	public EntityPlumper(World worldIn)
 	{
-		super(worldIn);
+		super(ModEntities.plumper, worldIn);
         this.setSize(0.9F, 0.6F);
 	}
 
-    protected void initEntityAI()
+    @Override
+	protected void initEntityAI()
     {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
+        tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        tasks.addTask(6, new EntityAIWander(this, 1.0D));
+        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        tasks.addTask(8, new EntityAILookIdle(this));
     }
     
-    protected void applyEntityAttributes()
+    @Override
+	protected void registerAttributes()
     {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.16D);
+        super.registerAttributes();
+        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
+        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.16D);
     }
 
 	@Override
@@ -65,17 +64,20 @@ public class EntityPlumper extends EntityAnimal {
 		return new EntityPlumper(world);
 	}
     
-    protected SoundEvent getAmbientSound()
+    @Override
+	protected SoundEvent getAmbientSound()
     {
         return ModSounds.plumperIdle;
     }
 
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_)
+    @Override
+	protected SoundEvent getHurtSound(DamageSource p_184601_1_)
     {
         return ModSounds.plumperHurt;
     }
 
-    protected SoundEvent getDeathSound()
+    @Override
+	protected SoundEvent getDeathSound()
     {
         return ModSounds.plumperDeath;
     }
@@ -95,8 +97,9 @@ public class EntityPlumper extends EntityAnimal {
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
-    public boolean isBreedingItem(ItemStack stack)
+    @Override
+	public boolean isBreedingItem(ItemStack stack)
     {
-        return TEMPTATION_ITEMS.contains(stack.getItem());
+        return TEMPTATION_ITEMS.test(stack);
     }
 }
