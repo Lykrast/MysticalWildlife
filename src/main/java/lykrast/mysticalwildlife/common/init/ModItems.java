@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemSpawnEgg;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.RegistryEvent;
@@ -69,9 +68,10 @@ public class ModItems {
 		krillCooked = initItem(reg, new ItemFood(4, 0.6F, true, def), "krill_meat_cooked");
 		
 		//Eggs
-		Item.Properties egg = new Item.Properties().group(ItemGroup.MISC);
+		ModEntities.initEntities();
+		
 		for (EntityType<?> e : ModEntities.entities) {
-			initItem(reg, new ItemSpawnEgg(e, 0xffffff, 0xffffff, egg), e.getRegistryName().getPath() + "_spawn_egg");
+			initItem(reg, new ItemSpawnEgg(e, 0xffffff, 0xffffff, def), e.getRegistryName().getPath() + "_spawn_egg");
 		}
 	}
 	

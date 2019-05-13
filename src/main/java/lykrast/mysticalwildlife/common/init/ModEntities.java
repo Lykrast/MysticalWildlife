@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import lykrast.mysticalwildlife.client.render.RenderCicaptera;
 import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
@@ -25,6 +26,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,13 +54,29 @@ public class ModEntities {
 	
 	public static List<EntityType<?>> entities;
 	
-	static {
+	public static void initEntities() {
 		//Need them constructed to register their spawn eggs
+		//So this is called in ModItems
 		entities = new ArrayList<>();
 		
-		vrontausaurus = EntityType.Builder.create(EntityVrontausaurus.class, EntityVrontausaurus::new).tracker(64, 3, true).build("vrontausaurus");
-		vrontausaurus.setRegistryName(MysticalWildlife.MODID, "vrontausaurus");
-		entities.add(vrontausaurus);
+		vrontausaurus = create(EntityVrontausaurus.class, EntityVrontausaurus::new, "vrontausaurus");
+		yagaHog = create(EntityYagaHog.class, EntityYagaHog::new, "yaga_hog");
+		duskLurker = create(EntityDuskLurker.class, EntityDuskLurker::new, "dusk_lurker");
+		cicapteraAzure = create(EntityCicaptera.Azure.class, EntityCicaptera.Azure::new, "cicaptera_azure");
+		cicapteraVerdant = create(EntityCicaptera.Verdant.class, EntityCicaptera.Verdant::new, "cicaptera_verdant");
+		cicapteraCrimson = create(EntityCicaptera.Crimson.class, EntityCicaptera.Crimson::new, "cicaptera_crimson");
+		cicapteraSandy = create(EntityCicaptera.Sandy.class, EntityCicaptera.Sandy::new, "cicaptera_sandy");
+		cicapteraWintry = create(EntityCicaptera.Wintry.class, EntityCicaptera.Wintry::new, "cicaptera_wintry");
+		cicapteraLovely = create(EntityCicaptera.Lovely.class, EntityCicaptera.Lovely::new, "cicaptera_lovely");
+		plumper = create(EntityPlumper.class, EntityPlumper::new, "plumper");
+		krill = create(EntityKrill.class, EntityKrill::new, "krill");
+	}
+	
+	public static <T extends Entity> EntityType<T> create(Class<? extends T> clazz, Function<? super World, ? extends T> factory, String name) {
+		EntityType<T> e = EntityType.Builder.create(clazz, factory).tracker(64, 3, true).build(name);
+		e.setRegistryName(MysticalWildlife.MODID, name);
+		entities.add(e);
+		return e;
 	}
 
 	@SubscribeEvent
@@ -156,10 +174,6 @@ public class ModEntities {
 		set.add(Biomes.FLOWER_FOREST);
 		
 		return set;
-	}
-	
-	public static void register(IForgeRegistry<EntityType<?>> reg, EntityType.Builder<? extends Entity> entry) {
-//		reg.register(entry.build(id));
 	}
 	
 //	public static EntityType.Builder<? extends Entity> create(Class<? extends Entity> entityClass, String name, int colorBack, int colorFront) {
