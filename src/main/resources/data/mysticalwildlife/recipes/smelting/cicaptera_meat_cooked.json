@@ -1,0 +1,7 @@
+{
+	"type": "smelting",
+	"ingredient": { "item": "mysticalwildlife:cicaptera_meat_raw" },
+	"result": "mysticalwildlife:cicaptera_meat_cooked",
+	"experience": 0.35,
+	"cookingtime": 200
+}

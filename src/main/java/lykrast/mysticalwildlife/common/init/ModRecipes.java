@@ -14,15 +14,6 @@ public class ModRecipes {
 //		initBrewing();
 //	}
 	
-	private static void initSmelting() {
-//		GameRegistry.addSmelting(ModItems.vrontausaurusRaw, new ItemStack(ModItems.vrontausaurusCooked), 0.35F);
-//		GameRegistry.addSmelting(ModItems.yagaHogRaw, new ItemStack(ModItems.yagaHogCooked), 0.35F);
-//		GameRegistry.addSmelting(ModItems.duskLurkerRaw, new ItemStack(ModItems.duskLurkerCooked), 0.35F);
-//		GameRegistry.addSmelting(ModItems.cicapteraRaw, new ItemStack(ModItems.cicapteraCooked), 0.35F);
-//		GameRegistry.addSmelting(ModItems.plumperRaw, new ItemStack(ModItems.plumperCooked), 0.35F);
-//		GameRegistry.addSmelting(ModItems.krillRaw, new ItemStack(ModItems.krillCooked), 0.35F);
-	}
-	
 	private static void initBrewing() {
 //		if (ModConfig.potionBreedingEnabled) {
 //			PotionHelper.addMix(PotionTypes.AWKWARD, ModItems.aphroditeEssence, ModPotions.potBreeding);
