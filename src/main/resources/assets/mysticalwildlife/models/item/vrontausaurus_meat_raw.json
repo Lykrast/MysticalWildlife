@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/vrontausaurus_meat_raw"
+        "layer0": "mysticalwildlife:item/vrontausaurus_meat_raw"
     }
 }

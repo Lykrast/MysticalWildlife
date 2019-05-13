@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/vrontausaurus_fur"
+        "layer0": "mysticalwildlife:item/vrontausaurus_fur"
     }
 }

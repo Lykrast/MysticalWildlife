@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/cicaptera_husk_sandy"
+        "layer0": "mysticalwildlife:item/cicaptera_husk_sandy"
     }
 }

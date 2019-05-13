@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/plumper_blubber"
+        "layer0": "mysticalwildlife:item/plumper_blubber"
     }
 }

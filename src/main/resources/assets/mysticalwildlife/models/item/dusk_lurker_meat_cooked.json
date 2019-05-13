@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/dusk_lurker_meat_cooked"
+        "layer0": "mysticalwildlife:item/dusk_lurker_meat_cooked"
     }
 }
