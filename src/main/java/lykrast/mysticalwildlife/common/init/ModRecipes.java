@@ -7,6 +7,7 @@ public class ModRecipes {
 	public static final String meatRaw = "listAllmeatraw",
 			meatCooked = "listAllmeatcooked",
 			leather = "leather";
+	//TODO: Brewing and tags (need forge on those)
 	
 //	@SubscribeEvent
 //	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {

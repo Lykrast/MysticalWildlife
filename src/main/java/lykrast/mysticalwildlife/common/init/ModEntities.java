@@ -50,11 +50,22 @@ public class ModEntities {
 	public static EntityType<EntityPlumper> plumper;
 	public static EntityType<EntityKrill> krill;
 	
-	private static int id = 1;
+	public static List<EntityType<?>> entities;
+	
+	static {
+		//Need them constructed to register their spawn eggs
+		entities = new ArrayList<>();
+		
+		vrontausaurus = EntityType.Builder.create(EntityVrontausaurus.class, EntityVrontausaurus::new).tracker(64, 3, true).build("vrontausaurus");
+		vrontausaurus.setRegistryName(MysticalWildlife.MODID, "vrontausaurus");
+		entities.add(vrontausaurus);
+	}
 
 	@SubscribeEvent
 	public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
 		IForgeRegistry<EntityType<?>> reg = event.getRegistry();
+		
+		entities.forEach(reg::register);
 		
 //		EntityEntryBuilder<?> builder;
 //		builder = create(EntityVrontausaurus.class, "vrontausaurus", 0x515151, 0xd3d3d3);
