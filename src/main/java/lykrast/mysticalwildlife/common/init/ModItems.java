@@ -31,7 +31,7 @@ public class ModItems {
     	Item.Properties def = new Item.Properties().group(ItemGroupMysticalWildlife.INSTANCE);
     	
 		//Tools
-		if (ModConfig.brushEnabled) brush = initItem(reg, new ItemBrush(new Item.Properties().defaultMaxDamage(65).maxStackSize(1).group(ItemGroupMysticalWildlife.INSTANCE)), "brush");
+		if (ModConfig.brushEnabled) brush = initItem(reg, new ItemBrush(new Item.Properties().defaultMaxDamage(65).group(ItemGroupMysticalWildlife.INSTANCE)), "brush");
 		
 		//Monsters
 		vrontausaurusFur = initItem(reg, new Item(def), "vrontausaurus_fur");
