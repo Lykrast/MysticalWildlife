@@ -1,7 +1,6 @@
 package lykrast.mysticalwildlife.common.init;
 
-import lykrast.mysticalwildlife.common.item.ItemBrush;
-import lykrast.mysticalwildlife.common.item.ItemFuel;
+import lykrast.mysticalwildlife.common.item.*;
 import lykrast.mysticalwildlife.common.util.ItemGroupMysticalWildlife;
 import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
@@ -58,7 +57,7 @@ public class ModItems {
 		cicapteraHuskSandy = initItem(reg, new DyeItem(DyeColor.YELLOW, def), "cicaptera_husk_sandy");
 		cicapteraHuskWintry = initItem(reg, new DyeItem(DyeColor.WHITE, def), "cicaptera_husk_wintry");
 		cicapteraHuskLovely = initItem(reg, new DyeItem(DyeColor.PINK, def), "cicaptera_husk_lovely");
-		aphroditeEssence = initItem(reg, new Item(def), "aphrodite_essence");
+		aphroditeEssence = initItem(reg, new ItemAphroditeEssence(def), "aphrodite_essence");
 		
 		plumperBlubber = initItem(reg, new ItemFuel(200, def), "plumper_blubber");
 		plumperRaw = initItem(reg, new Item(defProps().food(food(2, 0.6).meat().build())), "plumper_meat_raw");
