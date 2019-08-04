@@ -1,12 +1,9 @@
 package lykrast.mysticalwildlife.common.init;
 
-import static lykrast.mysticalwildlife.common.util.ModConfig.SPAWNING;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 
 import lykrast.mysticalwildlife.client.render.RenderCicaptera;
 import lykrast.mysticalwildlife.client.render.RenderDuskLurker;
@@ -22,13 +19,12 @@ import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
 import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
@@ -53,29 +49,38 @@ public class ModEntities {
 	public static EntityType<EntityKrill> krill;
 	
 	public static List<EntityType<?>> entities;
+	public static List<Item> eggs;
 	
 	public static void initEntities() {
 		//Need them constructed to register their spawn eggs
 		//So this is called in ModItems
 		entities = new ArrayList<>();
 		
-		vrontausaurus = create(EntityVrontausaurus.class, EntityVrontausaurus::new, "vrontausaurus");
-		yagaHog = create(EntityYagaHog.class, EntityYagaHog::new, "yaga_hog");
-		duskLurker = create(EntityDuskLurker.class, EntityDuskLurker::new, "dusk_lurker");
-		cicapteraAzure = create(EntityCicaptera.Azure.class, EntityCicaptera.Azure::new, "cicaptera_azure");
-		cicapteraVerdant = create(EntityCicaptera.Verdant.class, EntityCicaptera.Verdant::new, "cicaptera_verdant");
-		cicapteraCrimson = create(EntityCicaptera.Crimson.class, EntityCicaptera.Crimson::new, "cicaptera_crimson");
-		cicapteraSandy = create(EntityCicaptera.Sandy.class, EntityCicaptera.Sandy::new, "cicaptera_sandy");
-		cicapteraWintry = create(EntityCicaptera.Wintry.class, EntityCicaptera.Wintry::new, "cicaptera_wintry");
-		cicapteraLovely = create(EntityCicaptera.Lovely.class, EntityCicaptera.Lovely::new, "cicaptera_lovely");
-		plumper = create(EntityPlumper.class, EntityPlumper::new, "plumper");
-		krill = create(EntityKrill.class, EntityKrill::new, "krill");
+		vrontausaurus = create(EntityVrontausaurus::new, "vrontausaurus", 2.2F, 1.4F, 0x515151, 0xd3d3d3);
+		yagaHog = create(EntityYagaHog::new, "yaga_hog", 0.9F, 0.9F, 0x9c7f5f, 0x443225);
+		duskLurker = create(EntityDuskLurker::new, "dusk_lurker", 0.9F, 0.9F, 0x262626, 0x808080);
+		cicapteraAzure = create(EntityCicaptera.Azure::new, "cicaptera_azure", 0.9F, 0.4F, 0x0084d7, 0x262626);
+		cicapteraVerdant = create(EntityCicaptera.Verdant::new, "cicaptera_verdant", 0.9F, 0.4F, 0x4f6028, 0x262626);
+		cicapteraCrimson = create(EntityCicaptera.Crimson::new, "cicaptera_crimson", 0.9F, 0.4F, 0x8b2b29, 0x262626);
+		cicapteraSandy = create(EntityCicaptera.Sandy::new, "cicaptera_sandy", 0.9F, 0.4F, 0xbdb98A, 0x262626);
+		cicapteraWintry = create(EntityCicaptera.Wintry::new, "cicaptera_wintry", 0.9F, 0.4F, 0xcad7d7, 0x262626);
+		cicapteraLovely = create(EntityCicaptera.Lovely::new, "cicaptera_lovely", 0.9F, 0.4F, 0xdf64cf, 0x262626);
+		plumper = create(EntityPlumper::new, "plumper", 0.9F, 0.6F, 0x9a947b, 0x797461);
+		krill = create(EntityKrill::new, "krill", 0.75F, 0.45F, 0xfc6800, 0xf58000);
 	}
 	
-	public static <T extends Entity> EntityType<T> create(Class<? extends T> clazz, Function<? super World, ? extends T> factory, String name) {
-		EntityType<T> e = EntityType.Builder.create(clazz, factory).tracker(64, 3, true).build(name);
+	public static <T extends Entity> EntityType<T> create(EntityType.IFactory<T> factory, String name, float width, float height, int colorPrimary, int colorSecondary) {
+		//Trying vanilla values for tracking range
+		EntityType<T> e = EntityType.Builder.create(factory, EntityClassification.CREATURE).size(width, height).setTrackingRange(4).setUpdateInterval(3).build(name);
 		e.setRegistryName(MysticalWildlife.MODID, name);
+		
 		entities.add(e);
+		
+		//Spawn egg
+		Item egg= new SpawnEggItem(e, colorPrimary, colorSecondary, ModItems.defProps());
+		egg.setRegistryName(MysticalWildlife.MODID, name + "_spawn_egg");
+		eggs.add(egg);
+		
 		return e;
 	}
 
@@ -84,6 +89,9 @@ public class ModEntities {
 		IForgeRegistry<EntityType<?>> reg = event.getRegistry();
 		
 		entities.forEach(reg::register);
+		//Offer the list to the garbage collector now that it has outlive its usefulness
+		entities = null;
+		
 		//TODO: Spawns, egg colors
 		
 //		EntityEntryBuilder<?> builder;
@@ -161,16 +169,6 @@ public class ModEntities {
 		
 		return set;
 	}
-	
-//	public static EntityType.Builder<? extends Entity> create(Class<? extends Entity> entityClass, String name, int colorBack, int colorFront) {
-//		EntityType.Builder<Entity> builder = EntityType.Builder.create()
-//				.entity(entityClass)
-//				.name(MysticalWildlife.MODID + "." + name)
-//				.id(new ResourceLocation(MysticalWildlife.MODID, name), id++)
-//				.tracker(64, 3, true)
-//				.egg(colorBack, colorFront);
-//		return builder;
-//	}
 	
 	@OnlyIn(Dist.CLIENT)
     public static void initModels() {

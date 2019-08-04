@@ -1,174 +1,168 @@
 package lykrast.mysticalwildlife.client.model;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import lykrast.mysticalwildlife.common.entity.EntityKrill;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.model.ModelBase;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.util.math.MathHelper;
 
 /**
  * Krill - Lykrast
  * Created using Tabula 7.0.0
  */
-public class ModelKrill extends ModelBase {
+public class ModelKrill<T extends EntityKrill> extends EntityModel<T> {
 	protected static final float LEG_ANGLE = 2.356194490192345F; //From Tabula
 	protected static final float FOOT_ANGLE = 2.1816615649929116F; //From Tabula
 	protected static final float HEAD_ANGLE = 0.2617993877991494F; //From Tabula
 	protected static final float FORAGE_ANGLE = (float)Math.PI / 3; //60°
 	
-    public ModelRenderer body;
-    public ModelRenderer head;
-    public ModelRenderer legFL;
-    public ModelRenderer legML;
-    public ModelRenderer legBL;
-    public ModelRenderer legFR;
-    public ModelRenderer legMR;
-    public ModelRenderer legBR;
-    public ModelRenderer tentacleUL;
-    public ModelRenderer tentacleUR;
-    public ModelRenderer tentacleLL;
-    public ModelRenderer tentacleLR;
-    public ModelRenderer tentacleM;
-    public ModelRenderer footFL;
-    public ModelRenderer footML;
-    public ModelRenderer footBL;
-    public ModelRenderer footFR;
-    public ModelRenderer footMR;
-    public ModelRenderer footBR;
+    public RendererModel body;
+    public RendererModel head;
+    public RendererModel legFL;
+    public RendererModel legML;
+    public RendererModel legBL;
+    public RendererModel legFR;
+    public RendererModel legMR;
+    public RendererModel legBR;
+    public RendererModel tentacleUL;
+    public RendererModel tentacleUR;
+    public RendererModel tentacleLL;
+    public RendererModel tentacleLR;
+    public RendererModel tentacleM;
+    public RendererModel footFL;
+    public RendererModel footML;
+    public RendererModel footBL;
+    public RendererModel footFR;
+    public RendererModel footMR;
+    public RendererModel footBR;
 
     public ModelKrill() {
-        this.textureWidth = 32;
-        this.textureHeight = 32;
-        this.footML = new ModelRenderer(this, 0, 23);
-        this.footML.setRotationPoint(0.0F, 4.0F, 0.0F);
-        this.footML.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
-        this.setRotateAngle(footML, 0.0F, 0.0F, FOOT_ANGLE);
-        this.footMR = new ModelRenderer(this, 0, 23);
-        this.footMR.mirror = true;
-        this.footMR.setRotationPoint(0.0F, 4.0F, 0.0F);
-        this.footMR.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
-        this.setRotateAngle(footMR, 0.0F, 0.0F, -FOOT_ANGLE);
-        this.legBR = new ModelRenderer(this, 0, 18);
-        this.legBR.mirror = true;
-        this.legBR.setRotationPoint(-1.5F, 19.0F, 6.0F);
-        this.legBR.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
-        this.setRotateAngle(legBR, 0.0F, 0.0F, LEG_ANGLE);
-        this.legBL = new ModelRenderer(this, 0, 18);
-        this.legBL.setRotationPoint(1.5F, 19.0F, 6.0F);
-        this.legBL.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
-        this.setRotateAngle(legBL, 0.0F, 0.0F, -LEG_ANGLE);
-        this.footFR = new ModelRenderer(this, 0, 23);
-        this.footFR.mirror = true;
-        this.footFR.setRotationPoint(0.0F, 4.0F, 0.0F);
-        this.footFR.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
-        this.setRotateAngle(footFR, 0.0F, 0.0F, -FOOT_ANGLE);
-        this.legFR = new ModelRenderer(this, 0, 18);
-        this.legFR.mirror = true;
-        this.legFR.setRotationPoint(-1.5F, 19.0F, 0.0F);
-        this.legFR.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
-        this.setRotateAngle(legFR, 0.0F, 0.0F, LEG_ANGLE);
-        this.tentacleLR = new ModelRenderer(this, 0, 9);
-        this.tentacleLR.setRotationPoint(0.75F, 0.75F, -4.5F);
-        this.tentacleLR.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
-        this.setRotateAngle(tentacleLR, 0.8726646259971648F, 0.0F, 0.0F);
-        this.tentacleM = new ModelRenderer(this, 0, 9);
-        this.tentacleM.setRotationPoint(0.0F, 0.0F, -4.5F);
-        this.tentacleM.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
-        this.setRotateAngle(tentacleM, 0.7853981633974483F, 0.0F, 0.0F);
-        this.footFL = new ModelRenderer(this, 0, 23);
-        this.footFL.setRotationPoint(0.0F, 4.0F, 0.0F);
-        this.footFL.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
-        this.setRotateAngle(footFL, 0.0F, 0.0F, FOOT_ANGLE);
-        this.footBL = new ModelRenderer(this, 0, 23);
-        this.footBL.setRotationPoint(0.0F, 4.0F, 0.0F);
-        this.footBL.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
-        this.setRotateAngle(footBL, 0.0F, 0.0F, FOOT_ANGLE);
-        this.legMR = new ModelRenderer(this, 0, 18);
-        this.legMR.mirror = true;
-        this.legMR.setRotationPoint(-1.5F, 19.0F, 3.0F);
-        this.legMR.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
-        this.setRotateAngle(legMR, 0.0F, 0.0F, LEG_ANGLE);
-        this.body = new ModelRenderer(this, 16, 20);
-        this.body.setRotationPoint(0.0F, 19.0F, 0.0F);
-        this.body.addBox(-2.0F, -1.0F, -2.0F, 4, 8, 4, 0.0F);
-        this.setRotateAngle(body, 1.5707963267948966F, 0.0F, 0.0F);
-        this.head = new ModelRenderer(this, 0, 0);
-        this.head.setRotationPoint(0.0F, 19.0F, -1.0F);
-        this.head.addBox(-1.5F, -1.5F, -5.0F, 3, 3, 6, 0.0F);
-        this.setRotateAngle(head, HEAD_ANGLE, 0.0F, 0.0F);
-        this.legFL = new ModelRenderer(this, 0, 18);
-        this.legFL.setRotationPoint(1.5F, 19.0F, 0.0F);
-        this.legFL.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
-        this.setRotateAngle(legFL, 0.0F, 0.0F, -LEG_ANGLE);
-        this.legML = new ModelRenderer(this, 0, 18);
-        this.legML.setRotationPoint(1.5F, 19.0F, 3.0F);
-        this.legML.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
-        this.setRotateAngle(legML, 0.0F, 0.0F, -LEG_ANGLE);
-        this.footBR = new ModelRenderer(this, 0, 23);
-        this.footBR.mirror = true;
-        this.footBR.setRotationPoint(0.0F, 4.0F, 0.0F);
-        this.footBR.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
-        this.setRotateAngle(footBR, 0.0F, 0.0F, -FOOT_ANGLE);
-        this.tentacleLL = new ModelRenderer(this, 0, 9);
-        this.tentacleLL.setRotationPoint(-0.75F, 0.75F, -4.5F);
-        this.tentacleLL.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
-        this.setRotateAngle(tentacleLL, 0.8726646259971648F, 0.0F, 0.0F);
-        this.tentacleUL = new ModelRenderer(this, 0, 9);
-        this.tentacleUL.setRotationPoint(-0.75F, -0.75F, -4.5F);
-        this.tentacleUL.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
-        this.setRotateAngle(tentacleUL, 0.6981317007977318F, 0.0F, 0.0F);
-        this.tentacleUR = new ModelRenderer(this, 0, 9);
-        this.tentacleUR.setRotationPoint(0.75F, -0.75F, -4.5F);
-        this.tentacleUR.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
-        this.setRotateAngle(tentacleUR, 0.6981317007977318F, 0.0F, 0.0F);
-        this.legML.addChild(this.footML);
-        this.legMR.addChild(this.footMR);
-        this.legFR.addChild(this.footFR);
-        this.head.addChild(this.tentacleLR);
-        this.head.addChild(this.tentacleM);
-        this.legFL.addChild(this.footFL);
-        this.legBL.addChild(this.footBL);
-        this.legBR.addChild(this.footBR);
-        this.head.addChild(this.tentacleLL);
-        this.head.addChild(this.tentacleUL);
-        this.head.addChild(this.tentacleUR);
+        textureWidth = 32;
+        textureHeight = 32;
+        footML = new RendererModel(this, 0, 23);
+        footML.setRotationPoint(0.0F, 4.0F, 0.0F);
+        footML.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
+        setRotateAngle(footML, 0.0F, 0.0F, FOOT_ANGLE);
+        footMR = new RendererModel(this, 0, 23);
+        footMR.mirror = true;
+        footMR.setRotationPoint(0.0F, 4.0F, 0.0F);
+        footMR.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
+        setRotateAngle(footMR, 0.0F, 0.0F, -FOOT_ANGLE);
+        legBR = new RendererModel(this, 0, 18);
+        legBR.mirror = true;
+        legBR.setRotationPoint(-1.5F, 19.0F, 6.0F);
+        legBR.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
+        setRotateAngle(legBR, 0.0F, 0.0F, LEG_ANGLE);
+        legBL = new RendererModel(this, 0, 18);
+        legBL.setRotationPoint(1.5F, 19.0F, 6.0F);
+        legBL.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
+        setRotateAngle(legBL, 0.0F, 0.0F, -LEG_ANGLE);
+        footFR = new RendererModel(this, 0, 23);
+        footFR.mirror = true;
+        footFR.setRotationPoint(0.0F, 4.0F, 0.0F);
+        footFR.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
+        setRotateAngle(footFR, 0.0F, 0.0F, -FOOT_ANGLE);
+        legFR = new RendererModel(this, 0, 18);
+        legFR.mirror = true;
+        legFR.setRotationPoint(-1.5F, 19.0F, 0.0F);
+        legFR.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
+        setRotateAngle(legFR, 0.0F, 0.0F, LEG_ANGLE);
+        tentacleLR = new RendererModel(this, 0, 9);
+        tentacleLR.setRotationPoint(0.75F, 0.75F, -4.5F);
+        tentacleLR.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
+        setRotateAngle(tentacleLR, 0.8726646259971648F, 0.0F, 0.0F);
+        tentacleM = new RendererModel(this, 0, 9);
+        tentacleM.setRotationPoint(0.0F, 0.0F, -4.5F);
+        tentacleM.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
+        setRotateAngle(tentacleM, 0.7853981633974483F, 0.0F, 0.0F);
+        footFL = new RendererModel(this, 0, 23);
+        footFL.setRotationPoint(0.0F, 4.0F, 0.0F);
+        footFL.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
+        setRotateAngle(footFL, 0.0F, 0.0F, FOOT_ANGLE);
+        footBL = new RendererModel(this, 0, 23);
+        footBL.setRotationPoint(0.0F, 4.0F, 0.0F);
+        footBL.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
+        setRotateAngle(footBL, 0.0F, 0.0F, FOOT_ANGLE);
+        legMR = new RendererModel(this, 0, 18);
+        legMR.mirror = true;
+        legMR.setRotationPoint(-1.5F, 19.0F, 3.0F);
+        legMR.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
+        setRotateAngle(legMR, 0.0F, 0.0F, LEG_ANGLE);
+        body = new RendererModel(this, 16, 20);
+        body.setRotationPoint(0.0F, 19.0F, 0.0F);
+        body.addBox(-2.0F, -1.0F, -2.0F, 4, 8, 4, 0.0F);
+        setRotateAngle(body, 1.5707963267948966F, 0.0F, 0.0F);
+        head = new RendererModel(this, 0, 0);
+        head.setRotationPoint(0.0F, 19.0F, -1.0F);
+        head.addBox(-1.5F, -1.5F, -5.0F, 3, 3, 6, 0.0F);
+        setRotateAngle(head, HEAD_ANGLE, 0.0F, 0.0F);
+        legFL = new RendererModel(this, 0, 18);
+        legFL.setRotationPoint(1.5F, 19.0F, 0.0F);
+        legFL.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
+        setRotateAngle(legFL, 0.0F, 0.0F, -LEG_ANGLE);
+        legML = new RendererModel(this, 0, 18);
+        legML.setRotationPoint(1.5F, 19.0F, 3.0F);
+        legML.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, -0.1F);
+        setRotateAngle(legML, 0.0F, 0.0F, -LEG_ANGLE);
+        footBR = new RendererModel(this, 0, 23);
+        footBR.mirror = true;
+        footBR.setRotationPoint(0.0F, 4.0F, 0.0F);
+        footBR.addBox(-0.5F, 0.0F, -0.5F, 1, 8, 1, 0.0F);
+        setRotateAngle(footBR, 0.0F, 0.0F, -FOOT_ANGLE);
+        tentacleLL = new RendererModel(this, 0, 9);
+        tentacleLL.setRotationPoint(-0.75F, 0.75F, -4.5F);
+        tentacleLL.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
+        setRotateAngle(tentacleLL, 0.8726646259971648F, 0.0F, 0.0F);
+        tentacleUL = new RendererModel(this, 0, 9);
+        tentacleUL.setRotationPoint(-0.75F, -0.75F, -4.5F);
+        tentacleUL.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
+        setRotateAngle(tentacleUL, 0.6981317007977318F, 0.0F, 0.0F);
+        tentacleUR = new RendererModel(this, 0, 9);
+        tentacleUR.setRotationPoint(0.75F, -0.75F, -4.5F);
+        tentacleUR.addBox(-0.5F, -0.5F, -3.0F, 1, 1, 3, 0.0F);
+        setRotateAngle(tentacleUR, 0.6981317007977318F, 0.0F, 0.0F);
+        legML.addChild(footML);
+        legMR.addChild(footMR);
+        legFR.addChild(footFR);
+        head.addChild(tentacleLR);
+        head.addChild(tentacleM);
+        legFL.addChild(footFL);
+        legBL.addChild(footBL);
+        legBR.addChild(footBR);
+        head.addChild(tentacleLL);
+        head.addChild(tentacleUL);
+        head.addChild(tentacleUR);
     }
     
     private float headRotateX = -1;
 
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
+
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
-        this.head.rotateAngleX = headRotateX <= 0 ? headPitch * 0.017453292F + HEAD_ANGLE : headRotateX;
-        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+	public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+        head.rotateAngleX = headRotateX <= 0 ? headPitch * 0.017453292F + HEAD_ANGLE : headRotateX;
+        head.rotateAngleY = netHeadYaw * 0.017453292F;
         
         float forwards = MathHelper.cos(limbSwing) * 0.523599F * limbSwingAmount;
         float backwards = -forwards;
         
-        this.legFL.rotateAngleX = forwards;
-        this.legFL.rotateAngleY = backwards;
-        this.legML.rotateAngleX = backwards;
-        this.legML.rotateAngleY = forwards;
-        this.legBL.rotateAngleX = forwards;
-        this.legBL.rotateAngleY = backwards;
+        legFL.rotateAngleX = forwards;
+        legFL.rotateAngleY = backwards;
+        legML.rotateAngleX = backwards;
+        legML.rotateAngleY = forwards;
+        legBL.rotateAngleX = forwards;
+        legBL.rotateAngleY = backwards;
         
-        this.legFR.rotateAngleX = backwards;
-        this.legFR.rotateAngleY = forwards;
-        this.legMR.rotateAngleX = forwards;
-        this.legMR.rotateAngleY = backwards;
-        this.legBR.rotateAngleX = backwards;
-        this.legBR.rotateAngleY = forwards;
+        legFR.rotateAngleX = backwards;
+        legFR.rotateAngleY = forwards;
+        legMR.rotateAngleX = forwards;
+        legMR.rotateAngleY = backwards;
+        legBR.rotateAngleX = backwards;
+        legBR.rotateAngleY = forwards;
     }
     
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+    public void setLivingAnimations(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
 
     	int timer = ((EntityKrill)entitylivingbaseIn).forageTimer;
@@ -185,43 +179,43 @@ public class ModelKrill extends ModelBase {
     }
 
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+    public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-        if (this.isChild)
+        if (isChild)
         {
             GlStateManager.pushMatrix();
             GlStateManager.scalef(0.5F, 0.5F, 0.5F);
             GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
-            this.legBR.render(scale);
-            this.legBL.render(scale);
-            this.legFR.render(scale);
-            this.legMR.render(scale);
-            this.body.render(scale);
-            this.head.render(scale);
-            this.legFL.render(scale);
-            this.legML.render(scale);
+            legBR.render(scale);
+            legBL.render(scale);
+            legFR.render(scale);
+            legMR.render(scale);
+            body.render(scale);
+            head.render(scale);
+            legFL.render(scale);
+            legML.render(scale);
             GlStateManager.popMatrix();
         }
         else
         {
-            this.legBR.render(scale);
-            this.legBL.render(scale);
-            this.legFR.render(scale);
-            this.legMR.render(scale);
-            this.body.render(scale);
-            this.head.render(scale);
-            this.legFL.render(scale);
-            this.legML.render(scale);
+            legBR.render(scale);
+            legBL.render(scale);
+            legFR.render(scale);
+            legMR.render(scale);
+            body.render(scale);
+            head.render(scale);
+            legFL.render(scale);
+            legML.render(scale);
         }
     }
 
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+    public void setRotateAngle(RendererModel RendererModel, float x, float y, float z) {
+        RendererModel.rotateAngleX = x;
+        RendererModel.rotateAngleY = y;
+        RendererModel.rotateAngleZ = z;
     }
 }

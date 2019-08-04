@@ -5,38 +5,39 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import lykrast.mysticalwildlife.common.init.ModEntities;
-import lykrast.mysticalwildlife.common.init.ModPotions;
 import lykrast.mysticalwildlife.common.init.ModSounds;
-import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootParameterSets;
+import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.LootTable;
 
 public class EntityVrontausaurus extends EntityFurzard {
@@ -44,25 +45,22 @@ public class EntityVrontausaurus extends EntityFurzard {
     public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_vrontausaurus");
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.BEEF, Items.COOKED_BEEF, Items.MUTTON, Items.COOKED_MUTTON);
 	
-	public EntityVrontausaurus(World worldIn)
-	{
+	public EntityVrontausaurus(EntityType<? extends EntityVrontausaurus> type, World worldIn) {
 		super(ModEntities.vrontausaurus, worldIn);
-        this.setSize(2.2F, 1.4F);
 	}
 
     @Override
-	protected void initEntityAI()
-    {
-        tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new AIPanic(1.2D));
-        tasks.addTask(2, new AIAttackMeleeShortrange(this, 1.2D, false));
-        tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        tasks.addTask(4, new AITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        tasks.addTask(8, new EntityAILookIdle(this));
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+	protected void registerGoals() {
+        goalSelector.addGoal(0, new SwimGoal(this));
+        goalSelector.addGoal(1, new AIPanic(this, 1.2D));
+        goalSelector.addGoal(2, new AIAttackMeleeShortrange(this, 1.2D, false));
+        goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
+        goalSelector.addGoal(4, new AITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
+        goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
     
     @Override
@@ -74,43 +72,9 @@ public class EntityVrontausaurus extends EntityFurzard {
     }
     
     @Override
-    public boolean attackEntityAsMob(Entity entityIn)
-    {
-        if (entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F))
-        {
-            if (entityIn instanceof EntityLivingBase)
-            {
-                int i = -1;
-
-                if (this.world.getDifficulty() == EnumDifficulty.NORMAL)
-                {
-                    i = 0;
-                }
-                else if (this.world.getDifficulty() == EnumDifficulty.HARD)
-                {
-                    i = 1;
-                }
-
-                if (i >= 0)
-                {
-                    playSound(ModSounds.spark, 1.0F, 1.0F);
-                    ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(ModPotions.shocked, 60, i));
-                }
-            }
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    @Override
 	protected void updateAITasks()
     {
-    	if (world.getDifficulty() == EnumDifficulty.PEACEFUL)
-    	{
+    	if (world.getDifficulty() == Difficulty.PEACEFUL) {
         	if (this.getAttackTarget() != null) this.setAttackTarget(null);
         	if (this.getRevengeTarget() != null) this.setRevengeTarget(null);
     	}
@@ -119,12 +83,12 @@ public class EntityVrontausaurus extends EntityFurzard {
     }
 
 	@Override
-	public boolean isBrushable(EntityPlayer player, ItemStack item, BlockPos pos) {
+	public boolean isBrushable(PlayerEntity player, ItemStack item, BlockPos pos) {
 		return !isChild() && isBrushable() && getAttackTarget() == null;
 	}
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, BlockPos pos, int fortune) {
+	public List<ItemStack> onBrushed(PlayerEntity player, ItemStack item, BlockPos pos) {
 		if (rand.nextInt(4) == 0) player.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 2.0F);
 
         playSound(ModSounds.brushing, 1.0F, 1.0F);
@@ -133,35 +97,33 @@ public class EntityVrontausaurus extends EntityFurzard {
         if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
         
     	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
-		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
+        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this));
+        
+		return loottable.generate(builder.build(LootParameterSets.ENTITY));
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityVrontausaurus(world);
+	public AgeableEntity createChild(AgeableEntity ageable) {
+		return ModEntities.vrontausaurus.create(world);
 	}
 
 	@Override
-    protected SoundEvent getAmbientSound()
-    {
-        return ModSounds.lizardIdle;
-    }
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.lizardIdle;
+	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_)
-    {
-        return ModSounds.lizardHurt;
-    }
+	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+		return ModSounds.lizardHurt;
+	}
 
 	@Override
-    protected SoundEvent getDeathSound()
-    {
-        return ModSounds.lizardDeath;
-    }
+	protected SoundEvent getDeathSound() {
+		return ModSounds.lizardDeath;
+	}
 
     @Override
-	protected void playStepSound(BlockPos pos, IBlockState blockIn)
-    {
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
         this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0F, 1.0F);
     }
 
@@ -170,61 +132,44 @@ public class EntityVrontausaurus extends EntityFurzard {
     protected ResourceLocation getLootTable() {
         return LOOT;
     }
-
-    /**
-     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-     * the animal type)
-     */
+	
     @Override
-	public boolean isBreedingItem(ItemStack stack)
-    {
-    	if (!world.isRaining()) return false;
-        return TEMPTATION_ITEMS.test(stack);
-    }
+	public boolean isBreedingItem(ItemStack stack) {
+		if (!world.isRaining()) return false;
+		return TEMPTATION_ITEMS.test(stack);
+	}
     
-    class AIPanic extends EntityAIPanic
-    {
-        public AIPanic(double speed)
-        {
-            super(EntityVrontausaurus.this, speed);
+    static class AIPanic extends PanicGoal {
+        public AIPanic(CreatureEntity creature, double speed) {
+            super(creature, speed);
         }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
+        
         @Override
-		public boolean shouldExecute()
-        {
-            return !EntityVrontausaurus.this.isChild() && !EntityVrontausaurus.this.isBurning() ? false : super.shouldExecute();
+		public boolean shouldExecute() {
+            return !creature.isChild() && !creature.isBurning() ? false : super.shouldExecute();
         }
     }
     
-    private static class AIAttackMeleeShortrange extends EntityAIAttackMelee {
-
-		public AIAttackMeleeShortrange(EntityCreature creature, double speedIn, boolean useLongMemory) {
+    private static class AIAttackMeleeShortrange extends MeleeAttackGoal {
+		public AIAttackMeleeShortrange(CreatureEntity creature, double speedIn, boolean useLongMemory) {
 			super(creature, speedIn, useLongMemory);
 		}
 
 		@Override
-        protected double getAttackReachSqr(EntityLivingBase attackTarget)
-        {
-            return (double)(9.0F + attackTarget.width);
+        protected double getAttackReachSqr(LivingEntity attackTarget) {
+            return (double)(9.0F + attackTarget.getWidth());
         }
     	
     }
     
-    private static class AITempt extends EntityAITempt {
-    	//Private in the super class, damn it
-    	private EntityCreature tempted;
-    	
-		public AITempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Ingredient temptItemIn) {
+    private static class AITempt extends TemptGoal {
+		public AITempt(CreatureEntity temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Ingredient temptItemIn) {
 			super(temptedEntityIn, speedIn, scaredByPlayerMovementIn, temptItemIn);
-			tempted = temptedEntityIn;
 		}
 
 		@Override
 	    public boolean shouldExecute() {
-			if (!tempted.world.isRaining()) return false;
+			if (!creature.world.isRaining()) return false;
 			return super.shouldExecute();
 		}
     }

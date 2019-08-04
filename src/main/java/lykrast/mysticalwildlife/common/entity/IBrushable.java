@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
@@ -23,7 +23,7 @@ public interface IBrushable {
      * @param pos Block's position in world.
      * @return If this is brushable, and onBrushed should be called.
      */
-    boolean isBrushable(@Nullable EntityPlayer player, @Nonnull ItemStack item, BlockPos pos);
+    boolean isBrushable(@Nullable PlayerEntity player, @Nonnull ItemStack item, BlockPos pos);
 
     /**
      * Performs the brush function on this object.
@@ -41,9 +41,8 @@ public interface IBrushable {
      * @param item The ItemStack that is being used, may be empty.
      * @param world The current world.
      * @param pos If this is a block, the block's position in world.
-     * @param fortune The fortune level of the shears being used.
      * @return A List containing all items from this shearing. May be empty.
      */
     @Nonnull
-    List<ItemStack> onBrushed(@Nullable EntityPlayer player, @Nonnull ItemStack item, BlockPos pos, int fortune);
+    List<ItemStack> onBrushed(@Nullable PlayerEntity player, @Nonnull ItemStack item, BlockPos pos);
 }

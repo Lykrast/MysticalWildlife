@@ -2,19 +2,19 @@ package lykrast.mysticalwildlife.client.render;
 
 import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.model.ModelPig;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.PigModel;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderYagaHog extends RenderLiving<EntityYagaHog> {
+public class RenderYagaHog extends MobRenderer<EntityYagaHog, PigModel<EntityYagaHog>> {
 	private static final ResourceLocation NORMAL = ResourceUtil.getEntityTexture("yaga_hog"),
 			DIRTY = ResourceUtil.getEntityTexture("yaga_hog_dirt");
 	
-	public RenderYagaHog(RenderManager renderManagerIn)
+	public RenderYagaHog(EntityRendererManager renderManagerIn)
 	{
-		super(renderManagerIn, new ModelPig(), 0.7F);
-        this.addLayer(new LayerEyesYagaHog(this));
+		super(renderManagerIn, new PigModel<>(), 0.7F);
+        addLayer(new LayerEyesYagaHog<>(this));
 	}
 
     @Override

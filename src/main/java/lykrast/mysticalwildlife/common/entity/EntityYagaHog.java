@@ -5,53 +5,54 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import lykrast.mysticalwildlife.common.init.ModEntities;
-import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityAreaEffectCloud;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.AreaEffectCloudEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootParameterSets;
+import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.LootTable;
 
-public class EntityYagaHog extends EntityAnimal implements IBrushable {
+public class EntityYagaHog extends AnimalEntity implements IBrushable {
     public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("yaga_hog");
     public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_yaga_hog");
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.BREAD);
     
-    private static final DataParameter<Boolean> DIRTY = EntityDataManager.<Boolean>createKey(EntityAgeable.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DIRTY = EntityDataManager.<Boolean>createKey(EntityYagaHog.class, DataSerializers.BOOLEAN);
     private int dirtTime;
 	
-	public EntityYagaHog(World worldIn)
-	{
+	public EntityYagaHog(EntityType<? extends EntityYagaHog> type, World worldIn) {
 		super(ModEntities.yagaHog, worldIn);
-        this.setSize(0.9F, 0.9F);
 	}
 
 	@Override
@@ -61,21 +62,19 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     }
 
 	@Override
-    protected void initEntityAI()
-    {
-        tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        tasks.addTask(4, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        tasks.addTask(8, new EntityAILookIdle(this));
+    protected void registerGoals() {
+		goalSelector.addGoal(0, new SwimGoal(this));
+		goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+		goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
+		goalSelector.addGoal(4, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
+		goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
+		goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		goalSelector.addGoal(8, new LookRandomlyGoal(this));
     }
 
 	@Override
-    protected void registerAttributes()
-    {
+    protected void registerAttributes() {
         super.registerAttributes();
         getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
         getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
@@ -86,8 +85,7 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
 		return world.isRemote ? ((Boolean)getDataManager().get(DIRTY)).booleanValue() : dirtTime <= 0;
 	}
 	
-    public void setDirtTimer(int timer)
-    {
+    public void setDirtTimer(int timer) {
         getDataManager().set(DIRTY, Boolean.valueOf(timer <= 0));
         this.dirtTime = timer;
     }
@@ -102,18 +100,14 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     }
 
     @Override
-    public boolean isPotionApplicable(PotionEffect potioneffectIn)
-    {
-    	Potion potion = potioneffectIn.getPotion();
-    	if (potion == MobEffects.POISON) return false;
-
-    	return super.isPotionApplicable(potioneffectIn);
+    public boolean isPotionApplicable(EffectInstance potioneffectIn) {
+    	if (potioneffectIn.getPotion() == Effects.POISON) return false;
+    	else return super.isPotionApplicable(potioneffectIn);
     }
     
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-    	if (!world.isRemote && amount > 0)
-    	{
+    	if (!world.isRemote && amount > 0) {
     		int amplifier = (int)Math.floor(((amount / 10.0F) * 3.0F));
     		amplifier = MathHelper.clamp(amplifier, 0, 3);
     		
@@ -123,38 +117,40 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     	return super.attackEntityFrom(source, amount);
     }
 
-    private void spawnLingeringCloud(int amplifier)
-    {
-    	EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
-    	entityareaeffectcloud.setRadius(2.5F);
-    	entityareaeffectcloud.setRadiusOnUse(-0.5F);
-    	entityareaeffectcloud.setWaitTime(10);
-    	entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration() / 2);
-    	entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float)entityareaeffectcloud.getDuration());
-    	
-    	entityareaeffectcloud.addEffect(new PotionEffect(MobEffects.POISON, 200, amplifier));
+    private void spawnLingeringCloud(int amplifier) {
+    	//Adapted from the Creeper
+		AreaEffectCloudEntity areaeffectcloudentity = new AreaEffectCloudEntity(world, posX, posY, posZ);
+		areaeffectcloudentity.setRadius(2.5F);
+		areaeffectcloudentity.setRadiusOnUse(-0.5F);
+		areaeffectcloudentity.setWaitTime(10);
+		areaeffectcloudentity.setDuration(areaeffectcloudentity.getDuration() / 2);
+		areaeffectcloudentity.setRadiusPerTick(-areaeffectcloudentity.getRadius() / (float) areaeffectcloudentity.getDuration());
 
-    	this.world.spawnEntity(entityareaeffectcloud);
+		areaeffectcloudentity.addEffect(new EffectInstance(Effects.POISON, 200, amplifier));
+
+		world.addEntity(areaeffectcloudentity);
     }
 
 	@Override
-	public boolean isBrushable(EntityPlayer player, ItemStack item, BlockPos pos) {
+	public boolean isBrushable(PlayerEntity player, ItemStack item, BlockPos pos) {
 		return !isChild() && isDirty();
 	}
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, BlockPos pos, int fortune) {		
+	public List<ItemStack> onBrushed(PlayerEntity player, ItemStack item, BlockPos pos) {		
         playSound(SoundEvents.ENTITY_SLIME_JUMP, 1.0F, 1.0F);
         
         if (rand.nextInt(3) == 0) setDirtTimer(3600 + rand.nextInt(2401));
         
     	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
-		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
+        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this));
+        
+		return loottable.generate(builder.build(LootParameterSets.ENTITY));
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityYagaHog(world);
+	public AgeableEntity createChild(AgeableEntity ageable) {
+		return ModEntities.yagaHog.create(world);
 	}
 
 	@Override
@@ -176,19 +172,19 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     }
 
 	@Override
-    protected void playStepSound(BlockPos pos, IBlockState blockIn)
+    protected void playStepSound(BlockPos pos, BlockState blockIn)
     {
         this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
     }
 
 	@Override
-    public void writeAdditional(NBTTagCompound compound) {
+    public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.setInt("DirtTimer", dirtTime);
+        compound.putInt("DirtTimer", dirtTime);
     }
 
 	@Override
-    public void readAdditional(NBTTagCompound compound) {
+    public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
         setDirtTimer(compound.getInt("DirtTimer"));
     }
@@ -199,13 +195,8 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
         return LOOT;
     }
 
-    /**
-     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-     * the animal type)
-     */
 	@Override
-    public boolean isBreedingItem(ItemStack stack)
-    {
-        return TEMPTATION_ITEMS.test(stack);
-    }
+	public boolean isBreedingItem(ItemStack stack) {
+		return TEMPTATION_ITEMS.test(stack);
+	}
 }

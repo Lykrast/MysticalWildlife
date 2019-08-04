@@ -7,32 +7,36 @@ import javax.annotation.Nullable;
 import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModSounds;
-import lykrast.mysticalwildlife.common.util.LootUtil;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.Particles;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootParameterSets;
+import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,22 +46,21 @@ public class EntityDuskLurker extends EntityFurzard {
     public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_dusk_lurker");
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.RABBIT, Items.COOKED_RABBIT, ModItems.cicapteraRaw, ModItems.cicapteraCooked);
 	
-	public EntityDuskLurker(World worldIn) {
+	public EntityDuskLurker(EntityType<? extends EntityDuskLurker> type, World worldIn) {
 		super(ModEntities.duskLurker, worldIn);
-        this.setSize(0.9F, 0.9F);
 	}
 	
     @Override
-	protected void initEntityAI() {
-        tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        tasks.addTask(3, new AITempt(this, 0.8D, false, TEMPTATION_ITEMS));
-        tasks.addTask(4, new EntityAIAvoidEntity<EntityPlayer>(this, EntityPlayer.class, 10.0F, 1.0D, 1.25D));
-        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 24.0F, 1.0F));
-        tasks.addTask(8, new EntityAILookIdle(this));
+	protected void registerGoals() {
+    	goalSelector.addGoal(0, new SwimGoal(this));
+    	goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+        goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
+        goalSelector.addGoal(4, new AITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+        goalSelector.addGoal(5, new AvoidEntityGoal<>(this, PlayerEntity.class, 10.0F, 1.0D, 1.25D));
+        goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
+        goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 24.0F, 1.0F));
+        goalSelector.addGoal(9, new LookRandomlyGoal(this));
     }
     
     @Override
@@ -70,10 +73,10 @@ public class EntityDuskLurker extends EntityFurzard {
     private void spawnAshParticles() {
     	for (int i = 0; i < 10; ++i)
     	{
-    		this.world.spawnParticle(Particles.LARGE_SMOKE, 
-    				this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
-    				this.posY + this.rand.nextDouble() * (double)this.height, 
-    				this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 
+    		world.addParticle(ParticleTypes.LARGE_SMOKE, 
+    				posX + (rand.nextDouble() - 0.5D) * (double)getWidth(), 
+    				posY + rand.nextDouble() * (double)getHeight(), 
+    				posZ + (rand.nextDouble() - 0.5D) * (double)getWidth(), 
     				0.0D, 0.0D, 0.0D);
     	}
     }
@@ -86,7 +89,7 @@ public class EntityDuskLurker extends EntityFurzard {
     }
 
 	@Override
-	public List<ItemStack> onBrushed(EntityPlayer player, ItemStack item, BlockPos pos, int fortune) {		
+	public List<ItemStack> onBrushed(PlayerEntity player, ItemStack item, BlockPos pos) {		
 		//Spawns the particles
         this.world.setEntityState(this, (byte)10);
         playSound(ModSounds.brushing, 1.0F, 1.0F);
@@ -94,7 +97,9 @@ public class EntityDuskLurker extends EntityFurzard {
         if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
         
     	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
-		return loottable.generateLootForPools(rand, LootUtil.getBrushingContext(this, player, fortune));
+        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this));
+        
+		return loottable.generate(builder.build(LootParameterSets.ENTITY));
 	}
 
     /**
@@ -108,32 +113,29 @@ public class EntityDuskLurker extends EntityFurzard {
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityDuskLurker(world);
+	public AgeableEntity createChild(AgeableEntity ageable) {
+		return ModEntities.duskLurker.create(world);
 	}
 
 	@Override
-    protected SoundEvent getAmbientSound()
-    {
-        return ModSounds.lizardIdle;
-    }
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.lizardIdle;
+	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_)
-    {
-        return ModSounds.lizardHurt;
-    }
+	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+		return ModSounds.lizardHurt;
+	}
 
 	@Override
-    protected SoundEvent getDeathSound()
-    {
-        return ModSounds.lizardDeath;
-    }
+	protected SoundEvent getDeathSound() {
+		return ModSounds.lizardDeath;
+	}
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
-    {
-        this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
-    }
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
+	}
 
 	@Override
     @Nullable
@@ -152,18 +154,14 @@ public class EntityDuskLurker extends EntityFurzard {
         return TEMPTATION_ITEMS.test(stack);
     }
     
-    private static class AITempt extends EntityAITempt {
-    	//Private in the super class, damn it
-    	private EntityCreature tempted;
-    	
-		public AITempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Ingredient temptItemIn) {
+    private static class AITempt extends TemptGoal {
+		public AITempt(CreatureEntity temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Ingredient temptItemIn) {
 			super(temptedEntityIn, speedIn, scaredByPlayerMovementIn, temptItemIn);
-			tempted = temptedEntityIn;
 		}
 
 		@Override
 	    public boolean shouldExecute() {
-			if (tempted.world.isDaytime()) return false;
+			if (creature.world.isDaytime()) return false;
 			return super.shouldExecute();
 		}
     }

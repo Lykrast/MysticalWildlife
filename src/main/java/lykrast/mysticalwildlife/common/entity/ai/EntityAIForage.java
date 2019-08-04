@@ -1,22 +1,24 @@
 package lykrast.mysticalwildlife.common.entity.ai;
 
+import java.util.EnumSet;
+
 import lykrast.mysticalwildlife.common.util.ModConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityAIForage extends EntityAIBase {
-    protected final EntityLiving forager;
+public class EntityAIForage extends Goal {
+    protected final MobEntity forager;
     protected final World world;
     protected int timer;
     
-    public EntityAIForage(EntityLiving forager) {
+    public EntityAIForage(MobEntity forager) {
         this.forager = forager;
         this.world = forager.world;
-        this.setMutexBits(7);
+        this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
     }
     
     @Override
