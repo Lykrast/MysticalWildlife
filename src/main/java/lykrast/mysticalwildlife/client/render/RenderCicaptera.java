@@ -8,10 +8,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public abstract class RenderCicaptera extends RenderLiving<EntityCicaptera> {	
 	public RenderCicaptera(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelCicaptera(), 0.4F);

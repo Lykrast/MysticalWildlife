@@ -1,19 +1,16 @@
 package lykrast.mysticalwildlife.client.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.model.ModelBase;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * cicaptera - Lykrast
  * Created using Tabula 7.0.0
  */
-@SideOnly(Side.CLIENT)
 public class ModelCicaptera extends ModelBase {
 	protected static final float PI_HALF = ((float)Math.PI / 2F); //90°
 	protected static final float PI_THIRD = ((float)Math.PI / 3F); //60°
@@ -91,7 +88,8 @@ public class ModelCicaptera extends ModelBase {
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+    @Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         
@@ -131,8 +129,8 @@ public class ModelCicaptera extends ModelBase {
 
         if (this.isChild) {
             GlStateManager.pushMatrix();
-            GlStateManager.scale(0.5F, 0.5F, 0.5F);
-            GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+            GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
             this.head.render(scale);
             this.body.render(scale);
             GlStateManager.popMatrix();

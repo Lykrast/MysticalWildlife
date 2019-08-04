@@ -17,20 +17,16 @@ public class PotionGeneric extends Potion {
 	}
 
 	@Override
-	public int getStatusIconIndex()
-	{
-		Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
+	public int getStatusIconIndex() {
+		Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
 		return super.getStatusIconIndex();
 	}
 
 	@Override
-	public void performEffect(EntityLivingBase entity, int amplifier)
-    {
-    }
+	public void performEffect(EntityLivingBase entity, int amplifier) {}
 	
 	@Override
-    public boolean isReady(int duration, int amplifier)
-    {
+    public boolean isReady(int duration, int amplifier) {
 		if (tickrate < 0) return false;
 		
 		return tickrate <= 1 || duration % tickrate == 0;

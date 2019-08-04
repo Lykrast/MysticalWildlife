@@ -6,10 +6,7 @@ import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class RenderKrill extends RenderLiving<EntityKrill> {
 	private static final ResourceLocation TEXTURES = ResourceUtil.getEntityTexture("krill");
 	
@@ -17,7 +14,8 @@ public class RenderKrill extends RenderLiving<EntityKrill> {
 		super(renderManagerIn, new ModelKrill(), 0.45F);
 	}
 
-    protected float getDeathMaxRotation(EntityKrill entityLivingBaseIn) {
+    @Override
+	protected float getDeathMaxRotation(EntityKrill entityLivingBaseIn) {
         return 180.0F;
     }
 

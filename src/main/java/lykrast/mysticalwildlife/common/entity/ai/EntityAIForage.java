@@ -52,7 +52,7 @@ public class EntityAIForage extends EntityAIBase {
     }
     
     @Override
-    public void updateTask() {
+    public void tick() {
         timer = Math.max(0, timer - 1);
 
         if (timer == 4)

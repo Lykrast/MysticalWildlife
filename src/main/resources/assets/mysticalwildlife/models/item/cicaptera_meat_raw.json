@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/cicaptera_meat_raw"
+        "layer0": "mysticalwildlife:item/cicaptera_meat_raw"
     }
 }

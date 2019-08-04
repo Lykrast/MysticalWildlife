@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lykrast.mysticalwildlife.common.entity.IBrushable;
 import lykrast.mysticalwildlife.common.init.ModSounds;
+import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -17,14 +18,13 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MysticalWildlife.MODID)
 public class ItemBrush extends Item {
-    public ItemBrush(int damage) {
-        this.setMaxStackSize(1);
-        this.setMaxDamage(damage);
+    public ItemBrush(Item.Properties properties) {
+    	super(properties);
     }
 
 	@SubscribeEvent
@@ -47,9 +47,9 @@ public class ItemBrush extends Item {
         if (entity instanceof IBrushable) {
         	IBrushable target = (IBrushable)entity;
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ);
-            if (target.isBrushable(player, itemstack, entity.world, pos)) {
+            if (target.isBrushable(player, itemstack, pos)) {
                 if (!entity.world.isRemote) {
-                	List<ItemStack> drops = target.onBrushed(player, itemstack, entity.world, pos, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack));
+                	List<ItemStack> drops = target.onBrushed(player, itemstack, pos, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack));
 
                     if (!drops.isEmpty()) {
                         Random rand = new Random();

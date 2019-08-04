@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/yaga_hog_meat_raw"
+        "layer0": "mysticalwildlife:item/yaga_hog_meat_raw"
     }
 }

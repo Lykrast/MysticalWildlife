@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mysticalwildlife:items/aphrodite_essence"
+        "layer0": "mysticalwildlife:item/aphrodite_essence"
     }
 }

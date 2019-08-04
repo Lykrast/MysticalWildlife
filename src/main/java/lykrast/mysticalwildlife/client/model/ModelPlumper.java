@@ -1,18 +1,15 @@
 package lykrast.mysticalwildlife.client.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.model.ModelBase;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * plumper - Lykrast
  * Created using Tabula 7.0.0
  */
-@SideOnly(Side.CLIENT)
 public class ModelPlumper extends ModelBase {
     protected float childYOffset = 0.0F;
     protected float childZOffset = 4.0F;
@@ -55,12 +52,12 @@ public class ModelPlumper extends ModelBase {
         if (this.isChild)
         {
             GlStateManager.pushMatrix();
-            GlStateManager.translate(0.0F, this.childYOffset * scale, this.childZOffset * scale);
+            GlStateManager.translatef(0.0F, this.childYOffset * scale, this.childZOffset * scale);
             this.head.render(scale);
             GlStateManager.popMatrix();
             GlStateManager.pushMatrix();
-            GlStateManager.scale(0.5F, 0.5F, 0.5F);
-            GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+            GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
             this.body.render(scale);
             this.tail.render(scale);
             this.finLeft.render(scale);

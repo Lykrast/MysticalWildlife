@@ -1,0 +1,7 @@
+{
+	"type": "smelting",
+	"ingredient": { "item": "mysticalwildlife:dusk_lurker_meat_raw" },
+	"result": "mysticalwildlife:dusk_lurker_meat_cooked",
+	"experience": 0.35,
+	"cookingtime": 200
+}

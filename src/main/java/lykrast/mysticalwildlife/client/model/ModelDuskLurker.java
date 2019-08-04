@@ -1,14 +1,11 @@
 package lykrast.mysticalwildlife.client.model;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 
 /**
  * dusk_lurker - Lykrast
  * Created using Tabula 7.0.0
  */
-@SideOnly(Side.CLIENT)
 public class ModelDuskLurker extends ModelBaseQuadruped {
     public ModelRenderer snout;
 
