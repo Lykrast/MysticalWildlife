@@ -76,7 +76,7 @@ public class EntityKrill extends AnimalEntity {
     public void eatGrassBonus() {
     	//Forage something
     	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_FORAGE);
-        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this));
+        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.DAMAGE_SOURCE, DamageSource.GENERIC);
         
         loottable.generate(builder.build(LootParameterSets.ENTITY), this::entityDropItem);
     }

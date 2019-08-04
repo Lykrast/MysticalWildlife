@@ -97,7 +97,7 @@ public class EntityVrontausaurus extends EntityFurzard {
         if (rand.nextInt(5) == 0) setBrushTimer(3600 + rand.nextInt(2401));
         
     	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
-        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this));
+        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.DAMAGE_SOURCE, DamageSource.GENERIC);
         
 		return loottable.generate(builder.build(LootParameterSets.ENTITY));
 	}

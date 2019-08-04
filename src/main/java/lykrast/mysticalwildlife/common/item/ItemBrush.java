@@ -83,13 +83,6 @@ public class ItemBrush extends Item {
     }
 	
 	@Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
-    {
-		if (enchantment == Enchantments.FORTUNE) return true;
-        return super.canApplyAtEnchantingTable(stack, enchantment);
-    }
-	
-	@Override
     public int getItemEnchantability() {
         return 1;
     }
