@@ -1,7 +1,7 @@
 {
-	"type": "minecraft:smelting",
+	"type": "minecraft:smoking",
 	"ingredient": { "item": "mysticalwildlife:krill_meat_raw" },
 	"result": "mysticalwildlife:krill_meat_cooked",
 	"experience": 0.35,
-	"cookingtime": 200
+	"cookingtime": 100
 }
