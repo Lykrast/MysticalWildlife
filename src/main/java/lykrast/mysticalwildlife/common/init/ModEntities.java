@@ -55,6 +55,7 @@ public class ModEntities {
 		//Need them constructed to register their spawn eggs
 		//So this is called in ModItems
 		entities = new ArrayList<>();
+		eggs = new ArrayList<>();
 		
 		vrontausaurus = create(EntityVrontausaurus::new, "vrontausaurus", 2.2F, 1.4F, 0x515151, 0xd3d3d3);
 		yagaHog = create(EntityYagaHog::new, "yaga_hog", 0.9F, 0.9F, 0x9c7f5f, 0x443225);
