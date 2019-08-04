@@ -6,7 +6,6 @@ import java.util.Random;
 import lykrast.mysticalwildlife.common.entity.IBrushable;
 import lykrast.mysticalwildlife.common.init.ModSounds;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.TameableEntity;
