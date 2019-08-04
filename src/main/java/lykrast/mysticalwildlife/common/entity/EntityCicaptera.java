@@ -331,7 +331,7 @@ public abstract class EntityCicaptera extends AnimalEntity {
         public static final ResourceLocation LOOT = ResourceUtil.getEntityLootTable("cicaptera/wintry");
 
     	public Wintry(EntityType<? extends Wintry> type, World worldIn) {
-    		super(ModEntities.cicapteraLovely, worldIn);
+    		super(ModEntities.cicapteraWintry, worldIn);
     	}
 
     	@Override

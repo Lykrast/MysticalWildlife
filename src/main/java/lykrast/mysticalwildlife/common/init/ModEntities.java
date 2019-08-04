@@ -24,10 +24,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -92,8 +94,6 @@ public class ModEntities {
 		entities.forEach(reg::register);
 		//Offer the list to the garbage collector now that it has outlive its usefulness
 		entities = null;
-		
-		//TODO: Spawns, egg colors
 		
 //		EntityEntryBuilder<?> builder;
 //		builder = create(EntityVrontausaurus.class, "vrontausaurus", 0x515151, 0xd3d3d3);
@@ -160,6 +160,25 @@ public class ModEntities {
 //				SPAWNING.krill.weight, SPAWNING.krill.minGroup, SPAWNING.krill.maxGroup, 
 //				BiomeDictionary.getBiomes(BiomeDictionary.Type.BEACH));
 //		register(builder);
+	}
+
+	public static void makeSpawns() {
+		BiomeDictionary.getBiomes(Type.MOUNTAIN).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(vrontausaurus, 6, 3, 4)));
+		BiomeDictionary.getBiomes(Type.SWAMP).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(yagaHog, 12, 4, 5)));
+		BiomeDictionary.getBiomes(Type.FOREST).forEach(b -> {
+			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 8, 2, 4));
+			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraVerdant, 10, 4, 6));
+		});
+		BiomeDictionary.getBiomes(Type.SPOOKY).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 14, 4, 6)));
+		BiomeDictionary.getBiomes(Type.PLAINS).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraAzure, 10, 4, 6)));
+		BiomeDictionary.getBiomes(Type.HOT).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraCrimson, 6, 3, 4)));
+		BiomeDictionary.getBiomes(Type.SANDY).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraSandy, 10, 4, 6)));
+		BiomeDictionary.getBiomes(Type.SNOWY).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraWintry, 10, 4, 6)));
+		getLovelyBiomes().forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraLovely, 6, 2, 3)));
+		BiomeDictionary.getBiomes(Type.BEACH).forEach(b -> {
+			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(plumper, 12, 3, 5));
+			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(krill, 12, 1, 3));
+		});
 	}
 	
 	private static Set<Biome> getLovelyBiomes() {

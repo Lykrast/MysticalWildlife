@@ -10,9 +10,6 @@ public class ModConfig {
 	
 	public static int cicapteraLovelyEssenceTimeBase = 12000;
 	public static int cicapteraLovelyEssenceTimeExtra = 12000;
-
-	public static boolean potionBreedingEnabled = true;
-	public static boolean potionBreedingInstantEnabled = true;
 	
 	public static class Spawning {
 
