@@ -143,9 +143,9 @@ public class EntityYagaHog extends AnimalEntity implements IBrushable {
         if (rand.nextInt(3) == 0) setDirtTimer(3600 + rand.nextInt(2401));
         
     	LootTable loottable = world.getServer().getLootTableManager().getLootTableFromLocation(LOOT_BRUSH);
-        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.DAMAGE_SOURCE, DamageSource.GENERIC);
+        LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this));
         
-		return loottable.generate(builder.build(LootParameterSets.ENTITY));
+		return loottable.generate(builder.build(LootParameterSets.GIFT));
 	}
 
 	@Override

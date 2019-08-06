@@ -53,7 +53,7 @@ public class ItemBrush extends Item {
                         Random rand = new Random();
                         for(ItemStack stack : drops) {
                             ItemEntity ent = entity.entityDropItem(stack, 1.0F);
-                            ent.setMotion(
+                            if (ent != null) ent.setMotion(
                             		(rand.nextFloat() - rand.nextFloat()) * 0.1F, 
                             		rand.nextFloat() * 0.05F, 
                             		(rand.nextFloat() - rand.nextFloat()) * 0.1F);
