@@ -217,10 +217,16 @@ public abstract class EntityCicaptera extends AnimalEntity {
             targetSelector.addGoal(1, new HurtByTargetGoal(this));
         }
         
+    	@Override
+    	protected void registerAttributes() {
+    		super.registerAttributes();
+    		getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+    		getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3);
+    	}
+        
         @Override
-        public boolean attackEntityAsMob(Entity entityIn)
-        {
-        	boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
+        public boolean attackEntityAsMob(Entity entityIn) {
+        	boolean flag = super.attackEntityAsMob(entityIn);
         	
         	Vec3d motion = getMotion();
             if (flag) entityIn.setMotion(entityIn.getMotion().add(motion));

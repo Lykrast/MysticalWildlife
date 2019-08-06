@@ -63,13 +63,14 @@ public class EntityVrontausaurus extends EntityFurzard {
         targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
     
-    @Override
-	protected void registerAttributes()
-    {
-        super.registerAttributes();
-        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-        getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
-    }
+	@Override
+	protected void registerAttributes() {
+		super.registerAttributes();
+		getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.24D);
+		getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5);
+	}
     
     @Override
 	protected void updateAITasks()
