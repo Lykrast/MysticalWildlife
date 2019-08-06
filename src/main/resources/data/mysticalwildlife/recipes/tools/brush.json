@@ -7,7 +7,7 @@
     "key": {
         "W": { "item": "minecraft:wheat" },
         "P": { "tag": "minecraft:planks"},
-        "S": { "item": "minecraft:stick" }
+        "S": { "tag": "forge:rods/wooden" }
     },
     "result": { "item": "mysticalwildlife:brush" }
 }
