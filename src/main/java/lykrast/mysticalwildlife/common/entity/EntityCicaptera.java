@@ -38,7 +38,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -268,22 +267,8 @@ public abstract class EntityCicaptera extends AnimalEntity {
 				attacked = false;
 				LivingEntity leapTarget = leaper.getAttackTarget();
 				if (leapTarget == null) return;
-				
-		        double d0 = leapTarget.posX - this.leaper.posX;
-		        double d1 = leapTarget.posZ - this.leaper.posZ;
-		        float f = MathHelper.sqrt(d0 * d0 + d1 * d1);
 
-		        Vec3d motion = leaper.getMotion();
-		        double x, z;
-		        if ((double)f >= 1.0E-4D) {
-		        	x = d0 / f * 0.8D + motion.x * 1.2;
-		        	z = d0 / f * 0.8D + motion.z * 1.2;
-		        }
-		        else {
-		        	x = motion.x;
-		        	z = motion.z;
-		        }
-		        leaper.setMotion(x, 0.5, z);
+				super.startExecuting();
 		    }
 			
 			@Override
@@ -293,7 +278,7 @@ public abstract class EntityCicaptera extends AnimalEntity {
 				double distance = this.leaper.getDistanceSq(leapTarget.posX, 
 						(leapTarget.getBoundingBox().minY + leapTarget.getBoundingBox().maxY) / 2.0, 
 						leapTarget.posZ);
-				double range = (double)(leaper.getWidth() * leaper.getWidth() + leapTarget.getWidth());
+				double range = (double)(leaper.getWidth() + leapTarget.getWidth());
 				
 				if (distance <= range) {
 					attacked = true;
