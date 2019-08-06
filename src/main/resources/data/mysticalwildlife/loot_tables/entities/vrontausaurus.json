@@ -1,23 +1,25 @@
 {
+    "type": "minecraft:entity",
     "pools": [
         {
 			"name": "fur",
             "rolls": 1,
             "entries": [
                 {
-                    "type": "item",
+                    "type": "minecraft:item",
                     "name": "mysticalwildlife:vrontausaurus_fur",
                     "weight": 1,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
-                                "max": 3
+                                "max": 3,
+								"type": "minecraft:uniform"
                             }
                         },
                         {
-                            "function": "looting_enchant",
+                            "function": "minecraft:looting_enchant",
                             "count": {
                                 "min": 0,
                                 "max": 1
@@ -32,31 +34,30 @@
             "rolls": 1,
             "entries": [
                 {
-                    "type": "item",
+                    "type": "minecraft:item",
                     "name": "mysticalwildlife:vrontausaurus_meat_raw",
                     "weight": 1,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 2,
-                                "max": 4
+                                "max": 4,
+								"type": "minecraft:uniform"
                             }
                         },
                         {
-                            "function": "furnace_smelt",
-                            "conditions": [
-                                {
-                                    "condition": "entity_properties",
-                                    "entity": "this",
-                                    "properties": {
-                                        "on_fire": true
-                                    }
+                            "function": "minecraft:furnace_smelt",
+                            "conditions": [{
+                                "condition": "minecraft:entity_properties",
+                                "entity": "this",
+                                "predicate": {
+                                    "flags": { "is_on_fire": true }
                                 }
-                            ]
+                            }]
                         },
                         {
-                            "function": "looting_enchant",
+                            "function": "minecraft:looting_enchant",
                             "count": {
                                 "min": 0,
                                 "max": 1
