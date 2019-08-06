@@ -71,25 +71,6 @@
     "item.mysticalwildlife.krill_spawn_egg": "Oeuf d'apparition de krill",
 
     "_comment": "----------------------------",
-    "_comment": "Potion effects",
-    "_comment": "----------------------------",
-    "effect.mysticalwildlife.shocked": "Choqué",
-    "effect.mysticalwildlife.breeding": "Excitation",
-    "effect.mysticalwildlife.breeding_instant": "Amour instantané",
-
-    "_comment": "----------------------------",
-    "_comment": "Potions",
-    "_comment": "----------------------------",
-    "item.minecraft.potion.effect.breeding": "Potion d'excitation",
-    "item.minecraft.potion.effect.breeding_instant": "Potion d'amour instantané",
-    "item.minecraft.splash_potion.effect.breeding": "Potion d'excitation jetable",
-    "item.minecraft.splash_potion.effect.breeding_instant": "Potion d'amour instantané jetable",
-    "item.minecraft.lingering_potion.effect.breeding": "Potion d'excitation persistante",
-    "item.minecraft.lingering_potion.effect.breeding_instant": "Potion d'amour instantané persistante",
-    "item.minecraft.tipped_arrow.effect.breeding": "Flèche d'excitation",
-    "item.minecraft.tipped_arrow.effect.breeding_instant": "Flèche d'amour instantané",
-
-    "_comment": "----------------------------",
     "_comment": "Subtitles",
     "_comment": "----------------------------",
     "subtitles.mysticalwildlife.entity.lizard.idle": "Fourzard siffle",
@@ -108,21 +89,6 @@
     "_comment": "----------------------------",
     "_comment": "Config",
     "_comment": "----------------------------",
-    "config.mysticalwildlife.title": "Mystical Wildlife",
-
-    "config.mysticalwildlife.spawning.title": "Spawning",
-    "config.mysticalwildlife.spawning.weight": "Poids de spawn (0 désactive)",
-    "config.mysticalwildlife.spawning.mingroup": "Taille de groupe min",
-    "config.mysticalwildlife.spawning.maxgroup": "Taille de groupe max",
-
-    "config.mysticalwildlife.spawning.dusk_lurker.forest": "Rôdeur du crépuscule (forêts)",
-    "config.mysticalwildlife.spawning.dusk_lurker.spooky": "Rôdeur du crépuscule (sombre)",
-
-    "config.mysticalwildlife.brush": "Activer la brosse",
-    "config.mysticalwildlife.potion.breeding": "Activer la potion d'excitation",
-    "config.mysticalwildlife.potion.breeding_instant": "Activer la potion d'amour instantané",
-
-    "config.mysticalwildlife.krill.forage_chance": "Chance de fouille du krill (1 chance sur X, 0 désactive)",
-    "config.mysticalwildlife.cicaptera_lovely.essence_time.base": "Temps de base (ticks) pour drop d'essence d'Aphrodite",
-    "config.mysticalwildlife.cicaptera_lovely.essence_time.extra": "Temps extra max (ticks) pour drop d'essence d'Aphrodite"
+    "config.mysticalwildlife.krill.forage_time": "Temps de base entre les fouilles de krill (en jeu peut être jusqu'à 2x plus long)",
+    "config.mysticalwildlife.cicaptera_lovely.essence_time": Temps de base entre les drops d'essence d'Aphrodite (en jeu peut être jusqu'à 2x plus long)"
 }

@@ -71,25 +71,6 @@
     "item.mysticalwildlife.krill_spawn_egg": "Krill Spawn Egg",
 
     "_comment": "----------------------------",
-    "_comment": "Potion effects",
-    "_comment": "----------------------------",
-    "effect.mysticalwildlife.shocked": "Shocked",
-    "effect.mysticalwildlife.breeding": "Arousal",
-    "effect.mysticalwildlife.breeding_instant": "Instant Love",
-
-    "_comment": "----------------------------",
-    "_comment": "Potions",
-    "_comment": "----------------------------",
-    "item.minecraft.potion.effect.breeding": "Potion of Arousal",
-    "item.minecraft.potion.effect.breeding_instant": "Potion of Instant Love",
-    "item.minecraft.splash_potion.effect.breeding": "Splash Potion of Arousal",
-    "item.minecraft.splash_potion.effect.breeding_instant": "Splash Potion of Instant Love",
-    "item.minecraft.lingering_potion.effect.breeding": "Lingering Potion of Arousal",
-    "item.minecraft.lingering_potion.effect.breeding_instant": "Lingering Potion of Instant Love",
-    "item.minecraft.tipped_arrow.effect.breeding": "Arrow of Arousal",
-    "item.minecraft.tipped_arrow.effect.breeding_instant": "Arrow of Instant Love",
-
-    "_comment": "----------------------------",
     "_comment": "Subtitles",
     "_comment": "----------------------------",
     "subtitles.mysticalwildlife.entity.lizard.idle": "Furzard hisses",
@@ -108,8 +89,6 @@
     "_comment": "----------------------------",
     "_comment": "Config",
     "_comment": "----------------------------",
-    "config.mysticalwildlife.title": "Mystical Wildlife",
-	
     "config.mysticalwildlife.krill.forage_time": "Base time between Krill forages (can be up to 2x that amount in game)",
     "config.mysticalwildlife.cicaptera_lovely.essence_time": "Base time between Aphrodite Essence drops (can be up to 2x that amount in game)"
 }
