@@ -1,3 +1,17 @@
+# 1.14.4
+
+## 1.3.1
+
+* Ported to Minecraft 1.14.4
+* CHANGED (TEMPORARY): Furs, Dusk Ash and Cicaptera Husks now craft into their vanilla equivalent instead of directly being useable
+  * This will be reverted when Forge properly replaces vanilla recipes for all Forge tags
+* CHANGED: Aphrodite Essence can now be used on an animal to make it fall in love instantly (breed)
+* CHANGED: Krills now forage on a timer instead of randomly
+* REMOVED: Potions of Arousal and Instant Love
+* REMOVED: Shocked effect from Vrontausaurus attacks
+* REMOVED: Brushes can no longer receive Fortune
+* REMOVED: Config for spawn rates (new Forge configs do not give a clean way to configure that)
+
 # 1.12.2
 
 ## 1.3.0
