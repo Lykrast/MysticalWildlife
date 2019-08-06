@@ -4,8 +4,6 @@ import lykrast.mysticalwildlife.common.item.*;
 import lykrast.mysticalwildlife.common.util.ItemGroupMysticalWildlife;
 import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.DyeItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.potion.EffectInstance;
@@ -43,7 +41,8 @@ public class ModItems {
 		yagaHogRaw = initItem(reg, new Item(defProps().food(food(2, 0.3).meat().effect(new EffectInstance(Effects.HUNGER, 600, 0), 0.6F).build())), "yaga_hog_meat_raw");
 		yagaHogCooked = initItem(reg, new Item(defProps().food(food(6, 0.7).meat().build())), "yaga_hog_meat_cooked");
 
-		duskAsh = initItem(reg, new DyeItem(DyeColor.BLACK, def), "dusk_ash");
+//		duskAsh = initItem(reg, new DyeItem(DyeColor.BLACK, def), "dusk_ash");
+		duskAsh = initItem(reg, new Item(def), "dusk_ash");
 		duskLurkerFur = initItem(reg, new Item(def), "dusk_lurker_fur");
 		duskLurkerFurTuft = initItem(reg, new Item(def), "dusk_lurker_fur_tuft");
 		duskLurkerRaw = initItem(reg, new Item(defProps().food(food(2, 0.5).meat().build())), "dusk_lurker_meat_raw");
@@ -51,12 +50,18 @@ public class ModItems {
 		
 		cicapteraRaw = initItem(reg, new Item(defProps().food(food(3, 0.4).meat().build())), "cicaptera_meat_raw");
 		cicapteraCooked = initItem(reg, new Item(defProps().food(food(8, 0.8).meat().build())), "cicaptera_meat_cooked");
-		cicapteraHuskAzure = initItem(reg, new DyeItem(DyeColor.BLUE, def), "cicaptera_husk_azure");
-		cicapteraHuskVerdant = initItem(reg, new DyeItem(DyeColor.GREEN, def), "cicaptera_husk_verdant");
-		cicapteraHuskCrimson = initItem(reg, new DyeItem(DyeColor.RED, def), "cicaptera_husk_crimson");
-		cicapteraHuskSandy = initItem(reg, new DyeItem(DyeColor.YELLOW, def), "cicaptera_husk_sandy");
-		cicapteraHuskWintry = initItem(reg, new DyeItem(DyeColor.WHITE, def), "cicaptera_husk_wintry");
-		cicapteraHuskLovely = initItem(reg, new DyeItem(DyeColor.PINK, def), "cicaptera_husk_lovely");
+//		cicapteraHuskAzure = initItem(reg, new DyeItem(DyeColor.BLUE, def), "cicaptera_husk_azure");
+//		cicapteraHuskVerdant = initItem(reg, new DyeItem(DyeColor.GREEN, def), "cicaptera_husk_verdant");
+//		cicapteraHuskCrimson = initItem(reg, new DyeItem(DyeColor.RED, def), "cicaptera_husk_crimson");
+//		cicapteraHuskSandy = initItem(reg, new DyeItem(DyeColor.YELLOW, def), "cicaptera_husk_sandy");
+//		cicapteraHuskWintry = initItem(reg, new DyeItem(DyeColor.WHITE, def), "cicaptera_husk_wintry");
+//		cicapteraHuskLovely = initItem(reg, new DyeItem(DyeColor.PINK, def), "cicaptera_husk_lovely");
+		cicapteraHuskAzure = initItem(reg, new Item(def), "cicaptera_husk_azure");
+		cicapteraHuskVerdant = initItem(reg, new Item(def), "cicaptera_husk_verdant");
+		cicapteraHuskCrimson = initItem(reg, new Item(def), "cicaptera_husk_crimson");
+		cicapteraHuskSandy = initItem(reg, new Item(def), "cicaptera_husk_sandy");
+		cicapteraHuskWintry = initItem(reg, new Item(def), "cicaptera_husk_wintry");
+		cicapteraHuskLovely = initItem(reg, new Item(def), "cicaptera_husk_lovely");
 		aphroditeEssence = initItem(reg, new ItemAphroditeEssence(def), "aphrodite_essence");
 		
 		plumperBlubber = initItem(reg, new ItemFuel(200, def), "plumper_blubber");

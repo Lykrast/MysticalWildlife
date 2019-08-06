@@ -1,0 +1,32 @@
+{
+  "parent": "mysticalwildlife:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mysticalwildlife:oredict/vrontausaurus_fur_leather"
+    ]
+  },
+  "criteria": {
+    "has_material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mysticalwildlife:vrontausaurus_fur"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mysticalwildlife:oredict/vrontausaurus_fur_leather"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_material",
+      "has_the_recipe"
+    ]
+  ]
+}

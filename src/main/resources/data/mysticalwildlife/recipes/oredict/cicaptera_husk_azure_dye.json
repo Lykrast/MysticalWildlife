@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "blue_dye",
+    "ingredients": [
+        { "item": "mysticalwildlife:cicaptera_husk_azure" }
+    ],
+    "result": { "item": "minecraft:blue_dye" }
+}

@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "white_dye",
+    "ingredients": [
+        { "item": "mysticalwildlife:cicaptera_husk_wintry" }
+    ],
+    "result": { "item": "minecraft:white_dye" }
+}
