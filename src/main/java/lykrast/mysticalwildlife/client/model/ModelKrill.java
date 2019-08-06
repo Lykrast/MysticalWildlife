@@ -165,7 +165,7 @@ public class ModelKrill<T extends EntityKrill> extends EntityModel<T> {
     public void setLivingAnimations(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
 
-    	int timer = ((EntityKrill)entitylivingbaseIn).forageTimer;
+    	int timer = ((EntityKrill)entitylivingbaseIn).forageProgress;
     	if (timer > 0)
     	{
     		if (timer <= 4)

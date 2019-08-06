@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModItems;
 import lykrast.mysticalwildlife.common.init.ModSounds;
-import lykrast.mysticalwildlife.common.util.ModConfig;
+import lykrast.mysticalwildlife.common.util.ConfigHandler;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -372,7 +372,8 @@ public abstract class EntityCicaptera extends AnimalEntity {
     	}
     	
     	private void resetEssenceTime() {
-    		timeUntilNextEssence = rand.nextInt(ModConfig.cicapteraLovelyEssenceTimeBase) + ModConfig.cicapteraLovelyEssenceTimeExtra;
+    		int base = ConfigHandler.Common.CONFIG.cicapteraLovelyEssenceTime.get();
+    		timeUntilNextEssence = rand.nextInt(base) + base;
     	}
     	
 

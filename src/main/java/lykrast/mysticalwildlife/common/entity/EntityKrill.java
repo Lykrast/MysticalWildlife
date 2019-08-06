@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import lykrast.mysticalwildlife.common.entity.ai.EntityAIForage;
 import lykrast.mysticalwildlife.common.init.ModEntities;
 import lykrast.mysticalwildlife.common.init.ModSounds;
+import lykrast.mysticalwildlife.common.util.ConfigHandler;
 import lykrast.mysticalwildlife.common.util.ResourceUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
@@ -23,6 +24,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -42,11 +44,13 @@ public class EntityKrill extends AnimalEntity {
     public static final ResourceLocation LOOT_FORAGE = ResourceUtil.getSpecialLootTable("krill_forage");
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
     
-    public int forageTimer;
+    public int forageProgress;
+    public int forageCooldown;
     private EntityAIForage forageAI;
 	
 	public EntityKrill(EntityType<? extends EntityKrill> type, World worldIn) {
 		super(ModEntities.krill, worldIn);
+		resetForageCooldown();
 	}
 
     @Override
@@ -71,6 +75,11 @@ public class EntityKrill extends AnimalEntity {
         getAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(8.0D);
         getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26D);
     }
+	
+	private void resetForageCooldown() {
+		int base = ConfigHandler.Common.CONFIG.krillForageTime.get();
+		forageCooldown = rand.nextInt(base) + base;
+	}
     
     @Override
     public void eatGrassBonus() {
@@ -79,24 +88,40 @@ public class EntityKrill extends AnimalEntity {
         LootContext.Builder builder = (new LootContext.Builder((ServerWorld)world)).withRandom(rand).withParameter(LootParameters.THIS_ENTITY, this).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.DAMAGE_SOURCE, DamageSource.GENERIC);
         
         loottable.generate(builder.build(LootParameterSets.ENTITY), this::entityDropItem);
+        resetForageCooldown();
     }
 
     @Override
     protected void updateAITasks() {
-    	forageTimer = forageAI.getForageTime();
+    	forageProgress = forageAI.getForageProgress();
         super.updateAITasks();
     }
     
     @Override
     public void livingTick() {
-        if (this.world.isRemote) forageTimer = Math.max(0, forageTimer - 1);
+        if (world.isRemote && forageProgress > 0) forageProgress--;
+        if (!world.isRemote && !isChild() && forageCooldown > 0) forageCooldown--;
+        
         super.livingTick();
     }
+	
+
+	@Override
+	public void readAdditional(CompoundNBT compound) {
+		super.readAdditional(compound);
+		if (compound.contains("ForageCooldown")) forageCooldown = compound.getInt("ForageCooldown");
+	}
+
+	@Override
+	public void writeAdditional(CompoundNBT compound) {
+		super.writeAdditional(compound);
+		compound.putInt("ForageCooldown", forageCooldown);
+	}
     
     @OnlyIn(Dist.CLIENT)
 	@Override
     public void handleStatusUpdate(byte id) {
-        if (id == 10) forageTimer = 40;
+        if (id == 10) forageProgress = 40;
         else super.handleStatusUpdate(id);
     }
 

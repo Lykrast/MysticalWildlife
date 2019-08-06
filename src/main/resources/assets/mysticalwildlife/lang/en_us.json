@@ -109,20 +109,7 @@
     "_comment": "Config",
     "_comment": "----------------------------",
     "config.mysticalwildlife.title": "Mystical Wildlife",
-
-    "config.mysticalwildlife.spawning.title": "Spawning",
-    "config.mysticalwildlife.spawning.weight": "Spawn weight (0 disables)",
-    "config.mysticalwildlife.spawning.mingroup": "Min spawn group size",
-    "config.mysticalwildlife.spawning.maxgroup": "Max spawn group size",
-
-    "config.mysticalwildlife.spawning.dusk_lurker.forest": "Dusk Lurker (Forest)",
-    "config.mysticalwildlife.spawning.dusk_lurker.spooky": "Dusk Lurker (Spooky)",
-
-    "config.mysticalwildlife.brush": "Enable Brush",
-    "config.mysticalwildlife.potion.breeding": "Enable Potion of Arousal",
-    "config.mysticalwildlife.potion.breeding_instant": "Enable Potion of Instant Love",
-
-    "config.mysticalwildlife.krill.forage_chance": "Krill forage chance (1 in X, 0 disables)",
-    "config.mysticalwildlife.cicaptera_lovely.essence_time.base": "Base time (ticks) for Aphrodite Essence drops",
-    "config.mysticalwildlife.cicaptera_lovely.essence_time.extra": "Max extra time (ticks) for Aphrodite Essence drops"
+	
+    "config.mysticalwildlife.krill.forage_time": "Base time between Krill forages (can be up to 2x that amount in game)",
+    "config.mysticalwildlife.cicaptera_lovely.essence_time": "Base time between Aphrodite Essence drops (can be up to 2x that amount in game)"
 }

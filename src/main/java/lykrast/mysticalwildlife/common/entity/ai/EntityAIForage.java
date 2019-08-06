@@ -2,20 +2,19 @@ package lykrast.mysticalwildlife.common.entity.ai;
 
 import java.util.EnumSet;
 
-import lykrast.mysticalwildlife.common.util.ModConfig;
+import lykrast.mysticalwildlife.common.entity.EntityKrill;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityAIForage extends Goal {
-    protected final MobEntity forager;
+    protected final EntityKrill forager;
     protected final World world;
     protected int timer;
     
-    public EntityAIForage(MobEntity forager) {
+    public EntityAIForage(EntityKrill forager) {
         this.forager = forager;
         this.world = forager.world;
         this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
@@ -23,10 +22,8 @@ public class EntityAIForage extends Goal {
     
     @Override
     public boolean shouldExecute() {
-    	int chance = ModConfig.krillForageChance;
-        if (forager.isChild() || !forager.onGround || chance <= 0 || forager.getRNG().nextInt(chance) != 0) return false;
-        else
-        {
+        if (forager.isChild() || !forager.onGround || forager.forageCooldown > 0) return false;
+        else {
             BlockPos pos = new BlockPos(forager.posX, forager.posY - 1, forager.posZ);
             return world.getBlockState(pos).getMaterial() == Material.SAND;
         }
@@ -39,7 +36,7 @@ public class EntityAIForage extends Goal {
         forager.getNavigator().clearPath();
     }
     
-    public int getForageTime() {
+    public int getForageProgress() {
     	return timer;
     }
 
@@ -57,8 +54,7 @@ public class EntityAIForage extends Goal {
     public void tick() {
         timer = Math.max(0, timer - 1);
 
-        if (timer == 4)
-        {
+        if (timer == 4) {
 			BlockPos blockpos = new BlockPos(forager.posX, forager.posY - 1, forager.posZ);
 
 			if (world.getBlockState(blockpos).getMaterial() == Material.SAND)

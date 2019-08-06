@@ -1,8 +1,9 @@
 package lykrast.mysticalwildlife.common.init;
 
-import lykrast.mysticalwildlife.common.item.*;
+import lykrast.mysticalwildlife.common.item.ItemAphroditeEssence;
+import lykrast.mysticalwildlife.common.item.ItemBrush;
+import lykrast.mysticalwildlife.common.item.ItemFuel;
 import lykrast.mysticalwildlife.common.util.ItemGroupMysticalWildlife;
-import lykrast.mysticalwildlife.common.util.ModConfig;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -30,7 +31,7 @@ public class ModItems {
     	Item.Properties def = defProps();
     	
 		//Tools
-		if (ModConfig.brushEnabled) brush = initItem(reg, new ItemBrush(new Item.Properties().defaultMaxDamage(65).group(ItemGroupMysticalWildlife.INSTANCE)), "brush");
+		brush = initItem(reg, new ItemBrush(new Item.Properties().defaultMaxDamage(65).group(ItemGroupMysticalWildlife.INSTANCE)), "brush");
 		
 		//Monsters
 		vrontausaurusFur = initItem(reg, new Item(def), "vrontausaurus_fur");
