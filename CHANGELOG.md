@@ -1,5 +1,9 @@
 # 1.12.2
 
+## 1.3.0.1
+
+* FIXED: Potential crash on dedicated servers (reported by LuminescentMoon)
+
 ## 1.3.0
 
 * ADDED: Lovely Cicapteras, find them in magical or (vanilla) flowery biomes

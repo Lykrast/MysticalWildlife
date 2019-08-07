@@ -1,6 +1,5 @@
 package lykrast.mysticalwildlife.common.entity;
 
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,7 +11,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public abstract class EntityFurzard extends EntityAnimal implements IBrushable {
-    private static final DataParameter<Boolean> BRUSHABLE = EntityDataManager.<Boolean>createKey(EntityAgeable.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BRUSHABLE = EntityDataManager.<Boolean>createKey(EntityFurzard.class, DataSerializers.BOOLEAN);
     private int brushTimer;
 
 	public EntityFurzard(World worldIn) {

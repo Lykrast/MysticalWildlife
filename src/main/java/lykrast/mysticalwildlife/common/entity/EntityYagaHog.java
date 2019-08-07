@@ -48,7 +48,7 @@ public class EntityYagaHog extends EntityAnimal implements IBrushable {
     public static final ResourceLocation LOOT_BRUSH = ResourceUtil.getSpecialLootTable("brush_yaga_hog");
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.BREAD);
     
-    private static final DataParameter<Boolean> DIRTY = EntityDataManager.<Boolean>createKey(EntityAgeable.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DIRTY = EntityDataManager.<Boolean>createKey(EntityYagaHog.class, DataSerializers.BOOLEAN);
     private int dirtTime;
 	
 	public EntityYagaHog(World worldIn)
