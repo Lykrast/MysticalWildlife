@@ -23,6 +23,7 @@ public class MysticalWildlife {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::doClientStuff);
 		bus.addListener(this::setupCommon);
+//		bus.addListener(ConfigHandler::configChanged);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.Common.CONFIG_SPEC);
 	}

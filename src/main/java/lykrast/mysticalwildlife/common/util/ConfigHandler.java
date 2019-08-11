@@ -33,4 +33,12 @@ public class ConfigHandler {
 					.defineInRange("cicapteraLovelyEssenceTime", 12000, 1, Integer.MAX_VALUE / 2);
 		}
 	}
+	
+	//Don't seem we need it for now
+//	public static void configChanged(ModConfigEvent event) {
+//		MysticalWildlife.LOGGER.info("Config changed!");
+//		if(event.getConfig().getModId().equals(MysticalWildlife.MODID)) { 
+//			MysticalWildlife.LOGGER.info("It's ours!");
+//		}
+//	}
 }
