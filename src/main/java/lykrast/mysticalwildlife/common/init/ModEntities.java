@@ -101,14 +101,14 @@ public class ModEntities {
 		BiomeDictionary.getBiomes(Type.SWAMP).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(yagaHog, 12, 4, 5)));
 		BiomeDictionary.getBiomes(Type.FOREST).stream().filter(ModEntities::isOverworld).forEach(b -> {
 			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 8, 2, 4));
-			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraVerdant, 10, 4, 6));
+			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraVerdant, 8, 4, 6));
 		});
 		BiomeDictionary.getBiomes(Type.SPOOKY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 14, 4, 6)));
-		BiomeDictionary.getBiomes(Type.PLAINS).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraAzure, 10, 4, 6)));
-		BiomeDictionary.getBiomes(Type.HOT).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraCrimson, 6, 3, 4)));
-		BiomeDictionary.getBiomes(Type.SANDY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraSandy, 10, 4, 6)));
-		BiomeDictionary.getBiomes(Type.SNOWY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraWintry, 10, 4, 6)));
-		getLovelyBiomes().forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraLovely, 6, 2, 3)));
+		BiomeDictionary.getBiomes(Type.PLAINS).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraAzure, 8, 4, 6)));
+		BiomeDictionary.getBiomes(Type.HOT).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraCrimson, 2, 3, 4)));
+		BiomeDictionary.getBiomes(Type.SANDY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraSandy, 4, 4, 6)));
+		BiomeDictionary.getBiomes(Type.SNOWY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraWintry, 8, 4, 6)));
+		getLovelyBiomes().forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraLovely, 4, 2, 3)));
 		BiomeDictionary.getBiomes(Type.BEACH).stream().filter(ModEntities::isOverworld).forEach(b -> {
 			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(plumper, 12, 3, 5));
 			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(krill, 12, 1, 3));
