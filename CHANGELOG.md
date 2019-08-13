@@ -1,5 +1,12 @@
 # 1.14.4
 
+## 1.3.2
+
+* Built with Forge 28.0.45 (I don't think that changes anything but mentionned just in case)
+* CHANGED: Reduced spawn weights of all kinds of Cicapteras
+* FIXED: Crimson Cicapteras spawning in the Nether
+* FIXED: Config hot reloading (maybe? it was weird)
+
 ## 1.3.1
 
 * Ported to Minecraft 1.14.4
