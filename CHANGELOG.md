@@ -1,5 +1,9 @@
 # 1.14.4
 
+## 1.3.3
+
+* CHANGED: New texures for everything and Krill model by MCVinnyq
+
 ## 1.3.2
 
 * Built with Forge 28.0.45 (I don't think that changes anything but mentionned just in case)
