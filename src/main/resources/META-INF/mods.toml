@@ -7,10 +7,10 @@ modId="mysticalwildlife"
 version="${version}"
 displayName="Mystical Wildlife"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/mystical-wildlife"
-credits="The Minecraft Mod Development Discord for help."
-authors="Lykrast"
+logoFile="logo.png"
+authors="Lykrast, MCVinnyq"
 description='''
-Adds various imaginary animals to the world.
+Adds several imaginary animals to populate your worlds and make the wildlife a bit more varied and interesting, especially from biome to biome.
 '''
 
 [[dependencies.mysticalwildlife]]
