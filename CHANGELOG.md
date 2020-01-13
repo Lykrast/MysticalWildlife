@@ -1,5 +1,12 @@
 # 1.14.4
 
+## 1.3.4
+
+* ADDED: Configuration for animal spawn rates, delete the old config when updating as other fields have moved around (thanks nooby)
+* ADDED: German translation by Sven792
+* CHANGED: Dusk Lurkers no longer have increased spawn in spooky biomes (they are still found in forests)
+* FIXED: Console warnings about loot tables
+
 ## 1.3.3
 
 * CHANGED: New texures for everything and Krill model by MCVinnyq
