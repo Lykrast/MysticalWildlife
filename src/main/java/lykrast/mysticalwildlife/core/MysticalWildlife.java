@@ -10,8 +10,8 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 @Mod(MysticalWildlife.MODID)
 public class MysticalWildlife {
@@ -22,17 +22,13 @@ public class MysticalWildlife {
 	public MysticalWildlife() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::doClientStuff);
-		bus.addListener(this::setupCommon);
 //		bus.addListener(ConfigHandler::configChanged);
 		
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.Common.CONFIG_SPEC);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.CONFIG_SPEC);
+		ConfigHandler.loadConfig(ConfigHandler.CONFIG_SPEC, FMLPaths.CONFIGDIR.get().resolve(MODID + "-common.toml"));
 	}
 
     private void doClientStuff(final FMLClientSetupEvent event) {
     	ModEntities.initModels();
-    }
-    
-    private void setupCommon(final FMLCommonSetupEvent event) {
-    	ModEntities.makeSpawns();
     }
 }

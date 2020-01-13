@@ -77,7 +77,7 @@ public class EntityKrill extends AnimalEntity {
     }
 	
 	private void resetForageCooldown() {
-		int base = ConfigHandler.Common.CONFIG.krillForageTime.get();
+		int base = ConfigHandler.krillForageTime.get();
 		forageCooldown = rand.nextInt(base) + base;
 	}
     

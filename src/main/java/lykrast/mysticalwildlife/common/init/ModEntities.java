@@ -17,6 +17,7 @@ import lykrast.mysticalwildlife.common.entity.EntityKrill;
 import lykrast.mysticalwildlife.common.entity.EntityPlumper;
 import lykrast.mysticalwildlife.common.entity.EntityVrontausaurus;
 import lykrast.mysticalwildlife.common.entity.EntityYagaHog;
+import lykrast.mysticalwildlife.common.util.ConfigHandler;
 import lykrast.mysticalwildlife.core.MysticalWildlife;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -94,24 +95,43 @@ public class ModEntities {
 		entities.forEach(reg::register);
 		//Offer the list to the garbage collector now that it has outlive its usefulness
 		entities = null;
+		makeSpawns();
 	}
 
 	public static void makeSpawns() {
-		BiomeDictionary.getBiomes(Type.MOUNTAIN).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(vrontausaurus, 6, 3, 4)));
-		BiomeDictionary.getBiomes(Type.SWAMP).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(yagaHog, 12, 4, 5)));
+		if (ConfigHandler.vrontausaurus.isSpawnEnabled()) BiomeDictionary.getBiomes(Type.MOUNTAIN).stream().filter(ModEntities::isOverworld)
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(vrontausaurus, ConfigHandler.vrontausaurus.getWeight(), ConfigHandler.vrontausaurus.getMin(), ConfigHandler.vrontausaurus.getMax())));
+		if (ConfigHandler.yagaHog.isSpawnEnabled()) BiomeDictionary.getBiomes(Type.SWAMP).stream().filter(ModEntities::isOverworld)
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(yagaHog, ConfigHandler.yagaHog.getWeight(), ConfigHandler.yagaHog.getMin(), ConfigHandler.yagaHog.getMax())));
 		BiomeDictionary.getBiomes(Type.FOREST).stream().filter(ModEntities::isOverworld).forEach(b -> {
-			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 8, 2, 4));
-			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraVerdant, 8, 4, 6));
+			if (ConfigHandler.duskLurker.isSpawnEnabled()) b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(duskLurker, ConfigHandler.duskLurker.getWeight(), ConfigHandler.duskLurker.getMin(), ConfigHandler.duskLurker.getMax()));
+			if (ConfigHandler.cicapteraVerdant.isSpawnEnabled()) b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(cicapteraVerdant, ConfigHandler.cicapteraVerdant.getWeight(), ConfigHandler.cicapteraVerdant.getMin(), ConfigHandler.cicapteraVerdant.getMax()));
 		});
-		BiomeDictionary.getBiomes(Type.SPOOKY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 14, 4, 6)));
-		BiomeDictionary.getBiomes(Type.PLAINS).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraAzure, 8, 4, 6)));
-		BiomeDictionary.getBiomes(Type.HOT).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraCrimson, 2, 3, 4)));
-		BiomeDictionary.getBiomes(Type.SANDY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraSandy, 4, 4, 6)));
-		BiomeDictionary.getBiomes(Type.SNOWY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraWintry, 8, 4, 6)));
-		getLovelyBiomes().forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(cicapteraLovely, 4, 2, 3)));
+		//BiomeDictionary.getBiomes(Type.SPOOKY).stream().filter(ModEntities::isOverworld).forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(duskLurker, 14, 4, 6)));
+		if (ConfigHandler.cicapteraAzure.isSpawnEnabled()) BiomeDictionary.getBiomes(Type.PLAINS).stream().filter(ModEntities::isOverworld)
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(cicapteraAzure, ConfigHandler.cicapteraAzure.getWeight(), ConfigHandler.cicapteraAzure.getMin(), ConfigHandler.cicapteraAzure.getMax())));
+		if (ConfigHandler.cicapteraCrimson.isSpawnEnabled()) BiomeDictionary.getBiomes(Type.HOT).stream().filter(ModEntities::isOverworld)
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(cicapteraCrimson, ConfigHandler.cicapteraCrimson.getWeight(), ConfigHandler.cicapteraCrimson.getMin(), ConfigHandler.cicapteraCrimson.getMax())));
+		if (ConfigHandler.cicapteraSandy.isSpawnEnabled()) BiomeDictionary.getBiomes(Type.SANDY).stream().filter(ModEntities::isOverworld)
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(cicapteraSandy, ConfigHandler.cicapteraSandy.getWeight(), ConfigHandler.cicapteraSandy.getMin(), ConfigHandler.cicapteraSandy.getMax())));
+		if (ConfigHandler.cicapteraWintry.isSpawnEnabled()) BiomeDictionary.getBiomes(Type.SNOWY).stream().filter(ModEntities::isOverworld)
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(cicapteraWintry, ConfigHandler.cicapteraWintry.getWeight(), ConfigHandler.cicapteraWintry.getMin(), ConfigHandler.cicapteraWintry.getMax())));
+		if (ConfigHandler.cicapteraLovely.isSpawnEnabled()) getLovelyBiomes()
+			.forEach(b -> b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(cicapteraLovely, ConfigHandler.cicapteraLovely.getWeight(), ConfigHandler.cicapteraLovely.getMin(), ConfigHandler.cicapteraLovely.getMax())));
 		BiomeDictionary.getBiomes(Type.BEACH).stream().filter(ModEntities::isOverworld).forEach(b -> {
-			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(plumper, 12, 3, 5));
-			b.getSpawns(EntityClassification.CREATURE).add(new SpawnListEntry(krill, 12, 1, 3));
+			if (ConfigHandler.plumper.isSpawnEnabled()) b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(plumper, ConfigHandler.plumper.getWeight(), ConfigHandler.plumper.getMin(), ConfigHandler.plumper.getMax()));
+			if (ConfigHandler.krill.isSpawnEnabled()) b.getSpawns(EntityClassification.CREATURE).add(
+					new SpawnListEntry(krill, ConfigHandler.krill.getWeight(), ConfigHandler.krill.getMin(), ConfigHandler.krill.getMax()));
 		});
 	}
 	

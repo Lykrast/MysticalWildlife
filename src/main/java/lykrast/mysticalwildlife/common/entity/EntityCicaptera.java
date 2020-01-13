@@ -363,7 +363,7 @@ public abstract class EntityCicaptera extends AnimalEntity {
     	}
     	
     	private void resetEssenceTime() {
-    		int base = ConfigHandler.Common.CONFIG.cicapteraLovelyEssenceTime.get();
+    		int base = ConfigHandler.cicapteraLovelyEssenceTime.get();
     		timeUntilNextEssence = rand.nextInt(base) + base;
     	}
     	
